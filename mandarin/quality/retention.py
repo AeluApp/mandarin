@@ -630,7 +630,7 @@ def fit_weibull(conn, churn_days: int = _CHURN_THRESHOLD_DAYS) -> dict:
     # Method: iterative MLE using Newton-Raphson on k
     n = len(times)
     log_times = [math.log(max(t, 0.1)) for t in times]
-    mean_log = sum(log_times) / n
+    _mean_log = sum(log_times) / n  # noqa: F841
 
     # Initial k estimate from method of moments
     mean_t = sum(times) / n

@@ -83,7 +83,7 @@ def _detect_character_components(conn: sqlite3.Connection, limit: int) -> int:
         return 0
 
     # Build a lookup from single character to item ID
-    char_to_id: Dict[str, int] = {}
+    char_to_id: dict[str, int] = {}
     for row in rows:
         if len(row["hanzi"]) == 1:
             char_to_id[row["hanzi"]] = row["id"]
@@ -136,7 +136,7 @@ def _detect_compound_words(conn: sqlite3.Connection, limit: int) -> int:
 
     # Build lookup of hanzi -> (id, hsk_level) for multi-char items
     # that could be sub-words
-    word_lookup: Dict[str, tuple] = {}
+    word_lookup: dict[str, tuple] = {}
     try:
         all_items = conn.execute("""
             SELECT id, hanzi, hsk_level FROM content_item
@@ -186,7 +186,7 @@ def _detect_compound_words(conn: sqlite3.Connection, limit: int) -> int:
 
 def check_prerequisites_met(
     conn: sqlite3.Connection, user_id: int, item_id: int
-) -> Dict:
+) -> dict:
     """Check if all prerequisites for an item are met.
 
     Returns:
@@ -286,7 +286,7 @@ def check_prerequisites_met(
 
 def get_prerequisites(
     conn: sqlite3.Connection, item_id: int
-) -> List[Dict]:
+) -> list[dict]:
     """Get all prerequisite items for a given item.
 
     Returns a list of dicts with keys:
@@ -321,7 +321,7 @@ def get_prerequisites(
 
 def get_dependents(
     conn: sqlite3.Connection, item_id: int
-) -> List[Dict]:
+) -> list[dict]:
     """Get all items that depend on this item as a prerequisite.
 
     Returns a list of dicts with keys:

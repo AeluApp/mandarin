@@ -43,7 +43,7 @@ def _correlation(xs: list[float], ys: list[float]) -> float:
     if n < 2 or len(ys) != n:
         return 0.0
     mx, my = _mean(xs), _mean(ys)
-    cov = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / (n - 1)
+    cov = sum((x - mx) * (y - my) for x, y in zip(xs, ys, strict=False)) / (n - 1)
     sx, sy = _std(xs), _std(ys)
     if sx == 0 or sy == 0:
         return 0.0
@@ -59,7 +59,7 @@ def _regression_slope(xs: list[float], ys: list[float]) -> float:
     ss_xx = sum((x - mx) ** 2 for x in xs)
     if ss_xx == 0:
         return 0.0
-    ss_xy = sum((x - mx) * (y - my) for x, y in zip(xs, ys))
+    ss_xy = sum((x - mx) * (y - my) for x, y in zip(xs, ys, strict=False))
     return ss_xy / ss_xx
 
 
@@ -71,7 +71,7 @@ def _regression_slope_se(xs: list[float], ys: list[float]) -> float:
     mx = _mean(xs)
     slope = _regression_slope(xs, ys)
     intercept = _mean(ys) - slope * mx
-    residuals = [y - (intercept + slope * x) for x, y in zip(xs, ys)]
+    residuals = [y - (intercept + slope * x) for x, y in zip(xs, ys, strict=False)]
     ss_res = sum(r ** 2 for r in residuals)
     ss_xx = sum((x - mx) ** 2 for x in xs)
     if ss_xx == 0:
@@ -249,8 +249,8 @@ def test_mediation(
 
     # -- Path b: mediator -> outcome (within-group regression) -----------
     # Pool within-group mediator/outcome pairs and regress outcome on mediator
-    all_mediator = control_mediator + treatment_mediator
-    all_outcome = control_outcome + treatment_outcome
+    control_mediator + treatment_mediator
+    control_outcome + treatment_outcome
 
     # Within-group: center each group's values, then regress
     centered_mediator: list[float] = []

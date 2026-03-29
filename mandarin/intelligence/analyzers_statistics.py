@@ -592,7 +592,7 @@ def check_effect_size_distribution(conn):
         total_with_effect = 0
 
         for r in rows:
-            name = r["name"] if isinstance(r, dict) else r[0]
+            r["name"] if isinstance(r, dict) else r[0]
             conclusion_raw = r["conclusion"] if isinstance(r, dict) else r[1]
 
             if not conclusion_raw:

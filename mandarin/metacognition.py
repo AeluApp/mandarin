@@ -11,7 +11,7 @@ References:
 
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -254,7 +254,7 @@ def save_reflection(
             session_id,
             prompt,
             response,
-            datetime.now(timezone.utc).isoformat(),
+            datetime.now(UTC).isoformat(),
         ),
     )
     conn.commit()
@@ -289,7 +289,7 @@ def save_calibration_snapshot(
             1 if calibration["underconfident"] else 0,
             calibration["total_reviews"],
             json.dumps(calibration["calibration_curve"]),
-            datetime.now(timezone.utc).isoformat(),
+            datetime.now(UTC).isoformat(),
         ),
     )
     conn.commit()

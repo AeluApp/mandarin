@@ -120,7 +120,7 @@ def _detect_tone_pairs(conn: sqlite3.Connection, limit: int) -> int:
         return 0
 
     # Group by toneless pinyin base
-    groups: Dict[str, List[sqlite3.Row]] = {}
+    groups: dict[str, list[sqlite3.Row]] = {}
     for row in rows:
         base = _strip_tones(row["pinyin"])
         groups.setdefault(base, []).append(row)
@@ -164,7 +164,7 @@ def _detect_homophones(conn: sqlite3.Connection, limit: int) -> int:
         return 0
 
     # Group by normalized pinyin (with tones intact)
-    groups: Dict[str, List[sqlite3.Row]] = {}
+    groups: dict[str, list[sqlite3.Row]] = {}
     for row in rows:
         key = _normalize_pinyin(row["pinyin"])
         groups.setdefault(key, []).append(row)
@@ -208,7 +208,7 @@ def _detect_visual_confusables(conn: sqlite3.Connection, limit: int) -> int:
         return 0
 
     # Build a map of individual characters to item IDs
-    char_to_items: Dict[str, List[int]] = {}
+    char_to_items: dict[str, list[int]] = {}
     for row in rows:
         hanzi = row["hanzi"]
         if len(hanzi) == 1:
@@ -265,7 +265,7 @@ def _detect_visual_confusables(conn: sqlite3.Connection, limit: int) -> int:
 
 def get_confusable_pairs(
     conn: sqlite3.Connection, item_id: int
-) -> List[Dict]:
+) -> list[dict]:
     """Get all confusable pairs for a given item.
 
     Returns a list of dicts with keys:

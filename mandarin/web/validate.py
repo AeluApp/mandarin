@@ -77,7 +77,7 @@ def _validate(data, schema):
         # Type check
         if field_type and not isinstance(value, field_type):
             # Allow int for float fields
-            if field_type == float and isinstance(value, int):
+            if field_type is float and isinstance(value, int):
                 pass
             else:
                 errors.append(f"{field} must be {field_type.__name__}")

@@ -350,7 +350,7 @@ def paired_t_test(x: list[float], y: list[float]) -> dict[str, Any]:
         return {"t": 0.0, "df": 0, "p_value": 1.0, "ci_95": (0.0, 0.0),
                 "mean_diff": 0.0, "se": 0.0}
 
-    diffs = [xi - yi for xi, yi in zip(x, y)]
+    diffs = [xi - yi for xi, yi in zip(x, y, strict=False)]
     return one_sample_t_test(diffs, mu=0)
 
 
@@ -554,7 +554,7 @@ def one_way_anova(*groups: list[float]) -> dict[str, Any]:
     grand_mean = sum(sum(g) for g in groups) / n_total
 
     # Between-group sum of squares
-    ss_between = sum(ni * (_mean(g) - grand_mean) ** 2 for g, ni in zip(groups, ns))
+    ss_between = sum(ni * (_mean(g) - grand_mean) ** 2 for g, ni in zip(groups, ns, strict=False))
     df_between = k - 1
 
     # Within-group sum of squares
@@ -690,7 +690,7 @@ def kruskal_wallis(*groups: list[float]) -> dict[str, Any]:
 
     # H statistic
     h = (12.0 / (n_total * (n_total + 1))) * sum(
-        rs ** 2 / ni for rs, ni in zip(rank_sums, ns)
+        rs ** 2 / ni for rs, ni in zip(rank_sums, ns, strict=False)
     ) - 3.0 * (n_total + 1)
 
     # Tie correction

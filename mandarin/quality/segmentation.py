@@ -10,6 +10,7 @@ import math
 import random
 import sqlite3
 from typing import Any
+from datetime import UTC
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 def _euclidean(a: list[float], b: list[float]) -> float:
     """Euclidean distance between two vectors of equal length."""
-    return math.sqrt(sum((ai - bi) ** 2 for ai, bi in zip(a, b)))
+    return math.sqrt(sum((ai - bi) ** 2 for ai, bi in zip(a, b, strict=False)))
 
 
 def _centroid(points: list[list[float]]) -> list[float]:
@@ -35,7 +36,7 @@ def _centroid(points: list[list[float]]) -> list[float]:
 
 def _vectors_equal(a: list[float], b: list[float], tol: float = 1e-9) -> bool:
     """Check if two vectors are element-wise equal within tolerance."""
-    return all(abs(ai - bi) < tol for ai, bi in zip(a, b))
+    return all(abs(ai - bi) < tol for ai, bi in zip(a, b, strict=False))
 
 
 # ---------------------------------------------------------------------------
@@ -65,7 +66,7 @@ def kmeans(
         return {"labels": [], "centroids": [], "inertia": 0.0, "iterations": 0}
 
     n = len(data)
-    dim = len(data[0])
+    len(data[0])
 
     if k <= 0:
         logger.warning("kmeans: k must be > 0, got %d", k)
@@ -144,7 +145,7 @@ def kmeans(
         # Check convergence
         converged = all(
             _vectors_equal(old, new)
-            for old, new in zip(centroids, new_centroids)
+            for old, new in zip(centroids, new_centroids, strict=False)
         )
         centroids = new_centroids
 
@@ -318,7 +319,7 @@ def extract_learner_features(
             from datetime import datetime, timezone
             try:
                 first_dt = datetime.fromisoformat(first_at.replace("Z", "+00:00"))
-                now = datetime.now(timezone.utc)
+                now = datetime.now(UTC)
                 weeks = max(1.0, (now - first_dt).days / 7.0)
             except (ValueError, TypeError):
                 weeks = max(1.0, session_count / 3.0)

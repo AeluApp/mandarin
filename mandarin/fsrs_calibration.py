@@ -85,7 +85,7 @@ def calibrate_user(
         # Update weights
         new_weights = [
             w - LEARNING_RATE * g if i in OPTIMIZABLE_PARAMS else w
-            for i, (w, g) in enumerate(zip(best_weights, gradient))
+            for i, (w, g) in enumerate(zip(best_weights, gradient, strict=False))
         ]
 
         # Clamp weights to reasonable ranges
