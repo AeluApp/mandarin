@@ -6,13 +6,12 @@ to the andon_event table. Can optionally send webhooks to Discord/Slack.
 
 import json
 import logging
-import os
 import sqlite3
 from datetime import datetime, timezone
 
-logger = logging.getLogger(__name__)
+from ..settings import ANDON_WEBHOOK_URL as _WEBHOOK_URL
 
-_WEBHOOK_URL = os.environ.get("ANDON_WEBHOOK_URL")
+logger = logging.getLogger(__name__)
 
 
 def fire_andon(conn, event_type, severity, summary, details=None):

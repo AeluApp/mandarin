@@ -136,6 +136,7 @@ VAPID_PRIVATE_KEY = os.environ.get("VAPID_PRIVATE_KEY", "")
 VAPID_CLAIMS_EMAIL = os.environ.get("VAPID_CLAIMS_EMAIL", f"mailto:admin@{CANONICAL_DOMAIN}")
 
 ALERT_WEBHOOK_URL = os.environ.get("ALERT_WEBHOOK_URL", "")
+ANDON_WEBHOOK_URL = os.environ.get("ANDON_WEBHOOK_URL", "")
 ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "")
 
 # ── Sentry (error monitoring) ────────────────────────
