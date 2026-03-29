@@ -117,6 +117,50 @@ def register_marketing_routes(app):
             logger.debug("Price variant lookup failed: %s", e)
             return jsonify({"price_display": default_price, "variant": "default"})
 
+    # ── Experiment Variant Endpoints (Flutter + Web client) ──────────────
+
+    @app.route("/api/experiments/my-variants")
+    @login_required
+    def api_my_variants():
+        """Return all active experiment variant assignments for the current user."""
+        try:
+            with db.connection() as conn:
+                rows = conn.execute(
+                    """
+                    SELECT e.name, ea.variant
+                    FROM experiment_assignment ea
+                    JOIN experiment e ON e.id = ea.experiment_id
+                    WHERE ea.user_id = ? AND e.status = 'running'
+                    """,
+                    (current_user.id,),
+                ).fetchall()
+                variants = {r["name"]: r["variant"] for r in rows}
+                return jsonify({"variants": variants})
+        except Exception as e:
+            logger.debug("my-variants failed: %s", e)
+            return jsonify({"variants": {}})
+
+    @app.route("/api/experiments/expose", methods=["POST"])
+    @login_required
+    def api_experiment_expose():
+        """Log an experiment exposure event."""
+        data = request.get_json()
+        if not data or not data.get("experiment_name"):
+            return jsonify({"error": "experiment_name required"}), 400
+        try:
+            with db.connection() as conn:
+                from .. import experiments
+                experiments.log_exposure(
+                    conn,
+                    data["experiment_name"],
+                    current_user.id,
+                    context=data.get("context", "api"),
+                )
+                return jsonify({"status": "ok"})
+        except Exception as e:
+            logger.debug("exposure logging failed: %s", e)
+            return jsonify({"status": "ok"})  # Don't fail the client
+
     # ── Referral Tracking ─────────────────────────────────────────────────
 
     @app.route("/api/referral/track")

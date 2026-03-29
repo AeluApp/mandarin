@@ -609,6 +609,235 @@ def calculate_velocity(conn, weeks: int = 12) -> dict[str, Any]:
     }
 
 
+def calculate_blocked_time_analysis(conn, days: int = 90) -> dict[str, Any]:
+    """Analyse blocked time for completed work items.
+
+    Returns mean blocked hours, blocked % of cycle time, top reasons,
+    and per-service-class breakdown.
+    """
+    if not _table_exists(conn, "work_item"):
+        return {
+            "mean_blocked_hours": 0.0,
+            "blocked_pct_of_cycle": 0.0,
+            "top_reasons": [],
+            "by_class": {},
+            "total_items_with_blocks": 0,
+        }
+
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
+
+    # total_blocked_hours column may not exist yet — handle gracefully
+    try:
+        rows = conn.execute(
+            """
+            SELECT
+                total_blocked_hours,
+                (julianday(completed_at) - julianday(started_at)) * 24.0 AS cycle_hours,
+                COALESCE(service_class, 'standard') AS sclass,
+                blocked_reason
+            FROM work_item
+            WHERE completed_at IS NOT NULL
+              AND started_at IS NOT NULL
+              AND completed_at >= ?
+              AND total_blocked_hours > 0
+            """,
+            (cutoff,),
+        ).fetchall()
+    except Exception:
+        return {
+            "mean_blocked_hours": 0.0,
+            "blocked_pct_of_cycle": 0.0,
+            "top_reasons": [],
+            "by_class": {},
+            "total_items_with_blocks": 0,
+        }
+
+    if not rows:
+        return {
+            "mean_blocked_hours": 0.0,
+            "blocked_pct_of_cycle": 0.0,
+            "top_reasons": [],
+            "by_class": {},
+            "total_items_with_blocks": 0,
+        }
+
+    blocked_hours = [float(r["total_blocked_hours"]) for r in rows]
+    mean_blocked = sum(blocked_hours) / len(blocked_hours)
+
+    # Blocked as % of cycle time
+    ratios = []
+    for r in rows:
+        cycle = float(r["cycle_hours"]) if r["cycle_hours"] else 0.0
+        if cycle > 0:
+            ratios.append(float(r["total_blocked_hours"]) / cycle)
+    blocked_pct = (sum(ratios) / len(ratios) * 100) if ratios else 0.0
+
+    # Top blocked reasons
+    reason_counts: dict[str, int] = {}
+    for r in rows:
+        reason = r["blocked_reason"] or "unknown"
+        reason_counts[reason] = reason_counts.get(reason, 0) + 1
+    top_reasons = sorted(
+        [{"reason": k, "count": v} for k, v in reason_counts.items()],
+        key=lambda x: x["count"],
+        reverse=True,
+    )
+
+    # Per service class breakdown
+    class_groups: dict[str, list[float]] = {}
+    for r in rows:
+        sc = r["sclass"]
+        class_groups.setdefault(sc, []).append(float(r["total_blocked_hours"]))
+
+    by_class: dict[str, dict[str, Any]] = {}
+    for sc, hours_list in class_groups.items():
+        by_class[sc] = {
+            "mean_hours": round(sum(hours_list) / len(hours_list), 2),
+            "count": len(hours_list),
+        }
+
+    return {
+        "mean_blocked_hours": round(mean_blocked, 2),
+        "blocked_pct_of_cycle": round(blocked_pct, 2),
+        "top_reasons": top_reasons,
+        "by_class": by_class,
+        "total_items_with_blocks": len(rows),
+    }
+
+
+def calculate_expedite_dilution(conn, days: int = 90) -> dict[str, Any]:
+    """Measure expedite dilution — the fraction of work that is expedited.
+
+    When too much work is classified as expedite, the system becomes
+    purely reactive. Healthy threshold: <= 20%.
+    """
+    if not _table_exists(conn, "work_item"):
+        return {
+            "expedite_count": 0,
+            "total_count": 0,
+            "dilution_pct": 0.0,
+            "healthy": True,
+            "recommendation": "Healthy",
+        }
+
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
+
+    try:
+        rows = conn.execute(
+            """
+            SELECT
+                COALESCE(service_class, 'standard') AS sclass,
+                COUNT(*) AS cnt
+            FROM work_item
+            WHERE completed_at IS NOT NULL
+              AND completed_at >= ?
+            GROUP BY sclass
+            """,
+            (cutoff,),
+        ).fetchall()
+    except Exception:
+        return {
+            "expedite_count": 0,
+            "total_count": 0,
+            "dilution_pct": 0.0,
+            "healthy": True,
+            "recommendation": "Healthy",
+        }
+
+    total_count = 0
+    expedite_count = 0
+    for r in rows:
+        total_count += r["cnt"]
+        if r["sclass"] == "expedite":
+            expedite_count = r["cnt"]
+
+    dilution_pct = (expedite_count / total_count * 100) if total_count > 0 else 0.0
+    healthy = dilution_pct <= 20
+
+    return {
+        "expedite_count": expedite_count,
+        "total_count": total_count,
+        "dilution_pct": round(dilution_pct, 2),
+        "healthy": healthy,
+        "recommendation": "Healthy" if healthy else "Too reactive — reduce expedite work",
+    }
+
+
+def calculate_time_to_first_start(conn, days: int = 90) -> dict[str, Any]:
+    """Time from ready to first start (wait time in queue).
+
+    Measures how long items sit in 'ready' before work begins.
+    Returns median, p85, p95, and per-service-class breakdown.
+    """
+    if not _table_exists(conn, "work_item"):
+        return {
+            "median_hours": 0.0,
+            "p85_hours": 0.0,
+            "p95_hours": 0.0,
+            "by_class": {},
+            "total_items": 0,
+        }
+
+    cutoff = (datetime.now(UTC) - timedelta(days=days)).isoformat()
+
+    try:
+        rows = conn.execute(
+            """
+            SELECT
+                (julianday(started_at) - julianday(ready_at)) * 24.0 AS wait_hours,
+                COALESCE(service_class, 'standard') AS sclass
+            FROM work_item
+            WHERE ready_at IS NOT NULL
+              AND started_at IS NOT NULL
+              AND started_at >= ?
+            """,
+            (cutoff,),
+        ).fetchall()
+    except Exception:
+        return {
+            "median_hours": 0.0,
+            "p85_hours": 0.0,
+            "p95_hours": 0.0,
+            "by_class": {},
+            "total_items": 0,
+        }
+
+    all_waits = [float(r["wait_hours"]) for r in rows if r["wait_hours"] is not None]
+
+    if not all_waits:
+        return {
+            "median_hours": 0.0,
+            "p85_hours": 0.0,
+            "p95_hours": 0.0,
+            "by_class": {},
+            "total_items": 0,
+        }
+
+    # Per service class breakdown
+    class_groups: dict[str, list[float]] = {}
+    for r in rows:
+        if r["wait_hours"] is None:
+            continue
+        sc = r["sclass"]
+        class_groups.setdefault(sc, []).append(float(r["wait_hours"]))
+
+    by_class: dict[str, dict[str, Any]] = {}
+    for sc, waits in class_groups.items():
+        by_class[sc] = {
+            "median": round(_safe_median(waits), 2),
+            "p85": round(_percentile(waits, 85), 2),
+            "count": len(waits),
+        }
+
+    return {
+        "median_hours": round(_safe_median(all_waits), 2),
+        "p85_hours": round(_percentile(all_waits, 85), 2),
+        "p95_hours": round(_percentile(all_waits, 95), 2),
+        "by_class": by_class,
+        "total_items": len(all_waits),
+    }
+
+
 def get_flow_summary(conn) -> dict[str, Any]:
     """Combined flow metrics."""
     return {
@@ -617,6 +846,9 @@ def get_flow_summary(conn) -> dict[str, Any]:
         "throughput": calculate_throughput(conn),
         "service_class_compliance": assess_service_class_compliance(conn),
         "velocity": calculate_velocity(conn),
+        "blocked_time": calculate_blocked_time_analysis(conn),
+        "expedite_dilution": calculate_expedite_dilution(conn),
+        "time_to_first_start": calculate_time_to_first_start(conn),
     }
 
 

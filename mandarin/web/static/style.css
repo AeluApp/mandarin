@@ -147,6 +147,35 @@
   --skeleton-height: 14px;
 }
 
+/* ── Font loading orchestration ───────────────────────── */
+/* Prevents FOUT (Flash of Unstyled Text). The body starts at 95%
+   opacity and fades to 100% when web fonts finish loading. The
+   fonts-loaded class is added by JS in app.js via document.fonts.ready. */
+body {
+  opacity: 0.95;
+  transition: opacity var(--duration-slow) var(--ease-upward);
+}
+body.fonts-loaded {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { opacity: 1; transition: none; }
+}
+
+/* ── WebGL atmosphere handoff ────────────────────────── */
+/* Smooth transition from CSS gradient fallback to WebGL canvas.
+   The canvas starts transparent and fades in when Three.js is ready. */
+.webgl-atmosphere-canvas {
+  opacity: 0;
+  transition: opacity var(--duration-ambient) var(--ease-upward);
+}
+.webgl-atmosphere-canvas.webgl-ready {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .webgl-atmosphere-canvas { opacity: 1; transition: none; }
+}
+
 /* ── Awwwards-tier animation enrichment ──────────────── */
 
 /* Input focus glow — soft accent ring on all text inputs */
@@ -11215,4 +11244,534 @@ html[data-theme="dark"] .hanzi-watermark {
 .conv-scaffold-bar .btn-scaffold {
   font-size: var(--text-xs, 12px);
   padding: 4px 10px;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   Awwwards-tier Micro-interactions
+   Tactile polish for form inputs, custom controls, and card interactions.
+   All animations use --ease-upward and have prefers-reduced-motion fallbacks.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ── Answer input underline grow ─────────────────────── */
+/* The drill answer input grows an accent underline from center on focus,
+   matching the "horizon line" visual language from the brand guide. */
+#answer-input {
+  position: relative;
+}
+.input-row {
+  position: relative;
+}
+.input-row::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width var(--duration-base) var(--ease-upward),
+              left var(--duration-base) var(--ease-upward);
+}
+.input-row:focus-within::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ── Auth field label float ──────────────────────────── */
+/* On focus, the label smoothly slides up and shrinks. The label must
+   be positioned inside the field container to float above the input. */
+.auth-field {
+  position: relative;
+}
+.auth-field label {
+  transition: transform var(--duration-base) var(--ease-upward),
+              font-size var(--duration-base) var(--ease-upward),
+              color var(--duration-base) var(--ease-upward);
+  transform-origin: left top;
+}
+.auth-field input:focus ~ label,
+.auth-field input:not(:placeholder-shown) ~ label {
+  transform: translateY(-4px);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+}
+
+/* ── Custom checkbox ─────────────────────────────────── */
+/* Branded checkbox using accent color with checkmark stroke animation */
+input[type="checkbox"]:not(.toggle-switch input) {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-divider);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--duration-fast) var(--ease-default),
+              background var(--duration-fast) var(--ease-default);
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+input[type="checkbox"]:not(.toggle-switch input):checked {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+input[type="checkbox"]:not(.toggle-switch input)::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--color-on-accent);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform var(--duration-fast) var(--ease-upward);
+}
+input[type="checkbox"]:not(.toggle-switch input):checked::after {
+  transform: rotate(45deg) scale(1);
+}
+input[type="checkbox"]:not(.toggle-switch input):focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+/* ── Custom radio button ─────────────────────────────── */
+/* Branded radio with accent-colored inner circle scale animation */
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-divider);
+  border-radius: 50%;
+  background: var(--color-surface);
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--duration-fast) var(--ease-default);
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+input[type="radio"]:checked {
+  border-color: var(--color-accent);
+}
+input[type="radio"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform var(--duration-fast) var(--ease-upward);
+}
+input[type="radio"]:checked::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+input[type="radio"]:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+/* ── Textarea smooth resize ──────────────────────────── */
+textarea {
+  transition: height var(--duration-fast) var(--ease-upward),
+              border-color var(--duration-fast) var(--ease-default);
+}
+
+/* ── Card/panel hover lift ───────────────────────────── */
+/* Glass cards and stat panels lift slightly on hover with shadow deepening */
+@media (hover: hover) {
+  .surface-glass:hover,
+  .stat-card:hover,
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--duration-base) var(--ease-upward),
+                box-shadow var(--duration-base) var(--ease-upward);
+  }
+}
+
+/* ── View transition morphing ────────────────────────── */
+/* Slight scale-up on incoming view for depth perception */
+::view-transition-new(*) {
+  animation: vt-fade-in var(--duration-base) var(--ease-upward);
+}
+::view-transition-old(*) {
+  animation: vt-fade-out var(--duration-fast) var(--ease-exit);
+}
+@keyframes vt-fade-in {
+  from { opacity: 0; transform: scale(1.02); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes vt-fade-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.98); }
+}
+
+/* ── Additional view transition names ────────────────── */
+/* Extend shared-element transitions to more UI elements */
+.nav-bar, nav[role="navigation"] { view-transition-name: nav-bar; }
+.page-heading, .section-heading, main > h1:first-of-type { view-transition-name: page-heading; }
+.drill-container, #drill-area { view-transition-name: drill-question; }
+.mastery-bar, .mastery-overview { view-transition-name: mastery-bar; }
+
+/* ── Reduced motion fallbacks for micro-interactions ── */
+@media (prefers-reduced-motion: reduce) {
+  .input-row::after { transition: none; }
+  .auth-field label { transition: none; }
+  input[type="checkbox"]:not(.toggle-switch input)::after { transition: none; }
+  input[type="radio"]::after { transition: none; }
+  textarea { transition: none; }
+  .surface-glass:hover,
+  .stat-card:hover,
+  .metric-card:hover { transform: none; transition: none; }
+  ::view-transition-new(*),
+  ::view-transition-old(*) { animation-duration: 0.01ms; }
+  @keyframes vt-fade-in { from, to { opacity: 1; transform: none; } }
+  @keyframes vt-fade-out { from, to { opacity: 1; transform: none; } }
+}
+
+/* ── Landing page scroll choreography ─────────────────── */
+
+/* 1. Continuous parallax on feature cards */
+[data-scroll-section] .feature-card {
+  opacity: calc(var(--scroll-progress, 0) * 1.5);
+  transform: translateY(calc((1 - var(--scroll-progress, 0)) * 40px));
+}
+
+/* 2. Horizontal scroll section */
+.horizontal-scroll-section {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  height: 100vh;
+}
+.horizontal-scroll-track {
+  display: flex;
+  gap: var(--space-6);
+  will-change: transform;
+  transition: none; /* Driven by JS, no CSS transition needed */
+}
+.horizontal-scroll-track > * {
+  flex-shrink: 0;
+  width: min(80vw, 600px);
+}
+
+/* 3. Hero typography breathing */
+.landing-hero h1,
+.hero h1 {
+  font-size: calc(var(--text-display) + var(--scroll-progress, 0) * 0.15rem);
+  transition: font-size 0.05s linear; /* Smooth but responsive to scroll */
+}
+
+/* 4. Atmosphere depth veil */
+.depth-veil {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 30%, var(--color-base));
+  opacity: calc(var(--scroll-progress, 0) * 0.3);
+  z-index: 1;
+}
+
+/* 5. Stagger cascade for step numbers */
+[data-scroll-section] .step:nth-child(1) { --stagger: 0; }
+[data-scroll-section] .step:nth-child(2) { --stagger: 0.15; }
+[data-scroll-section] .step:nth-child(3) { --stagger: 0.3; }
+[data-scroll-section] .step:nth-child(4) { --stagger: 0.45; }
+[data-scroll-section] .step {
+  opacity: calc((var(--scroll-progress, 0) - var(--stagger, 0)) * 3);
+  transform: translateY(calc(max(0, (1 - (var(--scroll-progress, 0) - var(--stagger, 0)) * 3)) * 30px));
+}
+
+/* 6. Reduced motion fallback for scroll choreography */
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-section] .feature-card { opacity: 1; transform: none; }
+  .landing-hero h1,
+  .hero h1 { font-size: var(--text-display); }
+  .depth-veil { opacity: 0; }
+  [data-scroll-section] .step { opacity: 1; transform: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Kanban Board — Civic Sanctuary aesthetic
+   ═══════════════════════════════════════════════════════════════ */
+
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2);
+  min-height: 300px;
+}
+
+.kanban-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.kanban-column-header {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--color-divider);
+  margin-bottom: var(--space-1);
+}
+
+.kanban-column-count {
+  color: var(--color-text-dim);
+  font-size: var(--text-xs);
+}
+
+.kanban-wip-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+  margin-left: var(--space-1);
+}
+
+.kanban-wip-over {
+  color: var(--color-incorrect);
+  font-weight: 600;
+}
+
+.kanban-card {
+  background: var(--color-surface);
+  padding: var(--space-2);
+  border-radius: 8px;
+  transition: opacity 0.18s var(--ease-upward, ease-out);
+}
+
+.kanban-card--highlighted {
+  animation: kanban-highlight 2s var(--ease-upward, ease-out);
+}
+
+@keyframes kanban-highlight {
+  0% { background: color-mix(in oklch, var(--color-correct) 20%, var(--color-surface)); }
+  100% { background: var(--color-surface); }
+}
+
+.kanban-card--warning {
+  background: color-mix(in oklch, var(--color-accent) 8%, var(--color-surface));
+}
+
+.kanban-card--critical {
+  background: color-mix(in oklch, var(--color-incorrect) 10%, var(--color-surface));
+}
+
+.kanban-card--blocked {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-surface),
+    var(--color-surface) 6px,
+    color-mix(in oklch, var(--color-incorrect) 5%, var(--color-surface)) 6px,
+    color-mix(in oklch, var(--color-incorrect) 5%, var(--color-surface)) 12px
+  );
+}
+
+.kanban-card-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  line-height: 1.3;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.kanban-card-meta {
+  display: flex;
+  gap: var(--space-1);
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--color-text-dim);
+  margin-bottom: 4px;
+}
+
+.kanban-card-class {
+  text-transform: capitalize;
+}
+
+.kanban-card-age {
+  font-family: var(--font-mono);
+}
+
+.kanban-card-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.kanban-card-btn {
+  padding: 2px 8px;
+  font-size: 10px;
+  font-family: var(--font-body);
+  background: var(--color-surface-alt, var(--color-surface));
+  border: 1px solid var(--color-divider);
+  cursor: pointer;
+  color: var(--color-text);
+  border-radius: 4px;
+  transition: background 0.12s;
+}
+
+.kanban-card-btn:hover {
+  background: color-mix(in oklch, var(--color-accent) 10%, var(--color-surface));
+}
+
+.kanban-card-btn--block {
+  color: var(--color-incorrect);
+}
+
+.kanban-expedite-divider {
+  font-size: 9px;
+  font-family: var(--font-body);
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 0;
+  border-top: 1px dashed var(--color-divider);
+  margin: 2px 0;
+}
+
+.kanban-action-btn {
+  padding: 6px 16px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  background: none;
+  color: var(--color-text-dim);
+  border: 1px solid var(--color-divider);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.kanban-action-btn:hover {
+  background: color-mix(in oklch, var(--color-accent) 8%, var(--color-surface));
+}
+
+.kanban-action-btn--primary {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-color: var(--color-accent);
+}
+
+.kanban-action-btn--primary:hover {
+  background: color-mix(in oklch, var(--color-accent) 85%, black);
+}
+
+.kanban-view-toggle {
+  display: flex;
+  gap: 0;
+}
+
+.kanban-toggle-btn {
+  padding: 4px 12px;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  background: none;
+  color: var(--color-text-dim);
+  border: 1px solid var(--color-divider);
+  cursor: pointer;
+}
+
+.kanban-toggle-btn:first-child { border-radius: 4px 0 0 4px; }
+.kanban-toggle-btn:last-child { border-radius: 0 4px 4px 0; border-left: none; }
+
+.kanban-toggle-btn--active {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-color: var(--color-accent);
+}
+
+/* Responsive: horizontal scroll on narrow screens */
+@media (max-width: 768px) {
+  .kanban-board {
+    grid-template-columns: none;
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-2);
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-2);
+  }
+  .kanban-column {
+    min-width: 220px;
+    flex-shrink: 0;
+  }
+}
+
+/* ── Learner pipeline bar ── */
+.learning-pipeline {
+  display: flex;
+  height: 24px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--color-surface-alt, var(--color-surface));
+}
+
+.learning-pipeline-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: #fff;
+  min-width: 2px;
+  transition: flex 0.3s var(--ease-upward, ease-out);
+}
+
+.learning-pipeline-labels {
+  display: flex;
+  gap: var(--space-1);
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--color-text-dim);
+  flex-wrap: wrap;
+}
+
+.learning-pipeline-label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.learning-pipeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ── Queue depth indicator ── */
+.queue-depth {
+  margin: var(--space-2) 0;
+}
+
+.queue-depth-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--color-surface-alt, var(--color-surface));
+  overflow: hidden;
+}
+
+.queue-depth-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s var(--ease-upward, ease-out), background-color 0.3s;
+}
+
+.queue-depth-text {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+  margin-top: 4px;
 }

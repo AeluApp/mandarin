@@ -85,6 +85,15 @@ _AUTO_FIX_PATTERNS = [
     # Lint: simple lint violations
     (re.compile(r"lint|ruff|flake8|unused\s+import", re.I),
      "lint_violation", "code"),
+    # View transition: missing view-transition-name
+    (re.compile(r"missing\s+view-transition-name|view.transition.*coverage", re.I),
+     "missing_view_transition_name", "code"),
+    # Flutter platform drift: duration or radius mismatches
+    (re.compile(r"flutter.*duration.*drift|flutter.*radius.*drift|platform.*drift.*duration", re.I),
+     "flutter_token_drift", "code"),
+    # Missing prefers-reduced-motion for view transitions
+    (re.compile(r"reduced.motion.*view.transition|view.transition.*reduced.motion", re.I),
+     "missing_reduced_motion", "code"),
 ]
 
 # Patterns that require human review

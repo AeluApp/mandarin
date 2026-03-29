@@ -1099,6 +1099,356 @@ def _safe_scalar(conn, sql, params=(), default=None):
 
 
 # ═══════════════════════════════════════════════════════════════════════
+# LAYER 7: BUSINESS INTEGRITY METRICS
+# ═══════════════════════════════════════════════════════════════════════
+
+
+def conversion_to_retention_ratio(conn):
+    """Do users who convert (free→paid) actually retain at 30 days?
+
+    If conversion rises but 30-day retention falls, monetization is gaming engagement.
+    Counter-metric for: conversion rate, revenue
+    """
+    try:
+        # Count users who converted to paid
+        converted = _safe_scalar(
+            conn,
+            "SELECT COUNT(*) FROM user WHERE subscription_tier = 'paid'",
+            default=0,
+        )
+        if converted == 0:
+            return {"conversion_30d_retention": None, "converted_users": 0}
+
+        # Of those, how many had a session in the last 30 days?
+        retained = _safe_scalar(
+            conn,
+            """SELECT COUNT(DISTINCT u.id) FROM user u
+               JOIN session_log sl ON sl.user_id = u.id
+               WHERE u.subscription_tier = 'paid'
+               AND sl.started_at >= datetime('now', '-30 days')""",
+            default=0,
+        )
+        retention = retained / converted if converted > 0 else 0
+
+        return {
+            "conversion_30d_retention": round(retention, 4),
+            "converted_users": converted,
+            "retained_users": retained,
+        }
+    except Exception:
+        return {"conversion_30d_retention": None}
+
+
+def engagement_quality_score(conn):
+    """Is session frequency correlated with learning gains?
+
+    If sessions/week rises but mastery promotions/session falls, engagement is hollow.
+    Counter-metric for: engagement, DAU/MAU, session count
+    """
+    try:
+        row = conn.execute(
+            """SELECT
+                COUNT(DISTINCT sl.id) AS total_sessions,
+                COUNT(DISTINCT sl.user_id) AS active_users,
+                SUM(sl.items_completed) AS total_items
+               FROM session_log sl
+               WHERE sl.started_at >= datetime('now', '-30 days')"""
+        ).fetchone()
+
+        if not row or not row["total_sessions"]:
+            return {"engagement_quality": None}
+
+        sessions = row["total_sessions"]
+
+        # Count mastery promotions in same period
+        promotions = _safe_scalar(
+            conn,
+            """SELECT COUNT(*) FROM progress
+               WHERE mastery_stage IN ('stable', 'durable')
+               AND last_review_date >= datetime('now', '-30 days')""",
+            default=0,
+        )
+
+        quality = promotions / sessions if sessions > 0 else 0
+
+        return {
+            "engagement_quality": round(quality, 4),
+            "promotions_per_session": round(quality, 4),
+            "total_sessions_30d": sessions,
+            "total_promotions_30d": promotions,
+        }
+    except Exception:
+        return {"engagement_quality": None}
+
+
+def churn_honesty(conn):
+    """Among users who churned, was their last mastery state honest?
+
+    If mastered items have low delayed_recall, the product was lying about progress.
+    Counter-metric for: retention, mastery claims, user trust
+    """
+    try:
+        # Churned users: no session in 30+ days, had sessions before
+        churned = conn.execute(
+            """SELECT DISTINCT u.id FROM user u
+               JOIN session_log sl ON sl.user_id = u.id
+               WHERE u.id NOT IN (
+                   SELECT DISTINCT user_id FROM session_log
+                   WHERE started_at >= datetime('now', '-30 days')
+               )
+               GROUP BY u.id
+               HAVING MAX(sl.started_at) < datetime('now', '-30 days')
+               LIMIT 100"""
+        ).fetchall()
+
+        if not churned:
+            return {"churn_honesty": None, "churned_users": 0}
+
+        churned_ids = [r["id"] for r in churned]
+        total_mastered = 0
+        total_validated = 0
+        validated_correct = 0
+
+        for uid in churned_ids:
+            # Count "mastered" items at churn time
+            mastered = _safe_scalar(
+                conn,
+                "SELECT COUNT(*) FROM progress WHERE user_id = ? AND mastery_stage IN ('stable', 'durable')",
+                (uid,), default=0,
+            )
+            total_mastered += mastered
+
+            # Check delayed validation results
+            validated = conn.execute(
+                "SELECT correct FROM counter_metric_delayed_validation WHERE user_id = ? AND status = 'completed'",
+                (uid,),
+            ).fetchall()
+            for v in validated:
+                total_validated += 1
+                if v["correct"]:
+                    validated_correct += 1
+
+        honesty = validated_correct / total_validated if total_validated > 0 else None
+
+        return {
+            "churn_honesty": round(honesty, 4) if honesty is not None else None,
+            "churned_users": len(churned_ids),
+            "churned_mastered_items": total_mastered,
+            "validated_items": total_validated,
+            "validated_correct": validated_correct,
+        }
+    except Exception:
+        return {"churn_honesty": None}
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# LAYER 8: EXTENDED GAMING DETECTION
+# ═══════════════════════════════════════════════════════════════════════
+
+
+def mcq_position_bias(conn):
+    """Detect if correct answers cluster on specific MCQ option positions.
+
+    If a user always picks option B or always picks the longest option,
+    they're exploiting format, not retrieving from memory.
+    Counter-metric for: review accuracy
+    """
+    try:
+        rows = conn.execute(
+            """SELECT user_answer, correct FROM review_event
+               WHERE drill_type IN ('mc', 'reverse_mc', 'contrastive')
+               AND correct = 1
+               AND created_at >= datetime('now', '-30 days')
+               LIMIT 500"""
+        ).fetchall()
+
+        if len(rows) < 20:
+            return {"mcq_position_bias": None, "sample_size": len(rows)}
+
+        # Count answer positions (A=0, B=1, C=2, D=3)
+        position_counts = {}
+        for r in rows:
+            answer = str(r["user_answer"] or "").strip()
+            if answer:
+                pos = answer[0].upper() if answer[0].isalpha() else answer
+                position_counts[pos] = position_counts.get(pos, 0) + 1
+
+        if not position_counts:
+            return {"mcq_position_bias": None}
+
+        total = sum(position_counts.values())
+        n_positions = max(len(position_counts), 1)
+        expected = total / n_positions
+
+        # Chi-squared test for uniform distribution
+        chi2 = sum(
+            (count - expected) ** 2 / expected
+            for count in position_counts.values()
+        )
+
+        # For df=3 (4 options), chi2 > 7.81 is significant at p<0.05
+        biased = chi2 > 7.81 and n_positions >= 3
+
+        return {
+            "mcq_position_bias": round(chi2, 4),
+            "biased": biased,
+            "position_counts": position_counts,
+            "sample_size": total,
+        }
+    except Exception:
+        return {"mcq_position_bias": None}
+
+
+def confidence_inflation_rate(conn):
+    """Detect if user's confidence is inflating over time (gaming dampening).
+
+    Compare calibration gap (predicted - actual) over recent vs earlier periods.
+    If the gap is growing, user may be gaming the confidence system.
+    Counter-metric for: confidence dampening effectiveness
+    """
+    try:
+        # Recent calibration gap (last 14 days)
+        recent = conn.execute(
+            """SELECT
+                AVG(CASE confidence
+                    WHEN 'full' THEN 1.0
+                    WHEN 'half' THEN 0.5
+                    WHEN 'narrowed' THEN 0.4
+                    WHEN 'unknown' THEN 0.15
+                    ELSE 0.5 END) AS avg_predicted,
+                AVG(CASE WHEN correct THEN 1.0 ELSE 0.0 END) AS avg_actual,
+                COUNT(*) AS n
+               FROM review_event
+               WHERE created_at >= datetime('now', '-14 days')"""
+        ).fetchone()
+
+        # Earlier calibration gap (14-28 days ago)
+        earlier = conn.execute(
+            """SELECT
+                AVG(CASE confidence
+                    WHEN 'full' THEN 1.0
+                    WHEN 'half' THEN 0.5
+                    WHEN 'narrowed' THEN 0.4
+                    WHEN 'unknown' THEN 0.15
+                    ELSE 0.5 END) AS avg_predicted,
+                AVG(CASE WHEN correct THEN 1.0 ELSE 0.0 END) AS avg_actual,
+                COUNT(*) AS n
+               FROM review_event
+               WHERE created_at >= datetime('now', '-28 days')
+               AND created_at < datetime('now', '-14 days')"""
+        ).fetchone()
+
+        if not recent or not earlier or (recent["n"] or 0) < 20 or (earlier["n"] or 0) < 20:
+            return {"confidence_inflation": None}
+
+        recent_gap = (recent["avg_predicted"] or 0) - (recent["avg_actual"] or 0)
+        earlier_gap = (earlier["avg_predicted"] or 0) - (earlier["avg_actual"] or 0)
+        drift = recent_gap - earlier_gap
+
+        return {
+            "confidence_inflation": round(drift, 4),
+            "recent_gap": round(recent_gap, 4),
+            "earlier_gap": round(earlier_gap, 4),
+            "inflating": drift > 0.05,  # >5pp increase in overconfidence
+        }
+    except Exception:
+        return {"confidence_inflation": None}
+
+
+def contextual_guessing_rate(conn):
+    """Track accuracy by drill type for the same item.
+
+    If MCQ accuracy is 95% but production accuracy is 30% for the same items,
+    the user is guessing from options, not retrieving from memory.
+    Counter-metric for: review accuracy, items mastered
+    """
+    try:
+        rows = conn.execute(
+            """SELECT content_item_id,
+                AVG(CASE WHEN drill_type IN ('mc', 'reverse_mc') AND correct THEN 1.0
+                         WHEN drill_type IN ('mc', 'reverse_mc') THEN 0.0 END) AS mcq_acc,
+                AVG(CASE WHEN drill_type IN ('ime_type', 'english_to_pinyin', 'sentence_build', 'word_order') AND correct THEN 1.0
+                         WHEN drill_type IN ('ime_type', 'english_to_pinyin', 'sentence_build', 'word_order') THEN 0.0 END) AS prod_acc,
+                COUNT(*) AS n
+               FROM review_event
+               WHERE created_at >= datetime('now', '-30 days')
+               GROUP BY content_item_id
+               HAVING n >= 6
+                  AND mcq_acc IS NOT NULL
+                  AND prod_acc IS NOT NULL
+               LIMIT 200"""
+        ).fetchall()
+
+        if not rows:
+            return {"contextual_guessing_rate": None}
+
+        guessing_items = 0
+        total_items = len(rows)
+        for r in rows:
+            mcq = r["mcq_acc"] or 0
+            prod = r["prod_acc"] or 0
+            if mcq > 0.8 and prod < 0.4:  # MCQ easy but production hard = guessing
+                guessing_items += 1
+
+        rate = guessing_items / total_items if total_items > 0 else 0
+
+        return {
+            "contextual_guessing_rate": round(rate, 4),
+            "guessing_items": guessing_items,
+            "total_items_checked": total_items,
+        }
+    except Exception:
+        return {"contextual_guessing_rate": None}
+
+
+def detect_session_gaming(conn, session_id=None):
+    """Detect per-session gaming patterns.
+
+    Checks: speed gaming, difficulty avoidance, answer pattern exploitation.
+    Can run after each session for real-time detection.
+    """
+    try:
+        where = "AND sl.id = ?" if session_id else ""
+        params = (session_id,) if session_id else ()
+
+        rows = conn.execute(
+            f"""SELECT re.response_ms, re.correct, re.confidence, re.drill_type
+               FROM review_event re
+               JOIN session_log sl ON sl.id = re.session_id
+               WHERE sl.started_at >= datetime('now', '-1 day')
+               {where}
+               ORDER BY re.created_at""",
+            params,
+        ).fetchall()
+
+        if len(rows) < 5:
+            return {"gaming_detected": False, "flags": []}
+
+        flags = []
+
+        # Speed gaming: >50% of correct answers under 500ms
+        correct_fast = sum(1 for r in rows if r["correct"] and (r["response_ms"] or 9999) < 500)
+        correct_total = sum(1 for r in rows if r["correct"])
+        if correct_total > 5 and correct_fast / correct_total > 0.5:
+            flags.append("speed_gaming")
+
+        # Accuracy too high with low confidence: gaming the system
+        high_acc = sum(1 for r in rows if r["correct"]) / len(rows)
+        low_conf = sum(1 for r in rows if r["confidence"] in ("unknown", "narrowed_wrong")) / len(rows)
+        if high_acc > 0.95 and low_conf > 0.3:
+            flags.append("accuracy_confidence_mismatch")
+
+        return {
+            "gaming_detected": len(flags) > 0,
+            "flags": flags,
+            "speed_gaming_rate": round(correct_fast / max(correct_total, 1), 4),
+            "session_accuracy": round(high_acc, 4),
+        }
+    except Exception:
+        return {"gaming_detected": False, "flags": []}
+
+
+# ═══════════════════════════════════════════════════════════════════════
 # COUNTER-METRIC MAPPING TABLE
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -1141,6 +1491,21 @@ COUNTER_METRIC_MAP = {
         "integrity": ["mastery_survival_curve", "progress_honesty"],
         "distortion": [],
         "cost": [],
+        "business": ["conversion_30d_retention", "churn_honesty"],
+    },
+    "engagement": {
+        "likely_failure": "Compulsive use without learning, hollow metrics",
+        "integrity": ["delayed_recall", "transfer_accuracy"],
+        "distortion": ["difficulty_avoidance"],
+        "cost": ["session_fatigue", "learning_efficiency"],
+        "business": ["engagement_quality"],
+    },
+    "revenue": {
+        "likely_failure": "Monetizing without delivering learning value",
+        "integrity": ["progress_honesty", "holdout_accuracy"],
+        "distortion": [],
+        "cost": [],
+        "business": ["conversion_30d_retention", "churn_honesty"],
     },
     "corpus_expansion": {
         "likely_failure": "Duplicate/low-quality AI content, rubber-stamped reviews",
@@ -1187,6 +1552,16 @@ ALERT_THRESHOLDS = {
     "content_approval_latency_days": {"warn": 7, "critical": 14, "direction": "above"},
     "content_reaudit_failure_rate": {"warn": 0.10, "critical": 0.25, "direction": "above"},
     "content_rubber_stamp_rate": {"warn": 0.30, "critical": 0.50, "direction": "above"},
+
+    # Business integrity
+    "conversion_30d_retention": {"warn": 0.60, "critical": 0.40, "direction": "below"},
+    "engagement_quality": {"warn": 0.30, "critical": 0.10, "direction": "below"},
+    "churn_honesty": {"warn": 0.50, "critical": 0.30, "direction": "below"},
+
+    # Extended gaming detection
+    "mcq_position_bias": {"warn": 7.81, "critical": 11.34, "direction": "above"},
+    "confidence_inflation": {"warn": 0.05, "critical": 0.10, "direction": "above"},
+    "contextual_guessing_rate": {"warn": 0.15, "critical": 0.30, "direction": "above"},
 }
 
 

@@ -7,28 +7,28 @@ class AeluColors {
   // ── Light mode ──
   static const Color baseLight = Color(0xFFF2EBE0);       // --color-base
   static const Color surfaceLight = Color(0xFFF2EBE0);     // --color-surface (same as base)
-  static const Color surfaceAltLight = Color(0xFFEDE5D8);  // --color-surface-alt
+  static const Color surfaceAltLight = Color(0xFFEAE2D6);  // --color-surface-alt
   static const Color textLight = Color(0xFF2A3650);        // --color-text (slate blue)
-  static const Color textDimLight = Color(0xFF5A6478);     // --color-text-dim
-  static const Color textFaintLight = Color(0xFF8A8E98);   // --color-text-faint
+  static const Color textDimLight = Color(0xFF5A6678);     // --color-text-dim
+  static const Color textFaintLight = Color(0xFF6A7080);   // --color-text-faint
   static const Color accent = Color(0xFF946070);           // --color-accent (terracotta rose)
-  static const Color accentDim = Color(0xFFB48898);        // --color-accent-dim
+  static const Color accentDim = Color(0xFF7A5060);        // --color-accent-dim
   static const Color secondary = Color(0xFF6A7A5A);        // --color-secondary (olive)
   static const Color correct = Color(0xFF5A7A5A);          // --color-correct (forest green)
 
   // ── Dark mode ──
   static const Color baseDark = Color(0xFF1C2028);         // --color-base (dark)
   static const Color surfaceDark = Color(0xFF1C2028);      // --color-surface (dark)
-  static const Color surfaceAltDark = Color(0xFF252A34);   // --color-surface-alt (dark)
+  static const Color surfaceAltDark = Color(0xFF242A34);   // --color-surface-alt (dark)
   static const Color textDark = Color(0xFFE4DDD0);         // --color-text (dark)
-  static const Color textDimDark = Color(0xFFB0A898);      // --color-text-dim (dark)
+  static const Color textDimDark = Color(0xFFA09888);      // --color-text-dim (dark)
   static const Color textFaintDark = Color(0xFF787068);    // --color-text-faint (dark)
 
   // ── Dark mode semantic overrides (contrast-safe on #1C2028) ──
-  static const Color accentDark = Color(0xFFB8808E);    // terracotta rose — 5.06:1
-  static const Color secondaryDark = Color(0xFF8AA070); // olive — 5.71:1
-  static const Color incorrectDark = Color(0xFFB08878); // warm brown — 5.28:1
-  static const Color correctDark = Color(0xFF7AA07A);   // forest green — 4.95:1
+  static const Color accentDark = Color(0xFFB07888);    // terracotta rose — tokens #B07888
+  static const Color secondaryDark = Color(0xFF8AAA7A); // olive — tokens #8AAA7A
+  static const Color incorrectDark = Color(0xFFA8988E); // warm brown — tokens #A8988E
+  static const Color correctDark = Color(0xFF7A9A7A);   // forest green — tokens #7A9A7A
 
   // ── Semantic aliases ──
   static const Color streakGold = Color(0xFFD4A574);

@@ -23,9 +23,9 @@ class AeluTheme {
   static const Curve springCurve = Cubic(0.34, 1.56, 0.64, 1);
 
   // ── Duration tokens (matching web) ──
-  static const Duration durationPress = Duration(milliseconds: 100);
-  static const Duration durationSnappy = Duration(milliseconds: 150);
-  static const Duration durationFast = Duration(milliseconds: 200);
+  static const Duration durationPress = Duration(milliseconds: 80);
+  static const Duration durationSnappy = Duration(milliseconds: 120);
+  static const Duration durationFast = Duration(milliseconds: 180);
   static const Duration durationNormal = Duration(milliseconds: 300);
 
   // ── Button press scale ──

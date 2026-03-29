@@ -416,15 +416,26 @@ def _check_platform_drift(conn):
         comparisons = [
             # Light mode
             ("base", "light", "baseLight"),
+            ("surface", "light", "surfaceLight"),
+            ("surfaceAlt", "light", "surfaceAltLight"),
             ("text", "light", "textLight"),
+            ("textDim", "light", "textDimLight"),
+            ("textFaint", "light", "textFaintLight"),
             ("accent", "light", "accent"),
+            ("accentDim", "light", "accentDim"),
             ("correct", "light", "correct"),
+            ("incorrect", "light", "incorrect"),
             ("secondary", "light", "secondary"),
             # Dark mode
             ("base", "dark", "baseDark"),
+            ("surface", "dark", "surfaceDark"),
+            ("surfaceAlt", "dark", "surfaceAltDark"),
             ("text", "dark", "textDark"),
+            ("textDim", "dark", "textDimDark"),
             ("accent", "dark", "accentDark"),
             ("correct", "dark", "correctDark"),
+            ("incorrect", "dark", "incorrectDark"),
+            ("secondary", "dark", "secondaryDark"),
         ]
 
         drifts = []
@@ -439,22 +450,50 @@ def _check_platform_drift(conn):
             if _normalize_hex(token_hex) != _normalize_hex(flutter_hex):
                 drifts.append((token_key, mode, token_hex, flutter_field, flutter_hex))
 
+        # Also check duration drift (Flutter theme vs design tokens)
+        flutter_theme = _read_file("flutter_app/lib/theme/aelu_theme.dart")
+        if flutter_theme:
+            motion = tokens.get("motion", {}).get("duration", {})
+            dur_map = {
+                "durationPress": "press",
+                "durationSnappy": "snappy",
+                "durationFast": "fast",
+                "durationNormal": "base",
+            }
+            for flutter_name, token_key in dur_map.items():
+                fm = re.search(
+                    rf'{flutter_name}\s*=\s*Duration\(milliseconds:\s*(\d+)\)',
+                    flutter_theme
+                )
+                token_val = motion.get(token_key, "")
+                tm = re.match(r'([\d.]+)s', str(token_val))
+                if fm and tm:
+                    flutter_ms = int(fm.group(1))
+                    token_ms = int(float(tm.group(1)) * 1000)
+                    if flutter_ms != token_ms:
+                        drifts.append((
+                            f"duration.{token_key}", "motion",
+                            f"{token_ms}ms", flutter_name, f"{flutter_ms}ms"
+                        ))
+
         if drifts:
             detail_lines = [
                 f"  {tk} ({mode}): JSON={tv}  Flutter {ff}={fv}"
-                for tk, mode, tv, ff, fv in drifts[:8]
+                for tk, mode, tv, ff, fv in drifts[:12]
             ]
             findings.append(_finding(
                 "visual_vibe", "medium",
-                f"{len(drifts)} color(s) differ between design-tokens.json and Flutter AeluColors",
-                f"Platform visual drift detected — these colors in the Flutter theme "
+                f"{len(drifts)} value(s) differ between design-tokens.json and Flutter theme",
+                f"Platform visual drift detected — these values in the Flutter theme "
                 f"no longer match the canonical design tokens:\n" + "\n".join(detail_lines),
-                "Update Flutter AeluColors constants to match design-tokens.json values.",
-                "Update flutter_app/lib/theme/aelu_colors.dart Color constants to match "
+                "Update Flutter theme constants to match design-tokens.json values.",
+                "Update flutter_app/lib/theme/aelu_colors.dart and "
+                "flutter_app/lib/theme/aelu_theme.dart to match "
                 "the canonical values in mandarin/web/static/design-tokens.json.",
                 "Cross-platform brand consistency (web vs. Flutter)",
                 ["mandarin/web/static/design-tokens.json",
-                 "flutter_app/lib/theme/aelu_colors.dart"],
+                 "flutter_app/lib/theme/aelu_colors.dart",
+                 "flutter_app/lib/theme/aelu_theme.dart"],
             ))
     except Exception:
         pass

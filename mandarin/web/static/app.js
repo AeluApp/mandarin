@@ -11753,6 +11753,18 @@ function animateCounter(el, target, duration) {
   requestAnimationFrame(step);
 }
 
+/* ── Font loading orchestration ─────────────────────── */
+/* Adds .fonts-loaded to body when web fonts are ready, triggering
+   the CSS opacity transition from 0.95 to 1.0. */
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(function() {
+    document.body.classList.add('fonts-loaded');
+  });
+} else {
+  // Fallback for browsers without Font Loading API
+  document.body.classList.add('fonts-loaded');
+}
+
 /* Auto-animate stat values on page load */
 document.addEventListener('DOMContentLoaded', function() {
   var statValues = document.querySelectorAll('.stat-value');
@@ -11979,3 +11991,38 @@ function showSessionAnalysis(sessionId) {
 
   closeBtn.addEventListener('click', function() { container.classList.add('hidden'); });
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Global View Transition Interceptor
+   Wraps all same-origin <a> navigations in the View Transitions API for
+   cinematic page changes. Falls back to normal navigation if unsupported.
+   ════════════════════════════════════════════════════════════════════════ */
+(function() {
+  if (!document.startViewTransition) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+
+    // Skip external links, downloads, new-tab links, hash-only links
+    var href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+    if (link.target === '_blank' || link.download) return;
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
+    // Only intercept same-origin navigations
+    try {
+      var url = new URL(href, window.location.origin);
+      if (url.origin !== window.location.origin) return;
+    } catch (_) { return; }
+
+    // Skip WebSocket/API routes
+    if (href.startsWith('/api/') || href.startsWith('/ws/')) return;
+
+    e.preventDefault();
+    document.startViewTransition(function() {
+      window.location.href = href;
+    });
+  });
+})();

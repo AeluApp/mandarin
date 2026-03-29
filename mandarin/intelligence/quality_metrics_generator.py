@@ -282,6 +282,93 @@ def ensure_dmaic_measure_phase(conn):
         pass
 
 
+def check_dmaic_closure(conn):
+    """Auto-close DMAIC cycles when their SPC charts have been in control for 4+ weeks.
+
+    For each open DMAIC cycle, checks if the corresponding SPC chart
+    has zero violations in the last 28 days. If stable, updates the
+    control_json to mark the cycle as closed with a timestamp.
+    """
+    try:
+        open_cycles = _safe_query_all(conn,
+            "SELECT id, dimension, control_json FROM pi_dmaic_log "
+            "WHERE control_json IS NULL OR control_json = 'null' OR "
+            "json_extract(control_json, '$.status') != 'stable' "
+            "ORDER BY run_at DESC LIMIT 20")
+        if not open_cycles:
+            return 0
+
+        closed = 0
+        for cycle in open_cycles:
+            dim = cycle["dimension"] if isinstance(cycle, dict) else cycle[1]
+            cycle_id = cycle["id"] if isinstance(cycle, dict) else cycle[0]
+
+            # Check if SPC has been in control for 28+ days
+            violations_28d = _safe_scalar(conn,
+                "SELECT COUNT(*) FROM spc_observation "
+                "WHERE chart_type LIKE ? AND out_of_control = 1 "
+                "AND observed_at > datetime('now', '-28 days')",
+                (f"%{dim}%",))
+
+            observations_28d = _safe_scalar(conn,
+                "SELECT COUNT(*) FROM spc_observation "
+                "WHERE chart_type LIKE ? "
+                "AND observed_at > datetime('now', '-28 days')",
+                (f"%{dim}%",))
+
+            # Need at least 7 observations and zero violations to close
+            if observations_28d >= 7 and violations_28d == 0:
+                control_data = {
+                    "status": "stable",
+                    "closed_at": datetime.now(UTC).isoformat(),
+                    "observations_28d": observations_28d,
+                    "violations_28d": 0,
+                    "monitoring": "continuous_spc",
+                }
+                conn.execute(
+                    "UPDATE pi_dmaic_log SET control_json = ? WHERE id = ?",
+                    (json.dumps(control_data), cycle_id))
+                closed += 1
+                logger.info("DMAIC cycle %s (dimension=%s) auto-closed: stable for 28d", cycle_id, dim)
+
+        if closed:
+            conn.commit()
+        return closed
+    except (sqlite3.OperationalError, sqlite3.Error) as e:
+        logger.debug("DMAIC closure check skipped: %s", e)
+        return 0
+
+
+def check_takt_time(conn):
+    """Check content production rate against 50 items/week target.
+
+    Returns a finding dict if production is behind, or None if on pace.
+    """
+    try:
+        items_7d = _safe_scalar(conn,
+            "SELECT COUNT(*) FROM content_item "
+            "WHERE created_at > datetime('now', '-7 days')")
+        target = 50
+
+        if items_7d < target:
+            from ._base import _finding
+            return _finding(
+                "methodology", "medium",
+                f"Content production at {items_7d}/week (target: {target}/week)",
+                f"Content takt time analysis shows {items_7d} items created in the "
+                f"last 7 days, below the target of {target}/week needed to complete "
+                f"HSK 1-9 curriculum on schedule.",
+                f"Increase content production rate to at least {target} items/week.",
+                f"Investigate why content production dropped to {items_7d}/week. "
+                f"Check mandarin/ai/content_quality.py for generation pipeline issues.",
+                "Content production pace",
+                ["mandarin/ai/content_quality.py"],
+            )
+        return None
+    except (sqlite3.OperationalError, sqlite3.Error):
+        return None
+
+
 def enrich_rag_examples(conn):
     """Enrich RAG knowledge base with example sentences from corpus."""
     try:

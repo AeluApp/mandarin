@@ -492,6 +492,142 @@ def _analyze_media_authenticity(conn) -> list[dict]:
     return findings
 
 
+def _analyze_fsrs_calibration(conn):
+    """Check if FSRS per-learner calibration is fresh for active learners."""
+    findings = []
+    try:
+        # Count active users with 50+ reviews but no recent FSRS calibration
+        stale = _safe_scalar(
+            conn,
+            """SELECT COUNT(DISTINCT re.user_id) FROM review_event re
+               WHERE re.user_id NOT IN (
+                   SELECT user_id FROM learner_fsrs_params
+                   WHERE calibrated_at >= datetime('now', '-30 days')
+               )
+               GROUP BY re.user_id HAVING COUNT(*) >= 50""",
+        )
+        if stale and stale > 0:
+            findings.append(_finding(
+                dimension="learning_science",
+                severity="low",
+                title="FSRS calibration stale for active learners",
+                analysis=f"{stale} active learner(s) with 50+ reviews lack recent FSRS calibration.",
+                recommendation="Run FSRS calibration nightly via quality scheduler.",
+                claude_prompt="Check mandarin/fsrs_calibration.py calibrate_all_eligible()",
+                files=["mandarin/fsrs_calibration.py"],
+            ))
+    except Exception:
+        pass
+    return findings
+
+
+def _analyze_grammar_linkage_coverage(conn):
+    """Check what % of content items have grammar links."""
+    findings = []
+    try:
+        total = _safe_scalar(conn, "SELECT COUNT(*) FROM content_item") or 0
+        linked = _safe_scalar(
+            conn,
+            "SELECT COUNT(DISTINCT content_item_id) FROM content_grammar",
+        ) or 0
+        if total > 0:
+            coverage = linked / total
+            if coverage < 0.3:
+                findings.append(_finding(
+                    dimension="learning_science",
+                    severity="high",
+                    title=f"Grammar linkage coverage only {coverage:.0%}",
+                    analysis=f"Only {linked}/{total} content items have grammar links. "
+                             f"Focus on Form (Long 1991) cannot be enforced without linkage.",
+                    recommendation="Run auto_link_grammar() to populate content_grammar table.",
+                    claude_prompt="Run mandarin/grammar_linker.py auto_link_grammar(conn)",
+                    files=["mandarin/grammar_linker.py"],
+                ))
+    except Exception:
+        pass
+    return findings
+
+
+def _analyze_prerequisite_coverage(conn):
+    """Check what % of multi-character items have prerequisites defined."""
+    findings = []
+    try:
+        multi_char = _safe_scalar(
+            conn,
+            "SELECT COUNT(*) FROM content_item WHERE LENGTH(hanzi) > 1",
+        ) or 0
+        with_prereqs = _safe_scalar(
+            conn,
+            "SELECT COUNT(DISTINCT item_id) FROM prerequisite_edge",
+        ) or 0
+        if multi_char > 0:
+            coverage = with_prereqs / multi_char
+            if coverage < 0.2:
+                findings.append(_finding(
+                    dimension="learning_science",
+                    severity="medium",
+                    title=f"Prerequisite coverage only {coverage:.0%}",
+                    analysis=f"Only {with_prereqs}/{multi_char} multi-character items have prerequisites.",
+                    recommendation="Run build_prerequisite_graph() to detect character component dependencies.",
+                    claude_prompt="Run mandarin/prerequisites.py build_prerequisite_graph(conn)",
+                    files=["mandarin/prerequisites.py"],
+                ))
+    except Exception:
+        pass
+    return findings
+
+
+def _analyze_calibration_gap(conn):
+    """Check if learners are systematically overconfident or underconfident."""
+    findings = []
+    try:
+        rows = _safe_query(
+            conn,
+            """SELECT confidence_level, AVG(predicted_rate) as avg_pred,
+                      AVG(actual_rate) as avg_actual, SUM(n_items) as total
+               FROM calibration_snapshot
+               WHERE snapshot_at >= datetime('now', '-30 days')
+               GROUP BY confidence_level""",
+        )
+        if rows:
+            for r in rows:
+                gap = abs((r.get("avg_pred") or 0) - (r.get("avg_actual") or 0))
+                if gap > 0.15 and (r.get("total") or 0) >= 20:
+                    direction = "overconfident" if (r.get("avg_pred") or 0) > (r.get("avg_actual") or 0) else "underconfident"
+                    findings.append(_finding(
+                        dimension="learning_science",
+                        severity="medium",
+                        title=f"Learners are {direction} at '{r['confidence_level']}' level",
+                        analysis=f"Predicted {r['avg_pred']:.0%} but actual {r['avg_actual']:.0%} ({gap:.0%} gap).",
+                        recommendation="Increase calibration feedback frequency or adjust confidence prompts.",
+                        claude_prompt="Check mandarin/metacognition.py calibration feedback thresholds",
+                        files=["mandarin/metacognition.py"],
+                    ))
+    except Exception:
+        pass
+    return findings
+
+
+def _analyze_interference_scheduling(conn):
+    """Check if confusable pairs are being appropriately managed."""
+    findings = []
+    try:
+        total_pairs = _safe_scalar(conn, "SELECT COUNT(*) FROM confusable_pair") or 0
+        if total_pairs == 0:
+            findings.append(_finding(
+                dimension="learning_science",
+                severity="low",
+                title="No confusable pairs detected yet",
+                analysis="Interference-aware scheduling requires confusable pair data.",
+                recommendation="Run detect_confusables() to populate confusable_pair table.",
+                claude_prompt="Run mandarin/interference.py detect_confusables(conn)",
+                files=["mandarin/interference.py"],
+            ))
+    except Exception:
+        pass
+    return findings
+
+
 ANALYZERS = [
     _analyze_extensive_reading,
     _analyze_narrow_listening,
@@ -500,4 +636,9 @@ ANALYZERS = [
     _analyze_cross_modality_interleaving,
     _analyze_listening_desirable_difficulty,
     _analyze_media_authenticity,
+    _analyze_fsrs_calibration,
+    _analyze_grammar_linkage_coverage,
+    _analyze_prerequisite_coverage,
+    _analyze_calibration_gap,
+    _analyze_interference_scheduling,
 ]

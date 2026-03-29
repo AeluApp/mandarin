@@ -460,6 +460,9 @@ def create_app(testing=False):
     from .intelligence_admin_routes import intelligence_admin_bp
     app.register_blueprint(intelligence_admin_bp)
 
+    from .nps_routes import nps_bp
+    app.register_blueprint(nps_bp)
+
     # ── MFA routes (CSRF exempt for JSON API) ─────────────
     from .mfa_routes import mfa_bp
     app.register_blueprint(mfa_bp)

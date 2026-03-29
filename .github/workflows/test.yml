@@ -164,14 +164,42 @@ jobs:
         run: sleep 5
 
       - name: Run Lighthouse CI
-        continue-on-error: true
+        run: lhci autorun
+
+  visual-regression:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
         run: |
-          lhci autorun --collect.url=http://localhost:5000/ \
-            --assert.preset=lighthouse:no-pwa \
-            --assert.assertions.categories:performance=warn \
-            --assert.assertions.categories:accessibility=warn \
-            --assert.assertions.categories:best-practices=warn \
-            --assert.assertions.categories:seo=warn || true
+          pip install -r requirements.txt
+          pip install -e .
+          pip install playwright Pillow
+          playwright install chromium
+
+      - name: Start dev server
+        run: python -m mandarin.web &
+
+      - name: Wait for server
+        run: sleep 5
+
+      - name: Run visual regression
+        continue-on-error: true
+        run: python scripts/visual_regression.py --url http://localhost:5000
+
+      - name: Upload diff images
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diffs
+          path: tests/visual-diffs/
 
   accessibility:
     runs-on: ubuntu-latest
@@ -205,3 +233,44 @@ jobs:
       - name: Run pa11y accessibility audit
         continue-on-error: true
         run: pa11y http://localhost:5000/ --standard WCAG2AA
+
+  # ── Automated deployment to Fly.io ──────────────────────────────
+  deploy:
+    needs: [test, lint, quality-gates, audit]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy to Fly.io
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          if [ -z "$FLY_API_TOKEN" ]; then
+            echo "FLY_API_TOKEN not set — skipping deployment"
+            exit 0
+          fi
+          flyctl deploy --strategy rolling --wait-timeout 120
+
+      - name: Post-deploy health check
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        if: env.FLY_API_TOKEN != ''
+        run: |
+          APP_URL=$(flyctl status --json 2>/dev/null | python3 -c "import sys,json; print(json.load(sys.stdin).get('Hostname',''))" 2>/dev/null || echo "")
+          if [ -n "$APP_URL" ]; then
+            echo "Checking health at https://$APP_URL/api/health/live"
+            for i in 1 2 3 4 5; do
+              if curl -sf "https://$APP_URL/api/health/live" > /dev/null 2>&1; then
+                echo "Health check passed on attempt $i"
+                exit 0
+              fi
+              echo "Attempt $i failed, waiting 10s..."
+              sleep 10
+            done
+            echo "Health check failed after 5 attempts"
+            exit 1
+          fi

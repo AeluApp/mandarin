@@ -307,3 +307,395 @@ def churn_risk_factors(conn) -> dict[str, Any]:
         "n_users": len(timelines),
         "factors": factors,
     }
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# Cox Proportional Hazards — multivariate survival regression
+# ═══════════════════════════════════════════════════════════════════════
+
+
+def cox_proportional_hazards(
+    conn,
+    covariates: list[str] | None = None,
+    churn_days: int = _CHURN_THRESHOLD_DAYS,
+) -> dict:
+    """Semi-parametric Cox regression for identifying churn risk factors.
+
+    Partial likelihood estimation via Newton-Raphson.
+    Returns hazard ratios with 95% CI and p-values per covariate.
+
+    Example output: "Users with accuracy <60% have 2.3x higher churn hazard"
+    """
+    if covariates is None:
+        covariates = ["sessions_per_week", "avg_accuracy", "items_mastered"]
+
+    try:
+        rows = conn.execute(
+            """
+            SELECT u.id AS user_id,
+                   u.created_at,
+                   (SELECT MAX(sl.started_at) FROM session_log sl WHERE sl.user_id = u.id) AS last_session,
+                   (SELECT COUNT(*) FROM session_log sl2 WHERE sl2.user_id = u.id
+                    AND sl2.started_at >= datetime('now', '-30 days')) AS sessions_30d,
+                   (SELECT AVG(CASE WHEN re.correct THEN 1.0 ELSE 0.0 END)
+                    FROM review_event re WHERE re.user_id = u.id) AS avg_accuracy,
+                   (SELECT COUNT(*) FROM progress p WHERE p.user_id = u.id
+                    AND p.mastery_stage IN ('stable', 'durable')) AS items_mastered
+            FROM user u
+            WHERE u.created_at IS NOT NULL
+            LIMIT 500
+            """
+        ).fetchall()
+    except Exception:
+        return {"error": "Could not query user data", "coefficients": {}}
+
+    if len(rows) < 10:
+        return {"error": "Insufficient data", "n_users": len(rows), "coefficients": {}}
+
+    # Build survival data: (time, event, covariates)
+    now = datetime.now(UTC)
+    survival_data = []
+
+    for r in rows:
+        try:
+            created = datetime.fromisoformat(r["created_at"]).replace(tzinfo=UTC)
+            if r["last_session"]:
+                last = datetime.fromisoformat(r["last_session"]).replace(tzinfo=UTC)
+                days_since_last = (now - last).days
+                event = 1 if days_since_last >= churn_days else 0
+                time_days = max(1, (last - created).days) if event else max(1, (now - created).days)
+            else:
+                event = 1  # Never had a session = churned immediately
+                time_days = max(1, (now - created).days)
+
+            # Covariate vector
+            x = []
+            for cov in covariates:
+                if cov == "sessions_per_week":
+                    weeks = max(1, time_days / 7)
+                    x.append((r["sessions_30d"] or 0) / weeks * (30 / 7))  # normalize to per-week
+                elif cov == "avg_accuracy":
+                    x.append(r["avg_accuracy"] or 0.5)
+                elif cov == "items_mastered":
+                    x.append(min((r["items_mastered"] or 0) / 50.0, 1.0))  # normalize
+                else:
+                    x.append(0.0)
+
+            survival_data.append((time_days, event, x))
+        except (ValueError, TypeError):
+            continue
+
+    if len(survival_data) < 10:
+        return {"error": "Insufficient valid data", "coefficients": {}}
+
+    # Sort by time (descending for risk set computation)
+    survival_data.sort(key=lambda d: d[0])
+
+    n_covariates = len(covariates)
+
+    # Newton-Raphson for partial likelihood
+    beta = [0.0] * n_covariates
+
+    for iteration in range(30):
+        gradient = [0.0] * n_covariates
+        hessian = [[0.0] * n_covariates for _ in range(n_covariates)]
+
+        # Compute risk sets and partial likelihood derivatives
+        risk_sum = 0.0
+        risk_weighted = [0.0] * n_covariates
+        risk_weighted_sq = [[0.0] * n_covariates for _ in range(n_covariates)]
+
+        # Reverse iterate (build risk set from the end)
+        for i in range(len(survival_data) - 1, -1, -1):
+            time_i, event_i, x_i = survival_data[i]
+
+            # exp(beta . x)
+            lin_pred = sum(beta[j] * x_i[j] for j in range(n_covariates))
+            lin_pred = max(-20, min(20, lin_pred))
+            exp_bx = math.exp(lin_pred)
+
+            risk_sum += exp_bx
+            for j in range(n_covariates):
+                risk_weighted[j] += exp_bx * x_i[j]
+                for k in range(n_covariates):
+                    risk_weighted_sq[j][k] += exp_bx * x_i[j] * x_i[k]
+
+            if event_i == 1 and risk_sum > 0:
+                for j in range(n_covariates):
+                    gradient[j] += x_i[j] - risk_weighted[j] / risk_sum
+                    for k in range(n_covariates):
+                        hessian[j][k] -= (
+                            risk_weighted_sq[j][k] / risk_sum
+                            - (risk_weighted[j] * risk_weighted[k]) / (risk_sum ** 2)
+                        )
+
+        # Newton step: beta -= H^(-1) * g
+        # For simplicity, use diagonal Hessian approximation
+        max_step = 0.0
+        for j in range(n_covariates):
+            if abs(hessian[j][j]) > 1e-10:
+                step = gradient[j] / (-hessian[j][j])
+                step = max(-1.0, min(1.0, step))  # clamp step size
+                beta[j] += step
+                max_step = max(max_step, abs(step))
+
+        if max_step < 0.001:
+            break
+
+    # Compute hazard ratios and standard errors
+    coefficients = {}
+    for j, cov in enumerate(covariates):
+        se = 1.0 / math.sqrt(max(abs(hessian[j][j]), 1e-10))
+        hr = math.exp(beta[j])
+        hr_lower = math.exp(beta[j] - 1.96 * se)
+        hr_upper = math.exp(beta[j] + 1.96 * se)
+        z = beta[j] / max(se, 1e-10)
+        p_value = 2 * _norm_sf(abs(z))
+
+        coefficients[cov] = {
+            "beta": round(beta[j], 4),
+            "hazard_ratio": round(hr, 4),
+            "ci_95": [round(hr_lower, 4), round(hr_upper, 4)],
+            "se": round(se, 4),
+            "z": round(z, 4),
+            "p_value": round(p_value, 6),
+            "interpretation": (
+                f"{'Higher' if beta[j] > 0 else 'Lower'} {cov} → "
+                f"{'higher' if beta[j] > 0 else 'lower'} churn risk "
+                f"(HR={hr:.2f}, p={p_value:.3f})"
+            ),
+        }
+
+    return {
+        "coefficients": coefficients,
+        "n_users": len(survival_data),
+        "n_events": sum(1 for _, e, _ in survival_data if e == 1),
+        "covariates": covariates,
+    }
+
+
+def log_rank_test(conn, group_var: str = "subscription_tier") -> dict:
+    """Compare survival curves between groups using log-rank test.
+
+    Returns chi-squared statistic, df, and p-value.
+    """
+    try:
+        rows = conn.execute(
+            f"""
+            SELECT u.{group_var} AS grp,
+                   u.created_at,
+                   (SELECT MAX(sl.started_at) FROM session_log sl WHERE sl.user_id = u.id) AS last_session
+            FROM user u
+            WHERE u.created_at IS NOT NULL AND u.{group_var} IS NOT NULL
+            LIMIT 500
+            """
+        ).fetchall()
+    except Exception:
+        return {"error": f"Could not query {group_var}"}
+
+    if len(rows) < 10:
+        return {"error": "Insufficient data"}
+
+    now = datetime.now(UTC)
+    groups: dict[str, list[tuple[int, int]]] = {}  # group -> [(time, event)]
+
+    for r in rows:
+        try:
+            grp = str(r["grp"])
+            created = datetime.fromisoformat(r["created_at"]).replace(tzinfo=UTC)
+            if r["last_session"]:
+                last = datetime.fromisoformat(r["last_session"]).replace(tzinfo=UTC)
+                days = max(1, (now - last).days)
+                event = 1 if days >= _CHURN_THRESHOLD_DAYS else 0
+                time = max(1, (last - created).days) if event else max(1, (now - created).days)
+            else:
+                event = 1
+                time = max(1, (now - created).days)
+            groups.setdefault(grp, []).append((time, event))
+        except (ValueError, TypeError):
+            continue
+
+    if len(groups) < 2:
+        return {"error": "Need at least 2 groups"}
+
+    # Compute log-rank statistic
+    # Pool all event times
+    all_times = set()
+    for g_data in groups.values():
+        for t, e in g_data:
+            if e == 1:
+                all_times.add(t)
+
+    sorted_times = sorted(all_times)
+
+    group_names = list(groups.keys())
+    observed = {g: 0 for g in group_names}
+    expected = {g: 0.0 for g in group_names}
+
+    for t in sorted_times:
+        # At risk and events at time t
+        n_total = 0
+        d_total = 0
+        n_by_group = {}
+        d_by_group = {}
+
+        for g in group_names:
+            at_risk = sum(1 for ti, _ in groups[g] if ti >= t)
+            events = sum(1 for ti, ei in groups[g] if ti == t and ei == 1)
+            n_by_group[g] = at_risk
+            d_by_group[g] = events
+            n_total += at_risk
+            d_total += events
+
+        if n_total == 0:
+            continue
+
+        for g in group_names:
+            observed[g] += d_by_group[g]
+            expected[g] += n_by_group[g] * d_total / n_total
+
+    # Chi-squared statistic
+    chi2 = sum(
+        (observed[g] - expected[g]) ** 2 / max(expected[g], 1e-10)
+        for g in group_names
+    )
+    df = len(group_names) - 1
+
+    # p-value (chi-squared approximation)
+    if df > 0 and chi2 > 0:
+        z = ((chi2 / df) ** (1 / 3) - (1 - 2 / (9 * df))) / math.sqrt(2 / (9 * df))
+        p_value = _norm_sf(z) if z > 0 else 1.0
+    else:
+        p_value = 1.0
+
+    return {
+        "chi2": round(chi2, 4),
+        "df": df,
+        "p_value": round(p_value, 6),
+        "significant": p_value < 0.05,
+        "groups": {
+            g: {"observed": observed[g], "expected": round(expected[g], 2),
+                "n": len(groups[g])}
+            for g in group_names
+        },
+        "interpretation": (
+            f"Significant difference in survival between {group_var} groups (p={p_value:.3f})"
+            if p_value < 0.05
+            else f"No significant difference in survival between {group_var} groups (p={p_value:.3f})"
+        ),
+    }
+
+
+def fit_weibull(conn, churn_days: int = _CHURN_THRESHOLD_DAYS) -> dict:
+    """Fit Weibull distribution to time-to-churn.
+
+    Returns shape (k) and scale (λ) parameters.
+    Shape >1: increasing hazard (users more likely to churn over time)
+    Shape <1: decreasing hazard (early dropoff, survivors stay)
+    Shape =1: constant hazard (exponential)
+    """
+    try:
+        rows = conn.execute(
+            """
+            SELECT u.created_at,
+                   (SELECT MAX(sl.started_at) FROM session_log sl WHERE sl.user_id = u.id) AS last_session
+            FROM user u
+            WHERE u.created_at IS NOT NULL
+            LIMIT 500
+            """
+        ).fetchall()
+    except Exception:
+        return {"error": "Could not query data"}
+
+    now = datetime.now(UTC)
+    times = []
+
+    for r in rows:
+        try:
+            created = datetime.fromisoformat(r["created_at"]).replace(tzinfo=UTC)
+            if r["last_session"]:
+                last = datetime.fromisoformat(r["last_session"]).replace(tzinfo=UTC)
+                days = max(1, (last - created).days)
+                if (now - last).days >= churn_days:
+                    times.append(days)
+            else:
+                times.append(max(1, (now - created).days))
+        except (ValueError, TypeError):
+            continue
+
+    if len(times) < 10:
+        return {"error": "Insufficient churn data"}
+
+    # MLE for Weibull: k (shape), λ (scale)
+    # Method: iterative MLE using Newton-Raphson on k
+    n = len(times)
+    log_times = [math.log(max(t, 0.1)) for t in times]
+    mean_log = sum(log_times) / n
+
+    # Initial k estimate from method of moments
+    mean_t = sum(times) / n
+    var_t = sum((t - mean_t) ** 2 for t in times) / max(n - 1, 1)
+    cv = math.sqrt(var_t) / max(mean_t, 1e-10)
+    k = max(0.1, 1.0 / max(cv, 0.01))
+
+    # Newton-Raphson for shape parameter
+    for _ in range(50):
+        tk = [t ** k for t in times]
+        sum_tk = sum(tk)
+        sum_tk_log = sum(tk_i * log_times[i] for i, tk_i in enumerate(tk))
+
+        if sum_tk < 1e-10:
+            break
+
+        f = n / k + sum(log_times) - n * sum_tk_log / sum_tk
+        # Approximate derivative
+        f_prime = -n / (k ** 2) - n * (
+            sum(tk_i * log_times[i] ** 2 for i, tk_i in enumerate(tk)) * sum_tk
+            - sum_tk_log ** 2
+        ) / (sum_tk ** 2)
+
+        if abs(f_prime) < 1e-10:
+            break
+        step = f / f_prime
+        k -= max(-0.5, min(0.5, step))
+        k = max(0.01, min(50.0, k))
+
+        if abs(step) < 0.001:
+            break
+
+    # Scale parameter
+    lam = (sum(t ** k for t in times) / n) ** (1 / k)
+
+    # Median survival time
+    median = lam * (math.log(2)) ** (1 / k)
+
+    return {
+        "shape": round(k, 4),
+        "scale": round(lam, 4),
+        "median_survival_days": round(median, 1),
+        "n_events": n,
+        "hazard_type": (
+            "increasing" if k > 1.1 else
+            "decreasing" if k < 0.9 else
+            "constant"
+        ),
+        "interpretation": (
+            f"Shape={k:.2f}: {'Users become more likely to leave over time' if k > 1.1 else 'Early dropoff — survivors tend to stay' if k < 0.9 else 'Constant hazard — churn is random'}. "
+            f"Median survival: {median:.0f} days."
+        ),
+    }
+
+
+def _norm_sf(z: float) -> float:
+    """Standard normal survival function."""
+    if z < -8:
+        return 1.0
+    if z > 8:
+        return 0.0
+    if z < 0:
+        return 1.0 - _norm_sf(-z)
+    p = 0.2316419
+    b1, b2, b3, b4, b5 = 0.319381530, -0.356563782, 1.781477937, -1.821255978, 1.330274429
+    t = 1.0 / (1.0 + p * z)
+    pdf = math.exp(-0.5 * z * z) / math.sqrt(2 * math.pi)
+    return pdf * t * (b1 + t * (b2 + t * (b3 + t * (b4 + t * b5))))

@@ -1155,11 +1155,13 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-nav" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;" onfocus="this.style.cssText='position:fixed;top:0;left:0;padding:12px 24px;background:var(--color-accent);color:var(--color-on-accent);z-index:9999;font-family:var(--font-body);'">Skip to main content</a>
+  <div class="depth-veil" aria-hidden="true"></div>
   <div class="scroll-progress-bar" aria-hidden="true"></div>
   <div id="webgl-atmosphere" data-scene="marketing" aria-hidden="true"></div>
 
   <!-- Nav -->
-  <nav aria-label="Main navigation">
+  <nav aria-label="Main navigation" role="banner">
     <div class="container">
       <a href="/" class="nav-brand"><img src="/static/icon-app.png" alt="" class="nav-brand-icon">Aelu</a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -1177,6 +1179,7 @@
   </nav>
 
   <!-- Hero — typography-driven, Chinese characters ARE the design -->
+  <main id="main-content" role="main">
   <section class="hero" data-scroll-section="hero">
     <span class="section-depth-marker" aria-hidden="true">浅</span>
     <div class="container">
@@ -1418,7 +1421,9 @@
     </div>
   </section>
 
-  <footer>
+  </main>
+
+  <footer role="contentinfo">
     <div class="container">
       <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/pricing">Pricing</a> · <a href="/about">About</a></p>
       <p style="margin-top: var(--space-2);"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>

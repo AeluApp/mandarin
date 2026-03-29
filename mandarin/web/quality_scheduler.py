@@ -311,7 +311,132 @@ def _collect_metrics():
         except Exception:
             logger.debug("Design quality metrics collection failed")
 
+        # DMAIC cycle closure check (auto-close stable cycles)
+        try:
+            from ..intelligence.quality_metrics_generator import check_dmaic_closure
+            closed = check_dmaic_closure(conn)
+            if closed:
+                logger.info("DMAIC closure: %d cycle(s) auto-closed", closed)
+        except Exception:
+            logger.debug("DMAIC closure check failed")
+
+        # Andon threshold checks (real-time quality alerts)
+        try:
+            from .andon import check_andon_thresholds
+            alerts = check_andon_thresholds(conn)
+            if alerts:
+                logger.info("Andon: %d alert(s) fired", alerts)
+        except Exception:
+            logger.debug("Andon threshold check failed")
+
+        # Kanban flow metrics (cycle time, throughput, expedite dilution)
+        try:
+            from ..quality.flow_metrics import get_flow_summary
+            flow = get_flow_summary(conn)
+            ct_p85 = (flow.get("cycle_time") or {}).get("p85_hours")
+            if ct_p85 is not None:
+                conn.execute(
+                    "INSERT INTO quality_metric (metric_type, value) VALUES (?, ?)",
+                    ("kanban_cycle_time_p85", ct_p85),
+                )
+            tp_weekly = (flow.get("throughput") or {}).get("weekly_avg")
+            if tp_weekly is not None:
+                conn.execute(
+                    "INSERT INTO quality_metric (metric_type, value) VALUES (?, ?)",
+                    ("kanban_throughput_weekly", tp_weekly),
+                )
+            ed = flow.get("expedite_dilution") or {}
+            if ed.get("dilution_pct") is not None:
+                conn.execute(
+                    "INSERT INTO quality_metric (metric_type, value) VALUES (?, ?)",
+                    ("kanban_expedite_dilution", ed["dilution_pct"]),
+                )
+            # SLA breach notification
+            sla = flow.get("service_class_compliance") or {}
+            if sla.get("overall_compliance", 1.0) < 0.8:
+                try:
+                    conn.execute(
+                        "INSERT INTO kanban_notification "
+                        "(notification_type, message) VALUES (?, ?)",
+                        ("sla_breach",
+                         f"SLA compliance dropped to {sla['overall_compliance']:.0%}"),
+                    )
+                except Exception:
+                    pass
+            logger.info(
+                "Kanban metrics: cycle_time_p85=%.1fh, throughput=%.1f/wk, expedite=%.1f%%",
+                ct_p85 or 0, tp_weekly or 0, ed.get("dilution_pct", 0),
+            )
+        except Exception:
+            logger.debug("Kanban flow metrics collection failed")
+
         conn.commit()
+
+    # ── FSRS per-learner calibration ──
+    try:
+        with db.connection() as conn:
+            from ..fsrs_calibration import calibrate_all_eligible
+            calibrated = calibrate_all_eligible(conn, limit=10)
+            if calibrated:
+                logger.info("FSRS calibration: %d user(s) calibrated", calibrated)
+    except ImportError:
+        pass
+    except Exception:
+        logger.debug("FSRS calibration failed")
+
+    # ── Confusable pair detection ──
+    try:
+        with db.connection() as conn:
+            from ..interference import detect_confusables
+            new_pairs = detect_confusables(conn, limit=200)
+            if new_pairs:
+                logger.info("Interference: %d new confusable pairs detected", new_pairs)
+    except ImportError:
+        pass
+    except Exception:
+        logger.debug("Confusable pair detection failed")
+
+    # ── Prerequisite graph building ──
+    try:
+        with db.connection() as conn:
+            from ..prerequisites import build_prerequisite_graph
+            new_edges = build_prerequisite_graph(conn, limit=200)
+            if new_edges:
+                logger.info("Prerequisites: %d new edges built", new_edges)
+    except ImportError:
+        pass
+    except Exception:
+        logger.debug("Prerequisite graph building failed")
+
+    # ── IRT psychometric calibration ──
+    try:
+        with db.connection() as conn:
+            from ..psychometrics import joint_estimation, save_irt_results
+            irt_results = joint_estimation(conn, max_iter=30)
+            if irt_results.get("converged") and irt_results.get("n_items", 0) > 0:
+                saved = save_irt_results(conn, irt_results)
+                if saved:
+                    logger.info(
+                        "IRT calibration: %d items, %d users (converged in %d iter)",
+                        irt_results["n_items"], irt_results["n_users"],
+                        irt_results["iterations"],
+                    )
+    except ImportError:
+        pass
+    except Exception:
+        logger.debug("IRT calibration failed")
+
+    # ── Learner segmentation ──
+    try:
+        with db.connection() as conn:
+            from ..quality.segmentation import segment_learners
+            segments = segment_learners(conn, k=4)
+            if segments and segments.get("segments"):
+                logger.info("Learner segmentation: %d segments", len(segments["segments"]))
+    except ImportError:
+        pass
+    except Exception:
+        logger.debug("Learner segmentation failed")
 
     # ── Content reaudit ──
     # Sample approved AI items and verify quality post-approval.

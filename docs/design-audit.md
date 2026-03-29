@@ -98,6 +98,8 @@ Source of truth: `mandarin/web/static/design-tokens.json`. CSS variables are dec
 
 Flutter uses `12px` on interactive elements, `8px` on chips, `16px` on dialogs.
 
+**Intentional radius difference (Flutter vs Web):** Flutter uses `12px` for interactive elements (buttons, inputs) because mobile touch targets benefit from larger corner radii for visual affordance and comfort. Web uses `6px` (`radiusLg`) for the same elements. This is a deliberate platform adaptation, not token drift -- the drift analyzer should not flag it.
+
 ### 2.5 Shadow (6-level depth system)
 
 | Level | Light | Dark |
