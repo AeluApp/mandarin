@@ -110,7 +110,7 @@ def _check_view_transition_coverage(conn):
         unique_names = set(transition_names)
 
         # Count startViewTransition calls in JS
-        vt_calls = len(re.findall(r'startViewTransition|viewTransition\(', app_js)) if app_js else 0
+        _vt_calls = len(re.findall(r'startViewTransition|viewTransition\(', app_js)) if app_js else 0
 
         target_names = 8
         if len(unique_names) < target_names:

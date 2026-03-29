@@ -1272,8 +1272,8 @@ def admin_kanban_notifications_read():
         if data and data.get("ids"):
             placeholders = ",".join("?" for _ in data["ids"])
             conn.execute(
-                f"UPDATE kanban_notification SET read_at = datetime('now') "
-                f"WHERE id IN ({placeholders})",
+                "UPDATE kanban_notification SET read_at = datetime('now') "
+                "WHERE id IN (" + placeholders + ")",
                 data["ids"],
             )
         else:

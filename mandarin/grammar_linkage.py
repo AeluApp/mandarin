@@ -67,7 +67,7 @@ def link_content_to_grammar(
     content_item_id: int,
     grammar_point: str,
     level: int = 1,
-    example: Optional[str] = None,
+    example: str | None = None,
 ) -> int:
     """Create a link between a content item and a grammar point.
 

@@ -474,21 +474,31 @@ def cox_proportional_hazards(
     }
 
 
+_ALLOWED_GROUP_VARS = frozenset({
+    "subscription_tier",
+    "current_hsk_level",
+    "native_language",
+    "signup_source",
+})
+
+
 def log_rank_test(conn, group_var: str = "subscription_tier") -> dict:
     """Compare survival curves between groups using log-rank test.
 
     Returns chi-squared statistic, df, and p-value.
     """
+    if group_var not in _ALLOWED_GROUP_VARS:
+        return {"error": f"Invalid group variable: {group_var}"}
     try:
         rows = conn.execute(
-            f"""
-            SELECT u.{group_var} AS grp,
-                   u.created_at,
-                   (SELECT MAX(sl.started_at) FROM session_log sl WHERE sl.user_id = u.id) AS last_session
-            FROM user u
-            WHERE u.created_at IS NOT NULL AND u.{group_var} IS NOT NULL
-            LIMIT 500
-            """
+            "SELECT u." + group_var + " AS grp,"
+            " u.created_at,"
+            " (SELECT MAX(sl.started_at) FROM session_log sl"
+            " WHERE sl.user_id = u.id) AS last_session"
+            " FROM user u"
+            " WHERE u.created_at IS NOT NULL"
+            " AND u." + group_var + " IS NOT NULL"
+            " LIMIT 500"
         ).fetchall()
     except Exception:
         return {"error": f"Could not query {group_var}"}

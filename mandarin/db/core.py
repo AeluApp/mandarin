@@ -8,7 +8,7 @@ import re
 import sqlite3
 import json
 from pathlib import Path
-from datetime import datetime, date, timezone
+from datetime import datetime, date, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -7333,7 +7333,7 @@ def _migrate_v121_to_v122(conn):
     """v121->v122: Seed intelligence registry tables (copy, marketing pages, vibe audits, strategy reviews)."""
     import uuid as _uuid
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    now = datetime.now(UTC).strftime("%Y-%m-%d")
 
     # ── 1. pi_copy_registry — register key UI strings for voice audit ──
     copy_entries = [

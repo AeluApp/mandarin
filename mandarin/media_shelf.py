@@ -18,8 +18,8 @@ logger = logging.getLogger(__name__)
 
 def get_shelf_items(
     conn: sqlite3.Connection,
-    hsk_level: Optional[int] = None,
-    content_type: Optional[str] = None,
+    hsk_level: int | None = None,
+    content_type: str | None = None,
     limit: int = 20,
 ) -> list[dict]:
     """Query the media shelf with optional filters.
@@ -59,15 +59,13 @@ def get_shelf_items(
     params.append(limit)
 
     rows = conn.execute(
-        f"""
-        SELECT id, title, source_url, content_type, hsk_level,
-               topic, summary, full_text, duration_seconds,
-               created_at, curated_by
-        FROM media_shelf
-        {where}
-        ORDER BY created_at DESC
-        LIMIT ?
-        """,
+        "SELECT id, title, source_url, content_type, hsk_level,"
+        " topic, summary, full_text, duration_seconds,"
+        " created_at, curated_by"
+        " FROM media_shelf "
+        + where
+        + " ORDER BY created_at DESC"
+        " LIMIT ?",
         params,
     ).fetchall()
     return [dict(row) for row in rows]
@@ -78,11 +76,11 @@ def add_shelf_item(
     title: str,
     content_type: str,
     hsk_level: int,
-    source_url: Optional[str] = None,
-    topic: Optional[str] = None,
-    summary: Optional[str] = None,
-    full_text: Optional[str] = None,
-    duration_seconds: Optional[int] = None,
+    source_url: str | None = None,
+    topic: str | None = None,
+    summary: str | None = None,
+    full_text: str | None = None,
+    duration_seconds: int | None = None,
     curated_by: str = "system",
 ) -> int:
     """Add an item to the media shelf.
@@ -153,7 +151,7 @@ def add_shelf_item(
 def get_shelf_item_by_id(
     conn: sqlite3.Connection,
     item_id: int,
-) -> Optional[dict]:
+) -> dict | None:
     """Fetch a single shelf item by id. Returns None if not found."""
     row = conn.execute(
         """

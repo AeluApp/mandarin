@@ -2,7 +2,7 @@
 
 import logging
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -49,8 +49,8 @@ def is_trial_active(conn: sqlite3.Connection, user_id: int) -> bool:
     try:
         trial_end = datetime.strptime(
             row["trial_ends_at"], "%Y-%m-%d %H:%M:%S"
-        ).replace(tzinfo=timezone.utc)
-        return datetime.now(timezone.utc) < trial_end
+        ).replace(tzinfo=UTC)
+        return datetime.now(UTC) < trial_end
     except (ValueError, TypeError):
         return False
 
@@ -65,8 +65,8 @@ def get_trial_days_remaining(conn: sqlite3.Connection, user_id: int) -> int:
     try:
         trial_end = datetime.strptime(
             row["trial_ends_at"], "%Y-%m-%d %H:%M:%S"
-        ).replace(tzinfo=timezone.utc)
-        delta = trial_end - datetime.now(timezone.utc)
+        ).replace(tzinfo=UTC)
+        delta = trial_end - datetime.now(UTC)
         remaining = delta.days + (1 if delta.seconds > 0 else 0)
         return max(0, remaining)
     except (ValueError, TypeError):

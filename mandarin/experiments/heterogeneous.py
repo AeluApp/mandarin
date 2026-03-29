@@ -108,20 +108,19 @@ def _analyze_single_subgroup(
 
     try:
         rows = conn.execute(
-            f"""
-            SELECT
-                {subgroup_sql} AS subgroup_level,
-                ea.variant,
-                COUNT(DISTINCT ea.user_id) AS users,
-                AVG(CASE WHEN sl.session_outcome = 'completed' THEN 1.0 ELSE 0.0 END) AS completion_rate
-            FROM experiment_assignment ea
-            LEFT JOIN user u ON u.id = ea.user_id
-            LEFT JOIN session_log sl ON sl.user_id = ea.user_id
-                AND sl.started_at >= ea.assigned_at
-            WHERE ea.experiment_id = ?
-            GROUP BY subgroup_level, ea.variant
-            HAVING users >= 5
-            """,
+            "SELECT "
+            + subgroup_sql
+            + " AS subgroup_level,"
+            " ea.variant,"
+            " COUNT(DISTINCT ea.user_id) AS users,"
+            " AVG(CASE WHEN sl.session_outcome = 'completed' THEN 1.0 ELSE 0.0 END) AS completion_rate"
+            " FROM experiment_assignment ea"
+            " LEFT JOIN user u ON u.id = ea.user_id"
+            " LEFT JOIN session_log sl ON sl.user_id = ea.user_id"
+            " AND sl.started_at >= ea.assigned_at"
+            " WHERE ea.experiment_id = ?"
+            " GROUP BY subgroup_level, ea.variant"
+            " HAVING users >= 5",
             (exp_id,),
         ).fetchall()
     except sqlite3.OperationalError:

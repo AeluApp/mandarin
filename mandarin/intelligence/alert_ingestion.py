@@ -35,7 +35,6 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 import re
 import subprocess
 from datetime import datetime, timezone, UTC
@@ -43,6 +42,12 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from ..settings import (
+    SENTRY_AUTH_TOKEN,
+    SENTRY_ORG,
+    SENTRY_PROJECT,
+    UPTIMEROBOT_API_KEY,
+)
 from ._base import _safe_query_all
 
 logger = logging.getLogger(__name__)
@@ -86,9 +91,9 @@ def ingest_sentry_alerts() -> list[dict]:
     Requires SENTRY_AUTH_TOKEN, SENTRY_ORG, SENTRY_PROJECT environment variables.
     Returns empty list if not configured.
     """
-    auth_token = os.environ.get("SENTRY_AUTH_TOKEN", "")
-    org = os.environ.get("SENTRY_ORG", "")
-    project = os.environ.get("SENTRY_PROJECT", "")
+    auth_token = SENTRY_AUTH_TOKEN
+    org = SENTRY_ORG
+    project = SENTRY_PROJECT
 
     if not auth_token or not org or not project:
         logger.debug("Sentry alerts: not configured (missing env vars)")
@@ -183,15 +188,7 @@ def ingest_uptime_alerts() -> list[dict]:
     Requires UPTIMEROBOT_API_KEY environment variable (or in settings).
     Returns empty list if not configured.
     """
-    api_key = ""
-    try:
-        from ..settings import UPTIMEROBOT_API_KEY
-        api_key = UPTIMEROBOT_API_KEY or ""
-    except (ImportError, AttributeError):
-        pass
-
-    if not api_key:
-        api_key = os.environ.get("UPTIMEROBOT_API_KEY", "")
+    api_key = UPTIMEROBOT_API_KEY or ""
 
     if not api_key:
         logger.debug("UptimeRobot alerts: not configured")

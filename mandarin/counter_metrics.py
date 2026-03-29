@@ -1412,12 +1412,12 @@ def detect_session_gaming(conn, session_id=None):
         params = (session_id,) if session_id else ()
 
         rows = conn.execute(
-            f"""SELECT re.response_ms, re.correct, re.confidence, re.drill_type
-               FROM review_event re
-               JOIN session_log sl ON sl.id = re.session_id
-               WHERE sl.started_at >= datetime('now', '-1 day')
-               {where}
-               ORDER BY re.created_at""",
+            "SELECT re.response_ms, re.correct, re.confidence, re.drill_type"
+            " FROM review_event re"
+            " JOIN session_log sl ON sl.id = re.session_id"
+            " WHERE sl.started_at >= datetime('now', '-1 day') "
+            + where
+            + " ORDER BY re.created_at",
             params,
         ).fetchall()
 
