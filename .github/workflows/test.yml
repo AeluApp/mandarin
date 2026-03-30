@@ -161,6 +161,7 @@ jobs:
         run: python -m mandarin.web &
         env:
           FLASK_ENV: testing
+          PORT: "5000"
 
       - name: Wait for server to be ready
         run: |
