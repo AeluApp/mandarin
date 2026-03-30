@@ -282,3 +282,223 @@ class TestExperimentExpose:
         assert resp.status_code == 200
         data = json.loads(resp.data)
         assert data.get("status") == "ok"
+
+
+# ---------------------------------------------------------------------------
+# POST /api/referral/signup (public — under /api/referral/ prefix)
+# ---------------------------------------------------------------------------
+
+class TestReferralSignup:
+
+    def test_missing_params_returns_400(self, marketing_client):
+        """Missing visitor_id or partner_code returns 400."""
+        c, _ = marketing_client
+        resp = c.post(
+            "/api/referral/signup",
+            data=json.dumps({"visitor_id": "abc"}),
+            content_type="application/json",
+            headers={"X-Requested-With": "XMLHttpRequest"},
+        )
+        assert resp.status_code == 400
+
+    def test_unknown_referral_returns_error(self, marketing_client):
+        """Unknown visitor_id+partner_code returns 404 or 500."""
+        c, _ = marketing_client
+        resp = c.post(
+            "/api/referral/signup",
+            data=json.dumps({"visitor_id": "no-such-visitor", "partner_code": "NOSUCH"}),
+            content_type="application/json",
+            headers={"X-Requested-With": "XMLHttpRequest"},
+        )
+        assert resp.status_code in (404, 500)
+
+
+# ---------------------------------------------------------------------------
+# POST /api/subscription/cancel (authenticated)
+# ---------------------------------------------------------------------------
+
+class TestSubscriptionCancel:
+
+    def test_missing_reason_returns_400(self, auth_marketing_client):
+        """POST with no reason returns 400."""
+        c, _ = auth_marketing_client
+        resp = c.post(
+            "/api/subscription/cancel",
+            data=json.dumps({}),
+            content_type="application/json",
+            headers={"X-Requested-With": "XMLHttpRequest"},
+        )
+        assert resp.status_code == 400
+
+    def test_invalid_reason_returns_400(self, auth_marketing_client):
+        """POST with unrecognised reason returns 400."""
+        c, _ = auth_marketing_client
+        resp = c.post(
+            "/api/subscription/cancel",
+            data=json.dumps({"reason": "not_a_valid_reason"}),
+            content_type="application/json",
+            headers={"X-Requested-With": "XMLHttpRequest"},
+        )
+        assert resp.status_code == 400
+
+    def test_valid_cancel_returns_cancelled(self, auth_marketing_client):
+        """POST with valid reason returns {cancelled: true}."""
+        c, _ = auth_marketing_client
+        resp = c.post(
+            "/api/subscription/cancel",
+            data=json.dumps({"reason": "not_using", "details": "test"}),
+            content_type="application/json",
+            headers={"X-Requested-With": "XMLHttpRequest"},
+        )
+        assert resp.status_code == 200
+        data = json.loads(resp.data)
+        assert data.get("cancelled") is True
+        assert "access_until" in data
+
+
+# ---------------------------------------------------------------------------
+# POST /api/subscription/pause (authenticated)
+# ---------------------------------------------------------------------------
+
+class TestSubscriptionPause:
+
+    def test_invalid_duration_returns_400(self, auth_marketing_client):
+        """duration_months not in {1,2,3} returns 400."""
+        c, _ = auth_marketing_client
+        resp = c.post(
+            "/api/subscription/pause",
+            data=json.dumps({"duration_months": 5}),
+            content_type="application/json",
+            headers={"X-Requested-With": "XMLHttpRequest"},
+        )
+        assert resp.status_code == 400
+
+    def test_valid_pause_returns_paused(self, auth_marketing_client):
+        """POST with duration_months=1 returns {paused: true}."""
+        c, _ = auth_marketing_client
+        resp = c.post(
+            "/api/subscription/pause",
+            data=json.dumps({"duration_months": 1}),
+            content_type="application/json",
+            headers={"X-Requested-With": "XMLHttpRequest"},
+        )
+        assert resp.status_code == 200
+        data = json.loads(resp.data)
+        assert data.get("paused") is True
+        assert "resume_date" in data
+
+
+# ---------------------------------------------------------------------------
+# GET /api/referral/link (authenticated)
+# ---------------------------------------------------------------------------
+
+class TestReferralLink:
+
+    def test_returns_link_and_code(self, auth_marketing_client):
+        """Authenticated user gets a referral link."""
+        c, _ = auth_marketing_client
+        resp = c.get("/api/referral/link")
+        assert resp.status_code == 200
+        data = json.loads(resp.data)
+        assert "link" in data
+        assert "ref_code" in data
+
+
+# ---------------------------------------------------------------------------
+# GET /api/referral/stats (authenticated)
+# ---------------------------------------------------------------------------
+
+class TestReferralStats:
+
+    def test_returns_stats_dict(self, auth_marketing_client):
+        """Authenticated user gets referral stats."""
+        c, _ = auth_marketing_client
+        resp = c.get("/api/referral/stats")
+        assert resp.status_code == 200
+        data = json.loads(resp.data)
+        assert "referral_count" in data or "ref_code" in data
+
+
+# ---------------------------------------------------------------------------
+# GET /api/account/referral (authenticated — Flutter combined endpoint)
+# ---------------------------------------------------------------------------
+
+class TestAccountReferral:
+
+    def test_returns_link_and_count(self, auth_marketing_client):
+        """Flutter combined referral endpoint returns link + count."""
+        c, _ = auth_marketing_client
+        resp = c.get("/api/account/referral")
+        assert resp.status_code == 200
+        data = json.loads(resp.data)
+        assert "link" in data
+        assert "count" in data
+
+
+# ---------------------------------------------------------------------------
+# POST /api/subscription/resume (authenticated)
+# ---------------------------------------------------------------------------
+
+class TestSubscriptionResume:
+
+    def test_resume_returns_resumed(self, auth_marketing_client):
+        """Resuming a subscription returns {resumed: true, next_billing_date}."""
+        c, _ = auth_marketing_client
+        resp = c.post(
+            "/api/subscription/resume",
+            data=json.dumps({}),
+            content_type="application/json",
+            headers={"X-Requested-With": "XMLHttpRequest"},
+        )
+        assert resp.status_code == 200
+        data = json.loads(resp.data)
+        assert data.get("resumed") is True
+        assert "next_billing_date" in data
+
+
+# ---------------------------------------------------------------------------
+# POST /api/nps/prompted (authenticated)
+# ---------------------------------------------------------------------------
+
+class TestNpsPrompted:
+
+    def test_prompted_without_score(self, auth_marketing_client):
+        """Recording NPS survey shown (no score) returns ok."""
+        c, _ = auth_marketing_client
+        resp = c.post(
+            "/api/nps/prompted",
+            data=json.dumps({"comment": ""}),
+            content_type="application/json",
+            headers={"X-Requested-With": "XMLHttpRequest"},
+        )
+        assert resp.status_code == 200
+        data = json.loads(resp.data)
+        assert data.get("recorded") is True
+
+    def test_prompted_with_score_stores_feedback(self, auth_marketing_client):
+        """Recording NPS survey with score stores it and returns ok."""
+        c, _ = auth_marketing_client
+        resp = c.post(
+            "/api/nps/prompted",
+            data=json.dumps({"score": 9, "comment": "Great"}),
+            content_type="application/json",
+            headers={"X-Requested-With": "XMLHttpRequest"},
+        )
+        assert resp.status_code == 200
+        data = json.loads(resp.data)
+        assert data.get("recorded") is True
+
+
+# ---------------------------------------------------------------------------
+# GET /api/nps/check (authenticated)
+# ---------------------------------------------------------------------------
+
+class TestNpsCheck:
+
+    def test_check_returns_show_field(self, auth_marketing_client):
+        """NPS eligibility check returns {show: bool}."""
+        c, _ = auth_marketing_client
+        resp = c.get("/api/nps/check")
+        assert resp.status_code == 200
+        data = json.loads(resp.data)
+        assert "show" in data
