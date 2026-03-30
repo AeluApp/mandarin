@@ -160,3 +160,55 @@ class TestSanitizeStrings:
         schema = {"count": {"type": int}}
         _sanitize_strings(data, schema)
         assert data["count"] == 42
+
+
+# ---------------------------------------------------------------------------
+# validate_json decorator — Flask integration (covers lines 41-57)
+# ---------------------------------------------------------------------------
+
+class TestValidateJsonDecorator:
+
+    def test_decorator_passes_valid_request(self):
+        from flask import Flask
+        from mandarin.web.validate import validate_json
+        app = Flask(__name__)
+        app.config["TESTING"] = True
+
+        @app.route("/test", methods=["POST"])
+        @validate_json({"score": {"type": int, "required": True, "min_value": 0, "max_value": 10}})
+        def _view():
+            return ("ok", 200)
+
+        with app.test_client() as c:
+            resp = c.post("/test", json={"score": 7})
+            assert resp.status_code == 200
+
+    def test_decorator_rejects_missing_json(self):
+        from flask import Flask
+        from mandarin.web.validate import validate_json
+        app = Flask(__name__)
+        app.config["TESTING"] = True
+
+        @app.route("/test", methods=["POST"])
+        @validate_json({"score": {"type": int, "required": True}})
+        def _view():
+            return ("ok", 200)
+
+        with app.test_client() as c:
+            resp = c.post("/test", content_type="text/plain", data="not json")
+            assert resp.status_code == 400
+
+    def test_decorator_rejects_validation_error(self):
+        from flask import Flask
+        from mandarin.web.validate import validate_json
+        app = Flask(__name__)
+        app.config["TESTING"] = True
+
+        @app.route("/test", methods=["POST"])
+        @validate_json({"score": {"type": int, "required": True, "max_value": 10}})
+        def _view():
+            return ("ok", 200)
+
+        with app.test_client() as c:
+            resp = c.post("/test", json={"score": 99})
+            assert resp.status_code == 400

@@ -178,3 +178,35 @@ class TestAdminNps:
         data = json.loads(resp.data)
         assert "nps" in data
         assert "responses" in data
+
+    def test_admin_nps_with_data_returns_score(self, nps_admin_client):
+        """Covers lines 57-95: NPS calculation with actual responses."""
+        c, conn = nps_admin_client
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS nps_response (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                score INTEGER NOT NULL,
+                feedback TEXT DEFAULT '',
+                responded_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        # 2 promoters (>=9), 1 passive (7-8), 1 detractor (<=6)
+        for score, fb in [(10, "Love it"), (9, ""), (8, ""), (3, "Too hard")]:
+            conn.execute(
+                "INSERT INTO nps_response (score, feedback) VALUES (?, ?)",
+                (score, fb),
+            )
+        conn.commit()
+
+        resp = c.get("/api/admin/quality/nps")
+        assert resp.status_code == 200
+        data = json.loads(resp.data)
+        assert data["nps"] is not None
+        assert data["responses"] == 4
+        assert "promoters_pct" in data
+        assert "detractors_pct" in data
+        assert isinstance(data["trend"], list)
+        assert isinstance(data["feedback"], list)
+        # Only non-empty feedback returned
+        assert all(item["text"] for item in data["feedback"])
