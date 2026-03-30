@@ -57,6 +57,7 @@ def test_extract_f0_yin_empty():
     assert f0 == []
 
 
+@pytest.mark.skip(reason="pYIN via librosa segfaults xdist workers in CI — runs in test-t2-nightly")
 def test_extract_f0_wrapper_uses_pyin_or_yin():
     """extract_f0() should use librosa pYIN when available, else YIN."""
     try:
