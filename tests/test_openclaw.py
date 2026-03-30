@@ -5,6 +5,8 @@ import os
 import sqlite3
 import unittest
 
+from tests.shared_db import make_test_db  # noqa: F401
+
 
 class TestSecurity(unittest.TestCase):
     """Test prompt injection defense and input sanitization."""
@@ -370,46 +372,21 @@ class TestIMessageBot(unittest.TestCase):
     """
 
     def _mock_conn(self):
-        """Return an in-memory SQLite connection with minimal tables."""
-        conn = sqlite3.connect(":memory:")
-        conn.row_factory = sqlite3.Row
+        """Return an in-memory SQLite connection with full production schema."""
+        conn = make_test_db()
         conn.executescript("""
-            CREATE TABLE IF NOT EXISTS user (
-                id INTEGER PRIMARY KEY, email TEXT, display_name TEXT,
-                subscription_tier TEXT DEFAULT 'free'
-            );
-            CREATE TABLE IF NOT EXISTS progress (
-                id INTEGER PRIMARY KEY, user_id INTEGER DEFAULT 1,
-                content_item_id INTEGER, modality TEXT DEFAULT 'reading',
-                mastery_stage TEXT DEFAULT 'seen', interval_days REAL DEFAULT 1,
-                last_review_date TEXT, next_review_date TEXT,
-                total_attempts INTEGER DEFAULT 0, total_correct INTEGER DEFAULT 0
-            );
-            CREATE TABLE IF NOT EXISTS content_item (
-                id INTEGER PRIMARY KEY, hanzi TEXT, english TEXT,
-                pinyin TEXT DEFAULT '', hsk_level INTEGER DEFAULT 1
-            );
-            CREATE TABLE IF NOT EXISTS session_log (
-                id INTEGER PRIMARY KEY, user_id INTEGER DEFAULT 1,
-                created_at TEXT DEFAULT (datetime('now')),
-                started_at TEXT DEFAULT (datetime('now')),
-                session_outcome TEXT DEFAULT 'completed',
-                items_studied INTEGER DEFAULT 0, items_correct INTEGER DEFAULT 0
-            );
-            CREATE TABLE IF NOT EXISTS learner_profile (
-                id INTEGER PRIMARY KEY, user_id INTEGER DEFAULT 1,
-                target_sessions_per_week INTEGER DEFAULT 5
-            );
             CREATE TABLE IF NOT EXISTS message_log (
                 id INTEGER PRIMARY KEY, direction TEXT, channel TEXT,
                 message_text TEXT, user_identifier TEXT, intent TEXT,
                 tool_called TEXT, tool_result TEXT, created_at TEXT,
                 injection_detected INTEGER DEFAULT 0, injection_detail TEXT
             );
-            INSERT INTO user (id, email, display_name, subscription_tier)
-            VALUES (1, 'local@localhost', 'Local', 'admin');
-            INSERT INTO learner_profile (user_id) VALUES (1);
         """)
+        conn.execute(
+            "INSERT OR REPLACE INTO user (id, email, display_name, subscription_tier, password_hash, created_at) "
+            "VALUES (1, 'local@localhost', 'Local', 'admin', 'test_hash', datetime('now'))"
+        )
+        conn.commit()
         return conn
 
     class _FakeConnCtx:

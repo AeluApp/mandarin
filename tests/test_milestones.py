@@ -165,28 +165,8 @@ def test_multiple_requirements_partial_met():
 # ---- TestStageCountsSchema ----
 
 def _make_milestones_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("""
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY,
-            hanzi TEXT, pinyin TEXT, english TEXT,
-            status TEXT DEFAULT 'drill_ready',
-            hsk_level INTEGER DEFAULT 1
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE progress (
-            content_item_id INTEGER,
-            user_id INTEGER DEFAULT 1,
-            modality TEXT DEFAULT 'reading',
-            mastery_stage TEXT DEFAULT 'seen',
-            total_attempts INTEGER DEFAULT 0,
-            streak_correct INTEGER DEFAULT 0,
-            PRIMARY KEY (user_id, content_item_id, modality)
-        )
-    """)
-    return conn
+    from tests.shared_db import make_test_db
+    return make_test_db()
 
 
 def test_returns_all_expected_keys():
@@ -215,7 +195,7 @@ def test_seen_item_counted():
     from mandarin.milestones import get_stage_counts
     conn = _make_milestones_db()
     conn.execute("INSERT INTO content_item (hanzi, pinyin, english) VALUES ('\u4f60', 'n\u01d0', 'you')")
-    conn.execute("INSERT INTO progress (content_item_id, mastery_stage, total_attempts) VALUES (1, 'seen', 1)")
+    conn.execute("INSERT INTO progress (content_item_id, modality, mastery_stage, total_attempts) VALUES (1, 'reading', 'seen', 1)")
     result = get_stage_counts(conn)
     assert result["seen"] == 1
     assert result["unseen"] == 0
@@ -227,8 +207,8 @@ def test_weak_alias_is_seen_plus_passed_once():
     conn = _make_milestones_db()
     conn.execute("INSERT INTO content_item (id, hanzi, pinyin, english) VALUES (1, '\u4f60', 'n\u01d0', 'you')")
     conn.execute("INSERT INTO content_item (id, hanzi, pinyin, english) VALUES (2, '\u597d', 'h\u01ceo', 'good')")
-    conn.execute("INSERT INTO progress (content_item_id, mastery_stage, total_attempts) VALUES (1, 'seen', 1)")
-    conn.execute("INSERT INTO progress (content_item_id, mastery_stage, total_attempts) VALUES (2, 'passed_once', 2)")
+    conn.execute("INSERT INTO progress (content_item_id, modality, mastery_stage, total_attempts) VALUES (1, 'reading', 'seen', 1)")
+    conn.execute("INSERT INTO progress (content_item_id, modality, mastery_stage, total_attempts) VALUES (2, 'reading', 'passed_once', 2)")
     result = get_stage_counts(conn)
     assert result["weak"] == result["seen"] + result["passed_once"]
     conn.close()

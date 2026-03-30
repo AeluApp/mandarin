@@ -557,7 +557,7 @@ def _run_editorial_critic(conn, content_text: str, content_context: str, content
 def assess_editorial_quality(conn, content_item_id: str) -> dict:
     """Assess content quality on editorial dimensions."""
     item = _safe_query(conn, """
-        SELECT id, hanzi, english, content_type FROM content_item WHERE id = ?
+        SELECT id, hanzi, english, item_type FROM content_item WHERE id = ?
     """, (content_item_id,))
 
     if not item:
@@ -567,7 +567,7 @@ def assess_editorial_quality(conn, content_item_id: str) -> dict:
     if not content_text:
         return {'error': 'no_content'}
 
-    content_type = item['content_type'] or 'vocabulary'
+    content_type = item['item_type'] or 'vocabulary'
     content_context = f'{content_type}: {item["english"] or ""}'
 
     scores = _run_editorial_critic(conn, content_text, content_context, content_type)

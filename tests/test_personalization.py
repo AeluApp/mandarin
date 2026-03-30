@@ -82,9 +82,9 @@ def test_unknown_domain_returns_empty():
 
 # ---- TestDomainMetadata ----
 
-def test_all_domains_returns_five():
+def test_all_domains_returns_expected_count():
     domains = get_all_domains()
-    assert len(domains) == 5
+    assert len(domains) == 9
 
 
 def test_each_domain_has_label_and_description():

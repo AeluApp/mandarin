@@ -69,7 +69,7 @@ class SupportContext:
         crashes = 0
         try:
             c = conn.execute(
-                "SELECT COUNT(*) as cnt FROM crash_log WHERE created_at >= datetime('now', '-7 days')"
+                "SELECT COUNT(*) as cnt FROM crash_log WHERE timestamp >= datetime('now', '-7 days')"
             ).fetchone()
             crashes = c["cnt"] if c else 0
         except Exception:
@@ -78,7 +78,7 @@ class SupportContext:
         client_errors = 0
         try:
             ce = conn.execute(
-                "SELECT COUNT(*) as cnt FROM client_error_log WHERE user_id = ? AND created_at >= datetime('now', '-7 days')",
+                "SELECT COUNT(*) as cnt FROM client_error_log WHERE user_id = ? AND timestamp >= datetime('now', '-7 days')",
                 (user_id,),
             ).fetchone()
             client_errors = ce["cnt"] if ce else 0

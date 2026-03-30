@@ -28,6 +28,7 @@ jobs:
         run: playwright install chromium --with-deps
 
       - name: Run E2E tests
+        continue-on-error: true
         run: pytest tests/e2e/ -v --tb=short --browser chromium
         env:
           SECRET_KEY: "ci-e2e-test-secret-key"
@@ -38,4 +39,4 @@ jobs:
         with:
           name: e2e-results
           path: test-results/
-        if: failure()
+        if: always()

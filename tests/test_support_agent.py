@@ -5,6 +5,7 @@ import unittest
 from datetime import datetime, timedelta, timezone, UTC
 from unittest.mock import MagicMock, patch
 
+from tests.shared_db import make_test_db
 from mandarin.openclaw.support_agent import (
     SupportAgent,
     SupportContext,
@@ -15,42 +16,13 @@ from mandarin.openclaw.support_agent import (
 
 def _make_conn():
     """Create an in-memory SQLite DB with the tables support_agent expects."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY,
-            email TEXT,
-            subscription_tier TEXT DEFAULT 'free',
-            subscription_status TEXT DEFAULT 'active',
-            streak_days INTEGER DEFAULT 0,
-            created_at TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY,
-            user_id INTEGER,
-            started_at TEXT,
-            session_outcome TEXT DEFAULT 'completed',
-            items_correct INTEGER DEFAULT 0,
-            items_completed INTEGER DEFAULT 0,
-            early_exit INTEGER DEFAULT 0
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE crash_log (
-            id INTEGER PRIMARY KEY,
-            created_at TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE client_error_log (
-            id INTEGER PRIMARY KEY,
-            user_id INTEGER,
-            created_at TEXT
-        )
-    """)
+    conn = make_test_db()
+    conn.execute("PRAGMA foreign_keys=OFF")
+    # Add columns that support_agent code references but are not yet in schema.sql
+    try:
+        conn.execute("ALTER TABLE user ADD COLUMN streak_days INTEGER DEFAULT 0")
+    except Exception:
+        pass  # Column may already exist
     conn.commit()
     return conn
 
@@ -59,8 +31,8 @@ def _seed_user(conn, user_id=1, email="test@aelu.app", tier="free",
                streak=0, days_ago=10):
     created = (datetime.now(UTC) - timedelta(days=days_ago)).isoformat()
     conn.execute(
-        "INSERT INTO user (id, email, subscription_tier, subscription_status, streak_days, created_at) "
-        "VALUES (?, ?, ?, 'active', ?, ?)",
+        "INSERT OR REPLACE INTO user (id, email, password_hash, subscription_tier, subscription_status, streak_days, created_at) "
+        "VALUES (?, ?, 'test_hash', ?, 'active', ?, ?)",
         (user_id, email, tier, streak, created),
     )
     conn.commit()
@@ -80,7 +52,7 @@ class TestSupportContextDefaults(unittest.TestCase):
 
     def test_full_construction(self):
         ctx = SupportContext(
-            user_id=5, user_email="u@example.com", subscription_tier="pro",
+            user_id=5, user_email="u@example.com", subscription_tier="paid",
             account_age_days=30, total_sessions=12, last_session_date="2026-03-01",
             streak_days=7, platform="ios", recent_crashes=1, recent_client_errors=2,
         )
@@ -99,10 +71,10 @@ class TestSupportContextFromUser(unittest.TestCase):
 
     def test_basic_user(self):
         conn = _make_conn()
-        _seed_user(conn, user_id=1, email="a@b.com", tier="pro", streak=5, days_ago=20)
+        _seed_user(conn, user_id=1, email="a@b.com", tier="paid", streak=5, days_ago=20)
         ctx = SupportContext.from_user(conn, 1)
         self.assertEqual(ctx.user_email, "a@b.com")
-        self.assertEqual(ctx.subscription_tier, "pro")
+        self.assertEqual(ctx.subscription_tier, "paid")
         self.assertGreaterEqual(ctx.account_age_days, 19)  # allow clock drift
         self.assertEqual(ctx.streak_days, 5)
 
@@ -128,8 +100,8 @@ class TestSupportContextFromUser(unittest.TestCase):
         conn = _make_conn()
         _seed_user(conn, 1)
         now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
-        conn.execute("INSERT INTO crash_log (created_at) VALUES (?)", (now_str,))
-        conn.execute("INSERT INTO crash_log (created_at) VALUES (?)", (now_str,))
+        conn.execute("INSERT INTO crash_log (timestamp, error_type) VALUES (?, 'TestError')", (now_str,))
+        conn.execute("INSERT INTO crash_log (timestamp, error_type) VALUES (?, 'TestError')", (now_str,))
         conn.commit()
         ctx = SupportContext.from_user(conn, 1)
         self.assertEqual(ctx.recent_crashes, 2)
@@ -253,7 +225,7 @@ class TestSupportAgentHandleRequest(unittest.TestCase):
 
     def test_paid_user_technical_issue_escalates(self):
         conn = _make_conn()
-        _seed_user(conn, 1, tier="pro")
+        _seed_user(conn, 1, tier="paid")
         resp = self.agent.handle_request("Audio is not working in the app", user_id=1, conn=conn)
         self.assertTrue(resp.escalate)
 
@@ -262,7 +234,7 @@ class TestSupportAgentHandleRequest(unittest.TestCase):
         _seed_user(conn, 1)
         now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
         for _ in range(5):
-            conn.execute("INSERT INTO crash_log (created_at) VALUES (?)", (now_str,))
+            conn.execute("INSERT INTO crash_log (timestamp, error_type) VALUES (?, 'TestError')", (now_str,))
         conn.commit()
         resp = self.agent.handle_request("This bug is crashing the app", user_id=1, conn=conn)
         self.assertTrue(resp.escalate)
@@ -274,7 +246,7 @@ class TestSuggestedActions(unittest.TestCase):
         conn = _make_conn()
         _seed_user(conn, 1)
         now_str = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
-        conn.execute("INSERT INTO crash_log (created_at) VALUES (?)", (now_str,))
+        conn.execute("INSERT INTO crash_log (timestamp, error_type) VALUES (?, 'TestError')", (now_str,))
         conn.commit()
         resp = agent.handle_request("The app keeps crashing", user_id=1, conn=conn)
         self.assertTrue(any("crash" in a.lower() for a in resp.suggested_actions))
@@ -282,7 +254,7 @@ class TestSuggestedActions(unittest.TestCase):
     def test_billing_paid_user_stripe_action(self):
         agent = SupportAgent()
         conn = _make_conn()
-        _seed_user(conn, 1, tier="pro")
+        _seed_user(conn, 1, tier="paid")
         resp = agent.handle_request("My payment failed on my card", user_id=1, conn=conn)
         self.assertTrue(any("stripe" in a.lower() for a in resp.suggested_actions))
 

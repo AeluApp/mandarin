@@ -22,6 +22,7 @@ import uuid
 
 import pytest
 
+from tests.shared_db import make_test_db
 from mandarin.intelligence.methodology_coverage import (
     DetectionResult,
     _score_to_grade,
@@ -326,8 +327,7 @@ CREATE TABLE IF NOT EXISTS pi_framework_summary_grades (
 @pytest.fixture
 def conn():
     """In-memory SQLite with methodology coverage schema."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
+    c = make_test_db()
     c.executescript(_DDL)
     c.commit()
     return c

@@ -20,15 +20,13 @@ Covers:
 
 import json
 import sqlite3
-import tempfile
 import time
 from datetime import datetime, UTC
-from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 import pytest
 
-from mandarin.db.core import init_db, _migrate
+from tests.shared_db import make_test_db
 
 
 # ── Fixtures ──────────────────────────────────────────────────────────
@@ -36,11 +34,7 @@ from mandarin.db.core import init_db, _migrate
 @pytest.fixture
 def conn():
     """Fresh DB with full schema + tables needed for self-healing."""
-    tf = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
-    tf.close()
-    path = Path(tf.name)
-    c = init_db(path)
-    _migrate(c)
+    c = make_test_db()
     c.execute("""
         INSERT OR IGNORE INTO user (id, email, password_hash, display_name, is_admin)
         VALUES (1, 'test@example.com', 'hash', 'Test', 1)
@@ -69,7 +63,6 @@ def conn():
     c.commit()
     yield c
     c.close()
-    path.unlink(missing_ok=True)
 
 
 # ── Table creation ──────────────────────────────────────────────────

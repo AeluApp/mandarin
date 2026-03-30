@@ -78,7 +78,7 @@ class TestQueueManagement(unittest.TestCase):
         qid = queue_for_native_speaker_review(
             self.conn,
             content_hanzi="测试",
-            content_type="vocab",
+            content_type="drill_sentence",
             queue_reason="systematic_review",
         )
         row = self.conn.execute(
@@ -284,7 +284,7 @@ class TestAnalyzer(unittest.TestCase):
         self.assertIn("60", backlog_findings[0]["title"])
 
     def test_high_rejection_rate_triggers_finding(self):
-        validator_id = _seed_user(self.conn)
+        validator_id = _seed_user(self.conn, email="rejection-test@aelu.app")
         for i in range(25):
             qid = queue_for_native_speaker_review(
                 self.conn,

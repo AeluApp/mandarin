@@ -9,6 +9,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.shared_db import make_test_db
 from mandarin.metrics_report import (
     _business_health,
     _engagement,
@@ -38,58 +39,7 @@ from mandarin.metrics_report import (
 def conn():
     """In-memory SQLite DB with tables and seed data matching the schema
     that metrics_report queries expect."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
-
-    c.executescript("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY, email TEXT, display_name TEXT,
-            subscription_tier TEXT DEFAULT 'free', created_at TEXT,
-            last_login_at TEXT, is_active INTEGER DEFAULT 1,
-            password_hash TEXT DEFAULT ''
-        );
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY, user_id INTEGER, started_at TEXT,
-            ended_at TEXT, duration_seconds INTEGER,
-            session_type TEXT DEFAULT 'standard',
-            items_planned INTEGER DEFAULT 0,
-            items_completed INTEGER DEFAULT 0,
-            items_correct INTEGER DEFAULT 0,
-            session_outcome TEXT DEFAULT 'completed',
-            early_exit INTEGER DEFAULT 0,
-            boredom_flags INTEGER DEFAULT 0,
-            modality_counts TEXT,
-            session_day_of_week INTEGER
-        );
-        CREATE TABLE progress (
-            id INTEGER PRIMARY KEY, user_id INTEGER,
-            content_item_id INTEGER, modality TEXT DEFAULT 'reading',
-            mastery_stage TEXT DEFAULT 'seen',
-            total_attempts INTEGER DEFAULT 0,
-            total_correct INTEGER DEFAULT 0,
-            last_review_date TEXT, accuracy REAL DEFAULT 0.0
-        );
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY, hanzi TEXT, pinyin TEXT,
-            english TEXT, hsk_level INTEGER DEFAULT 1,
-            status TEXT DEFAULT 'drill_ready',
-            scale_level TEXT DEFAULT 'word',
-            created_at TEXT
-        );
-        CREATE TABLE lifecycle_event (
-            id INTEGER PRIMARY KEY, user_id INTEGER,
-            event_type TEXT, created_at TEXT
-        );
-        CREATE TABLE crash_log (
-            id INTEGER PRIMARY KEY, user_id INTEGER,
-            timestamp TEXT, error_type TEXT, error_message TEXT
-        );
-        CREATE TABLE error_log (
-            id INTEGER PRIMARY KEY, user_id INTEGER,
-            content_item_id INTEGER, error_type TEXT,
-            created_at TEXT
-        );
-    """)
+    c = make_test_db()
 
     now = datetime.now(UTC)
     now.strftime("%Y-%m-%d %H:%M:%S")
@@ -100,10 +50,9 @@ def conn():
     # lifecycle_event timestamps need timezone info for fromisoformat() compat
     month_ago_iso = (now - timedelta(days=25)).isoformat()
 
-    # Seed user
+    # Seed user (update the bootstrap user from make_test_db)
     c.execute(
-        "INSERT INTO user (id, email, display_name, created_at) "
-        "VALUES (1, 'test@test.com', 'Test', ?)",
+        "UPDATE user SET email = 'test@test.com', display_name = 'Test', created_at = ? WHERE id = 1",
         (month_ago,),
     )
 
@@ -150,8 +99,8 @@ def conn():
         c.execute(
             "INSERT INTO progress "
             "(user_id, content_item_id, modality, mastery_stage, "
-            "total_attempts, total_correct, last_review_date, accuracy) "
-            "VALUES (1, ?, 'reading', 'stable', 10, 9, ?, 0.9)",
+            "total_attempts, total_correct, last_review_date) "
+            "VALUES (1, ?, 'reading', 'stable', 10, 9, ?)",
             (i, yesterday),
         )
 
@@ -170,53 +119,10 @@ def conn():
 @pytest.fixture
 def empty_conn():
     """In-memory SQLite DB with tables but NO data — for edge-case tests."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
-
-    c.executescript("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY, email TEXT, display_name TEXT,
-            subscription_tier TEXT DEFAULT 'free', created_at TEXT,
-            last_login_at TEXT, is_active INTEGER DEFAULT 1
-        );
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY, user_id INTEGER, started_at TEXT,
-            ended_at TEXT, duration_seconds INTEGER,
-            session_type TEXT DEFAULT 'standard',
-            items_planned INTEGER DEFAULT 0,
-            items_completed INTEGER DEFAULT 0,
-            items_correct INTEGER DEFAULT 0,
-            session_outcome TEXT DEFAULT 'completed',
-            early_exit INTEGER DEFAULT 0,
-            boredom_flags INTEGER DEFAULT 0,
-            modality_counts TEXT,
-            session_day_of_week INTEGER
-        );
-        CREATE TABLE progress (
-            id INTEGER PRIMARY KEY, user_id INTEGER,
-            content_item_id INTEGER, modality TEXT DEFAULT 'reading',
-            mastery_stage TEXT DEFAULT 'seen',
-            total_attempts INTEGER DEFAULT 0,
-            total_correct INTEGER DEFAULT 0,
-            last_review_date TEXT, accuracy REAL DEFAULT 0.0
-        );
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY, hanzi TEXT, pinyin TEXT,
-            english TEXT, hsk_level INTEGER DEFAULT 1,
-            status TEXT DEFAULT 'drill_ready',
-            scale_level TEXT DEFAULT 'word',
-            created_at TEXT
-        );
-        CREATE TABLE lifecycle_event (
-            id INTEGER PRIMARY KEY, user_id INTEGER,
-            event_type TEXT, created_at TEXT
-        );
-        CREATE TABLE crash_log (
-            id INTEGER PRIMARY KEY, user_id INTEGER,
-            timestamp TEXT, error_type TEXT, error_message TEXT
-        );
-    """)
-
+    c = make_test_db()
+    # Delete the bootstrap test user seeded by make_test_db so the DB is truly empty
+    c.execute("DELETE FROM learner_profile")
+    c.execute("DELETE FROM user")
     c.commit()
     yield c
     c.close()

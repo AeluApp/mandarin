@@ -14,7 +14,8 @@ from dataclasses import replace
 from datetime import date, timedelta
 from unittest.mock import patch
 
-from conftest import OutputCapture, InputSequence, make_test_db
+from tests.conftest import OutputCapture, InputSequence
+from tests.shared_db import make_test_db
 from mandarin.scheduler import SessionPlan, DrillItem, _validate_plan, _interleave
 from mandarin.drills.base import (
     DrillResult, _handle_confidence, _handle_narrowed_choice, _run_mc_input,

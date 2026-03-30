@@ -12,12 +12,12 @@ def _make_db():
     conn = make_test_db()
     # Update user 1 for stripe tests and add user 2
     conn.execute(
-        "UPDATE user SET display_name='Test User', subscription_tier='pro', "
+        "UPDATE user SET display_name='Test User', subscription_tier='paid', "
         "stripe_customer_id='cus_test123', subscription_status='active' WHERE id=1"
     )
     conn.execute(
-        "INSERT OR IGNORE INTO user (id, email, password_hash, display_name, subscription_tier) "
-        "VALUES (2, 'free@aelu.app', 'test_hash', 'Free User', 'free')"
+        "INSERT OR IGNORE INTO user (id, email, password_hash, display_name, subscription_tier, subscription_status) "
+        "VALUES (2, 'free@aelu.app', 'test_hash', 'Free User', 'free', 'none')"
     )
     conn.commit()
     return conn
@@ -90,7 +90,7 @@ class TestSubscriptionStatus(unittest.TestCase):
         with patch("mandarin.db.connection", return_value=mock_conn):
             result = get_subscription_status(1)
             self.assertEqual(result["user_id"], 1)
-            self.assertEqual(result["tier"], "pro")
+            self.assertEqual(result["tier"], "paid")
             self.assertEqual(result["status"], "active")
             self.assertEqual(result["email"], "test@aelu.app")
 

@@ -13,6 +13,8 @@ from unittest import mock
 
 import pytest
 
+from tests.shared_db import make_test_db
+
 # Add project root to path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -24,61 +26,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 @pytest.fixture
 def content_db():
     """Create a minimal in-memory DB with content_item + dialogue_scenario tables."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.executescript("""
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL,
-            pinyin TEXT NOT NULL DEFAULT '',
-            english TEXT NOT NULL DEFAULT '',
-            item_type TEXT NOT NULL DEFAULT 'vocab',
-            hsk_level INTEGER,
-            source TEXT,
-            source_context TEXT,
-            status TEXT NOT NULL DEFAULT 'drill_ready',
-            review_status TEXT NOT NULL DEFAULT 'approved',
-            scale_level TEXT NOT NULL DEFAULT 'word',
-            audio_available INTEGER NOT NULL DEFAULT 0,
-            audio_file_path TEXT,
-            difficulty REAL NOT NULL DEFAULT 0.5,
-            register TEXT DEFAULT 'neutral',
-            content_lens TEXT,
-            tags TEXT DEFAULT '[]',
-            context_note TEXT,
-            image_url TEXT,
-            suitable_for_listening INTEGER NOT NULL DEFAULT 1,
-            suitable_for_ime INTEGER NOT NULL DEFAULT 1,
-            suitable_for_speaking INTEGER NOT NULL DEFAULT 1,
-            suitable_for_reading INTEGER NOT NULL DEFAULT 1,
-            is_mined_out INTEGER NOT NULL DEFAULT 0,
-            times_shown INTEGER NOT NULL DEFAULT 0,
-            times_correct INTEGER NOT NULL DEFAULT 0,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE TABLE dialogue_scenario (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            title_zh TEXT,
-            hsk_level INTEGER NOT NULL DEFAULT 1,
-            register TEXT NOT NULL DEFAULT 'neutral',
-            scenario_type TEXT NOT NULL DEFAULT 'dialogue',
-            tree_json TEXT NOT NULL,
-            difficulty REAL NOT NULL DEFAULT 0.5,
-            times_presented INTEGER NOT NULL DEFAULT 0,
-            avg_score REAL,
-            status TEXT NOT NULL DEFAULT 'active',
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE TABLE dictionary_entry (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            traditional TEXT NOT NULL,
-            simplified TEXT NOT NULL,
-            pinyin TEXT NOT NULL,
-            english TEXT NOT NULL,
-            frequency_rank INTEGER
-        );
-    """)
+    conn = make_test_db()
     # Seed some HSK words for level estimation
     hsk_words = [
         ("你好", "nǐ hǎo", "hello", 1),

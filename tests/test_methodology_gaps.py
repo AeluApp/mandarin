@@ -97,10 +97,19 @@ def _create_work_item(conn, title="Test item", status="backlog", service_class="
 class TestWIPLimitEnforcement:
 
     def test_wip_limit_rejects_transition(self, admin_client):
-        """Moving to in_progress should be rejected when WIP limit reached."""
+        """Moving to in_progress should be rejected when per-class WIP limit reached."""
         c, conn = admin_client
-        # Fill WIP to limit (5 items in_progress)
-        for i in range(5):
+        # Seed kanban_config if not present (per-class limits: standard=3)
+        try:
+            conn.execute(
+                "INSERT OR IGNORE INTO kanban_config (service_class, wip_limit, target_cycle_hours, max_cycle_hours) "
+                "VALUES ('standard', 3, 168, 336)"
+            )
+            conn.commit()
+        except Exception:
+            pass
+        # Fill standard class WIP to its limit (3 items in_progress)
+        for i in range(3):
             _create_work_item(conn, title=f"WIP item {i}", status="in_progress")
 
         # Create item to move
@@ -112,14 +121,22 @@ class TestWIPLimitEnforcement:
                      headers={"X-Requested-With": "XMLHttpRequest"})
         assert resp.status_code == 409
         data = json.loads(resp.data)
-        assert "WIP limit reached" in data["error"]
-        assert data["wip_count"] == 5
-        assert data["wip_limit"] == 5
+        assert "WIP limit" in data["error"]
+        assert data["wip_count"] == 3
+        assert data["wip_limit"] == 3
 
     def test_wip_limit_force_override(self, admin_client):
         """Force override should allow transition past WIP limit."""
         c, conn = admin_client
-        for i in range(5):
+        try:
+            conn.execute(
+                "INSERT OR IGNORE INTO kanban_config (service_class, wip_limit, target_cycle_hours, max_cycle_hours) "
+                "VALUES ('standard', 3, 168, 336)"
+            )
+            conn.commit()
+        except Exception:
+            pass
+        for i in range(3):
             _create_work_item(conn, title=f"WIP item {i}", status="in_progress")
 
         item_id = _create_work_item(conn, title="Urgent item", status="ready")
@@ -136,9 +153,18 @@ class TestWIPLimitEnforcement:
         assert "overridden" in data["wip_warning"]
 
     def test_wip_limit_allows_below_limit(self, admin_client):
-        """Transition should succeed when WIP count is below limit."""
+        """Transition should succeed when WIP count is below per-class limit."""
         c, conn = admin_client
-        for i in range(3):
+        try:
+            conn.execute(
+                "INSERT OR IGNORE INTO kanban_config (service_class, wip_limit, target_cycle_hours, max_cycle_hours) "
+                "VALUES ('standard', 3, 168, 336)"
+            )
+            conn.commit()
+        except Exception:
+            pass
+        # Only 2 standard items in progress (limit is 3)
+        for i in range(2):
             _create_work_item(conn, title=f"WIP item {i}", status="in_progress")
 
         item_id = _create_work_item(conn, title="New item", status="ready")

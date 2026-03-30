@@ -13,64 +13,20 @@ from mandarin.quality.curriculum_graph import (
     suggest_next_items,
     _goal_to_item_ids,
 )
+from tests.shared_db import make_test_db
 
 
 def _make_curriculum_db():
-    """Create in-memory DB with tables needed by the curriculum graph module."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA foreign_keys=ON")
-    conn.executescript("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email TEXT UNIQUE NOT NULL,
-            password_hash TEXT NOT NULL DEFAULT '',
-            display_name TEXT NOT NULL DEFAULT '',
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hanzi TEXT NOT NULL,
-            pinyin TEXT NOT NULL DEFAULT '',
-            english TEXT NOT NULL DEFAULT '',
-            hsk_level INTEGER NOT NULL DEFAULT 1,
-            drill_ready INTEGER NOT NULL DEFAULT 1,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE memory_states (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            content_item_id INTEGER NOT NULL,
-            stability REAL NOT NULL DEFAULT 1.0,
-            retrievability REAL NOT NULL DEFAULT 0.0,
-            difficulty REAL NOT NULL DEFAULT 0.5,
-            state TEXT NOT NULL DEFAULT 'new',
-            next_review_due TEXT NOT NULL DEFAULT (datetime('now')),
-            scheduled_days INTEGER NOT NULL DEFAULT 1,
-            reps INTEGER NOT NULL DEFAULT 0,
-            lapses INTEGER NOT NULL DEFAULT 0,
-            UNIQUE(user_id, content_item_id),
-            FOREIGN KEY (content_item_id) REFERENCES content_item(id)
-        );
-        CREATE TABLE grammar_prerequisites (
-            grammar_point_id INTEGER NOT NULL,
-            prerequisite_id INTEGER NOT NULL,
-            relationship TEXT DEFAULT 'requires',
-            PRIMARY KEY (grammar_point_id, prerequisite_id)
-        );
-
-        INSERT INTO user (id, email) VALUES (1, 'test@test.com');
-    """)
-    return conn
+    """Create in-memory DB with the full production schema."""
+    return make_test_db()
 
 
 def _seed_hsk_items(conn, level, count, start_id=None):
     """Insert `count` content_items at the given hsk_level."""
     for i in range(count):
         conn.execute(
-            "INSERT INTO content_item (hanzi, pinyin, english, hsk_level, drill_ready) "
-            "VALUES (?, ?, ?, ?, 1)",
+            "INSERT INTO content_item (hanzi, pinyin, english, hsk_level, status) "
+            "VALUES (?, ?, ?, ?, 'drill_ready')",
             (f"char_L{level}_{i}", f"pin{i}", f"eng{i}", level),
         )
     conn.commit()
@@ -230,7 +186,7 @@ class TestGoalToItemIds(unittest.TestCase):
         _seed_hsk_items(self.conn, level=2, count=3)
 
         expected = [r["id"] for r in self.conn.execute(
-            "SELECT id FROM content_item WHERE hsk_level = 1 AND drill_ready = 1 ORDER BY id"
+            "SELECT id FROM content_item WHERE hsk_level = 1 AND status = 'drill_ready' ORDER BY id"
         ).fetchall()]
 
         result = _goal_to_item_ids(self.conn, "hsk_1")
@@ -258,10 +214,10 @@ class TestGoalToItemIds(unittest.TestCase):
         self.assertEqual(result, [])
 
     def test_non_drill_ready_excluded(self):
-        """Items with drill_ready=0 are excluded from goal IDs."""
+        """Items with status != 'drill_ready' are excluded from goal IDs."""
         _seed_hsk_items(self.conn, level=1, count=3)
         # Mark one item as not drill-ready
-        self.conn.execute("UPDATE content_item SET drill_ready = 0 WHERE id = 1")
+        self.conn.execute("UPDATE content_item SET status = 'raw' WHERE id = 1")
         self.conn.commit()
 
         result = _goal_to_item_ids(self.conn, "hsk_1")

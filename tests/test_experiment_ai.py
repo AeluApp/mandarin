@@ -23,7 +23,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from conftest import make_test_db
+from tests.shared_db import make_test_db
 
 from mandarin.ai.ollama_client import OllamaResponse
 
@@ -34,10 +34,9 @@ from mandarin.ai.ollama_client import OllamaResponse
 @pytest.fixture
 def exp_db():
     """Provide a test DB connection with experiment tables."""
-    conn, path = make_test_db()
+    conn = make_test_db()
     yield conn
     conn.close()
-    path.unlink(missing_ok=True)
 
 
 def _insert_session(conn, user_id=1, days_ago=0, items=10, correct=8, duration=300,

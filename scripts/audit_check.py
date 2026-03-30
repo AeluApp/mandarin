@@ -693,10 +693,10 @@ def check_t4() -> dict:
             violations.append(fname)
     passed = len(violations) == 0
     return {
-        "check": "T4",
-        "title": "No inline CREATE TABLE in tests",
-        "passed": passed,
-        "detail": f"Found inline schemas in: {', '.join(violations)}" if violations else "All tests use shared_db",
+        "id": "T4",
+        "name": "No inline CREATE TABLE in tests",
+        "status": "PASS" if passed else "FAIL",
+        "details": f"Found inline schemas in: {', '.join(violations)}" if violations else "All tests use shared_db",
     }
 
 

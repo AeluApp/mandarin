@@ -1,5 +1,7 @@
 """Tests for Doc 16: Learner Model and Personalization Engine."""
 
+import sqlite3
+
 import pytest
 
 from mandarin.ai.learner_model import (

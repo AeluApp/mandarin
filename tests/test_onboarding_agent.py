@@ -5,6 +5,7 @@ import unittest
 from datetime import datetime, timedelta, timezone, UTC
 from unittest.mock import patch
 
+from tests.shared_db import make_test_db
 from mandarin.openclaw.onboarding_agent import (
     Intervention,
     InterventionEngine,
@@ -17,37 +18,12 @@ from mandarin.openclaw.onboarding_agent import (
 
 
 def _make_conn():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY,
-            email TEXT,
-            display_name TEXT,
-            subscription_tier TEXT DEFAULT 'free',
-            subscription_status TEXT DEFAULT 'active',
-            streak_days INTEGER DEFAULT 0,
-            created_at TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY,
-            user_id INTEGER,
-            started_at TEXT,
-            session_outcome TEXT DEFAULT 'completed',
-            items_correct INTEGER DEFAULT 0,
-            items_completed INTEGER DEFAULT 0,
-            early_exit INTEGER DEFAULT 0
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE progress (
-            id INTEGER PRIMARY KEY,
-            user_id INTEGER,
-            next_review_date TEXT
-        )
-    """)
+    conn = make_test_db()
+    # Add columns that the onboarding_agent code references but are not yet in schema.sql
+    try:
+        conn.execute("ALTER TABLE user ADD COLUMN streak_days INTEGER DEFAULT 0")
+    except Exception:
+        pass  # Column may already exist
     conn.commit()
     return conn
 
@@ -62,9 +38,9 @@ def _seed_user(conn, user_id=1, email="u@a.com", name="User", tier="free",
                streak=0, days_ago=10):
     created = _ts(days_ago)
     conn.execute(
-        "INSERT INTO user (id, email, display_name, subscription_tier, streak_days, created_at) "
-        "VALUES (?, ?, ?, ?, ?, ?)",
-        (user_id, email, name, tier, streak, created),
+        "INSERT OR REPLACE INTO user (id, email, password_hash, display_name, subscription_tier, created_at) "
+        "VALUES (?, ?, 'test_hash', ?, ?, ?)",
+        (user_id, email, name, tier, created),
     )
     conn.commit()
 
@@ -143,7 +119,8 @@ class TestUserContext(unittest.TestCase):
         conn = _make_conn()
         _seed_user(conn, 1)
         today = datetime.now(UTC).strftime("%Y-%m-%d")
-        conn.execute("INSERT INTO progress (user_id, next_review_date) VALUES (1, ?)", (today,))
+        conn.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english) VALUES (99, '测', 'cè', 'test')")
+        conn.execute("INSERT INTO progress (user_id, content_item_id, modality, next_review_date) VALUES (1, 99, 'reading', ?)", (today,))
         conn.commit()
         ctx = UserContext.from_db(conn, 1)
         self.assertEqual(ctx.items_due, 1)

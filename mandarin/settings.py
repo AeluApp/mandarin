@@ -136,12 +136,17 @@ VAPID_PRIVATE_KEY = os.environ.get("VAPID_PRIVATE_KEY", "")
 VAPID_CLAIMS_EMAIL = os.environ.get("VAPID_CLAIMS_EMAIL", f"mailto:admin@{CANONICAL_DOMAIN}")
 
 ALERT_WEBHOOK_URL = os.environ.get("ALERT_WEBHOOK_URL", "")
+ANDON_WEBHOOK_URL = os.environ.get("ANDON_WEBHOOK_URL", "")
 ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "")
+
+# ── UptimeRobot (uptime monitoring) ──────────────────
+UPTIMEROBOT_API_KEY = os.environ.get("UPTIMEROBOT_API_KEY", "")
 
 # ── Sentry (error monitoring) ────────────────────────
 SENTRY_AUTH_TOKEN = os.environ.get("SENTRY_AUTH_TOKEN", "")
 SENTRY_ORG = os.environ.get("SENTRY_ORG", "")
 SENTRY_PROJECT = os.environ.get("SENTRY_PROJECT", "")
+SENTRY_WEBHOOK_SECRET = os.environ.get("SENTRY_WEBHOOK_SECRET", "")
 
 # ── Fly.io / Infrastructure ─────────────────────────
 FLY_API_TOKEN = os.environ.get("FLY_API_TOKEN", "")

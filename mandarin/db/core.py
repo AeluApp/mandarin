@@ -8,7 +8,7 @@ import re
 import sqlite3
 import json
 from pathlib import Path
-from datetime import datetime, date, timezone
+from datetime import datetime, date, timezone, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -63,8 +63,21 @@ def ensure_db() -> sqlite3.Connection:
     return conn
 
 
+import threading as _threading
+
+# Thread-local connection pool — reuses connections per-thread instead of
+# opening/closing on every request. Gevent greenlets share threads, so
+# thread-local storage is greenlet-safe.
+_pool = _threading.local()
+_pool_stats = {"reused": 0, "created": 0}
+
+
 class connection:
-    """Context manager for DB connections. Closes on exit.
+    """Context manager for DB connections with thread-local pooling.
+
+    Reuses the connection for the current thread/greenlet instead of
+    opening and closing on every request. Connections are verified
+    before reuse and replaced if stale.
 
     Usage:
         with db.connection() as conn:
@@ -72,18 +85,57 @@ class connection:
     """
     def __init__(self):
         self.conn = None
+        self._owned = False  # True if we created a new connection
 
     def __enter__(self) -> sqlite3.Connection:
+        # Try to reuse thread-local connection
+        cached = getattr(_pool, "conn", None)
+        if cached is not None:
+            try:
+                # Verify connection is still valid
+                cached.execute("SELECT 1")
+                self.conn = cached
+                _pool_stats["reused"] += 1
+                return self.conn
+            except (sqlite3.Error, sqlite3.ProgrammingError):
+                # Connection is stale — discard and create new
+                try:
+                    cached.close()
+                except Exception:
+                    pass
+                _pool.conn = None
+
+        # Create new connection
         self.conn = ensure_db()
+        _pool.conn = self.conn
+        self._owned = True
+        _pool_stats["created"] += 1
         return self.conn
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
-        if self.conn:
-            self.conn.close()
+        if exc_type is not None and self.conn:
+            # On exception, rollback but keep connection in pool
+            try:
+                self.conn.rollback()
+            except Exception:
+                pass
+        # Don't close — keep in thread-local pool for reuse
+        # Connection will be reused by the next `with db.connection()` in this thread
         return False
 
 
-SCHEMA_VERSION = 126  # Increment when adding migrations
+def get_pool_stats() -> dict:
+    """Return connection pool statistics for monitoring."""
+    total = _pool_stats["reused"] + _pool_stats["created"]
+    return {
+        "reused": _pool_stats["reused"],
+        "created": _pool_stats["created"],
+        "reuse_rate": round(_pool_stats["reused"] / max(total, 1), 4),
+        "total": total,
+    }
+
+
+SCHEMA_VERSION = 133  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -7281,7 +7333,7 @@ def _migrate_v121_to_v122(conn):
     """v121->v122: Seed intelligence registry tables (copy, marketing pages, vibe audits, strategy reviews)."""
     import uuid as _uuid
 
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    now = datetime.now(UTC).strftime("%Y-%m-%d")
 
     # ── 1. pi_copy_registry — register key UI strings for voice audit ──
     copy_entries = [
@@ -7484,6 +7536,356 @@ def _migrate_v126_to_v127(conn):
     conn.commit()
 
 
+def _migrate_v127_to_v128(conn):
+    """v127->v128: Lean Six Sigma A+ tables — NPS, Andon, tollgate, email quality, LLM quality."""
+    tables = _table_set(conn)
+    if "nps_response" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS nps_response (
+                id INTEGER PRIMARY KEY,
+                user_id INTEGER,
+                score INTEGER CHECK (score BETWEEN 0 AND 10),
+                feedback TEXT,
+                responded_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (user_id) REFERENCES user(id)
+            );
+            CREATE INDEX IF NOT EXISTS idx_nps_user ON nps_response(user_id);
+            CREATE INDEX IF NOT EXISTS idx_nps_date ON nps_response(responded_at);
+        """)
+    if "andon_event" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS andon_event (
+                id INTEGER PRIMARY KEY,
+                event_type TEXT NOT NULL,
+                severity TEXT NOT NULL CHECK (severity IN ('info', 'warning', 'critical')),
+                summary TEXT NOT NULL,
+                details TEXT,
+                fired_at TEXT DEFAULT (datetime('now')),
+                acknowledged_at TEXT,
+                acknowledged_by INTEGER
+            );
+            CREATE INDEX IF NOT EXISTS idx_andon_date ON andon_event(fired_at);
+        """)
+    if "pi_tollgate_review" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS pi_tollgate_review (
+                id INTEGER PRIMARY KEY,
+                dmaic_id INTEGER,
+                phase TEXT CHECK (phase IN ('define', 'measure', 'analyze', 'improve', 'control')),
+                decision TEXT CHECK (decision IN ('go', 'conditional_go', 'no_go')),
+                reviewed_at TEXT DEFAULT (datetime('now')),
+                notes TEXT,
+                FOREIGN KEY (dmaic_id) REFERENCES pi_dmaic_log(id)
+            );
+        """)
+    if "email_send_log" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS email_send_log (
+                id INTEGER PRIMARY KEY,
+                email_type TEXT,
+                user_id INTEGER,
+                resend_message_id TEXT,
+                sent_at TEXT DEFAULT (datetime('now')),
+                delivered_at TEXT,
+                opened_at TEXT,
+                clicked_at TEXT,
+                converted_at TEXT,
+                FOREIGN KEY (user_id) REFERENCES user(id)
+            );
+            CREATE INDEX IF NOT EXISTS idx_email_log_type ON email_send_log(email_type);
+        """)
+    if "llm_output_quality" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS llm_output_quality (
+                id INTEGER PRIMARY KEY,
+                content_item_id INTEGER,
+                llm_model TEXT,
+                metric_type TEXT CHECK (metric_type IN ('authenticity', 'grammatical_correctness', 'pedagogical_fit')),
+                score REAL,
+                evaluated_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (content_item_id) REFERENCES content_item(id)
+            );
+            CREATE INDEX IF NOT EXISTS idx_llm_quality_item ON llm_output_quality(content_item_id);
+        """)
+    conn.commit()
+
+
+def _migrate_v128_to_v129(conn):
+    """v128->v129: Kanban A+ — per-class WIP config, due dates, blocked time, notifications."""
+    tables = _table_set(conn)
+    cols = _col_set(conn, "work_item") if "work_item" in tables else set()
+
+    # Add due_date to work_item
+    if "due_date" not in cols:
+        conn.execute("ALTER TABLE work_item ADD COLUMN due_date TEXT")
+
+    # Add total_blocked_hours to work_item
+    if "total_blocked_hours" not in cols:
+        conn.execute(
+            "ALTER TABLE work_item ADD COLUMN total_blocked_hours REAL DEFAULT 0"
+        )
+
+    # Kanban config table with per-service-class WIP limits
+    if "kanban_config" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS kanban_config (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                service_class TEXT NOT NULL UNIQUE,
+                wip_limit INTEGER NOT NULL DEFAULT 3,
+                target_cycle_hours REAL,
+                max_cycle_hours REAL,
+                updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+            );
+            INSERT OR IGNORE INTO kanban_config (service_class, wip_limit, target_cycle_hours, max_cycle_hours)
+            VALUES
+                ('expedite', 1, 24, 48),
+                ('fixed_date', 2, 72, 168),
+                ('standard', 3, 168, 336),
+                ('intangible', 2, 336, 672);
+        """)
+
+    # Kanban notification table
+    if "kanban_notification" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS kanban_notification (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                work_item_id INTEGER,
+                notification_type TEXT NOT NULL,
+                message TEXT NOT NULL,
+                read_at TEXT,
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                FOREIGN KEY (work_item_id) REFERENCES work_item(id)
+            );
+            CREATE INDEX IF NOT EXISTS idx_kanban_notif_unread
+                ON kanban_notification(read_at) WHERE read_at IS NULL;
+        """)
+    conn.commit()
+
+
+def _migrate_v129_to_v130(conn):
+    """v129->v130: A/B testing A+ — subgroup results, causal DAGs, metric hierarchy."""
+    tables = _table_set(conn)
+
+    # Experiment subgroup results (heterogeneous treatment effects)
+    if "experiment_subgroup_result" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS experiment_subgroup_result (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                experiment_id INTEGER NOT NULL,
+                subgroup_variable TEXT NOT NULL,
+                subgroup_level TEXT NOT NULL,
+                effect_size REAL,
+                ci_lower REAL,
+                ci_upper REAL,
+                p_value REAL,
+                n_treatment INTEGER,
+                n_control INTEGER,
+                analyzed_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+            );
+            CREATE INDEX IF NOT EXISTS idx_subgroup_exp
+                ON experiment_subgroup_result(experiment_id);
+        """)
+
+    # Causal DAG documentation
+    if "experiment_causal_dag" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS experiment_causal_dag (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                experiment_id INTEGER,
+                dag_json TEXT NOT NULL,
+                confounders TEXT,
+                documented_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+            );
+        """)
+
+    # Add metric_hierarchy to experiment table
+    if "experiment" in tables:
+        cols = _col_set(conn, "experiment")
+        if "metric_hierarchy" not in cols:
+            conn.execute(
+                "ALTER TABLE experiment ADD COLUMN metric_hierarchy TEXT"
+            )
+
+    conn.commit()
+
+
+def _migrate_v130_to_v131(conn):
+    """v130->v131: Learning science A+ — FSRS columns, confusables, prerequisites, metacognition."""
+    tables = _table_set(conn)
+
+    # FSRS columns on progress table
+    if "progress" in tables:
+        cols = _col_set(conn, "progress")
+        if "fsrs_stability" not in cols:
+            conn.execute("ALTER TABLE progress ADD COLUMN fsrs_stability REAL")
+        if "fsrs_difficulty" not in cols:
+            conn.execute("ALTER TABLE progress ADD COLUMN fsrs_difficulty REAL")
+
+    # Confusable pairs table
+    if "confusable_pair" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS confusable_pair (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                item_a_id INTEGER NOT NULL,
+                item_b_id INTEGER NOT NULL,
+                confusable_type TEXT NOT NULL,
+                similarity_score REAL DEFAULT 0.5,
+                detected_at TEXT DEFAULT (datetime('now')),
+                UNIQUE(item_a_id, item_b_id, confusable_type)
+            );
+            CREATE INDEX IF NOT EXISTS idx_confusable_a ON confusable_pair(item_a_id);
+            CREATE INDEX IF NOT EXISTS idx_confusable_b ON confusable_pair(item_b_id);
+        """)
+
+    # Prerequisite edges table
+    if "prerequisite_edge" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS prerequisite_edge (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                item_id INTEGER NOT NULL,
+                prerequisite_id INTEGER NOT NULL,
+                edge_type TEXT NOT NULL,
+                created_at TEXT DEFAULT (datetime('now')),
+                UNIQUE(item_id, prerequisite_id, edge_type)
+            );
+            CREATE INDEX IF NOT EXISTS idx_prereq_item ON prerequisite_edge(item_id);
+            CREATE INDEX IF NOT EXISTS idx_prereq_dep ON prerequisite_edge(prerequisite_id);
+        """)
+
+    # Calibration snapshot table
+    if "calibration_snapshot" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS calibration_snapshot (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                confidence_level TEXT NOT NULL,
+                predicted_rate REAL,
+                actual_rate REAL,
+                n_items INTEGER,
+                brier_score REAL,
+                snapshot_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (user_id) REFERENCES user(id)
+            );
+            CREATE INDEX IF NOT EXISTS idx_calibration_user ON calibration_snapshot(user_id);
+        """)
+
+    # Reflection log table
+    if "reflection_log" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS reflection_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                session_id INTEGER,
+                prompt TEXT NOT NULL,
+                response TEXT,
+                created_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (user_id) REFERENCES user(id)
+            );
+        """)
+
+    # Adaptive listening columns on user table
+    if "user" in tables:
+        cols = _col_set(conn, "user")
+        if "listening_speed" not in cols:
+            conn.execute(
+                "ALTER TABLE user ADD COLUMN listening_speed REAL DEFAULT 1.0"
+            )
+        if "max_replays" not in cols:
+            conn.execute(
+                "ALTER TABLE user ADD COLUMN max_replays INTEGER DEFAULT 5"
+            )
+
+    conn.commit()
+
+
+def _migrate_v131_to_v132(conn):
+    """v131->v132: Goodhart A+ — alert outcomes, pending actions, session distortion, validation flag."""
+    tables = _table_set(conn)
+
+    # Alert outcome tracking (counter-metric self-validation)
+    if "counter_metric_alert_outcome" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS counter_metric_alert_outcome (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                metric_name TEXT NOT NULL,
+                alert_severity TEXT,
+                action_taken TEXT,
+                metric_before REAL,
+                metric_after REAL,
+                improved INTEGER,
+                evaluated_at TEXT DEFAULT (datetime('now')),
+                action_log_id INTEGER
+            );
+            CREATE INDEX IF NOT EXISTS idx_alert_outcome_metric
+                ON counter_metric_alert_outcome(metric_name);
+        """)
+
+    # Pending actions requiring admin approval
+    if "counter_metric_pending_action" not in tables:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS counter_metric_pending_action (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                metric_name TEXT NOT NULL,
+                severity TEXT NOT NULL,
+                action_type TEXT NOT NULL,
+                action_details TEXT,
+                status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected', 'expired')),
+                created_at TEXT DEFAULT (datetime('now')),
+                decided_at TEXT,
+                decided_by INTEGER
+            );
+        """)
+
+    # Session distortion flags
+    if "session_log" in tables:
+        cols = _col_set(conn, "session_log")
+        if "distortion_flags" not in cols:
+            conn.execute(
+                "ALTER TABLE session_log ADD COLUMN distortion_flags TEXT"
+            )
+
+    # Validation failed flag on progress
+    if "progress" in tables:
+        cols = _col_set(conn, "progress")
+        if "validation_failed" not in cols:
+            conn.execute(
+                "ALTER TABLE progress ADD COLUMN validation_failed INTEGER DEFAULT 0"
+            )
+
+    conn.commit()
+
+
+def _migrate_v132_to_v133(conn):
+    """v132->v133: Statistics A+ — IRT columns, learner segmentation."""
+    tables = _table_set(conn)
+
+    # IRT columns on content_item
+    if "content_item" in tables:
+        cols = _col_set(conn, "content_item")
+        if "irt_difficulty" not in cols:
+            conn.execute("ALTER TABLE content_item ADD COLUMN irt_difficulty REAL")
+        if "irt_discrimination" not in cols:
+            conn.execute("ALTER TABLE content_item ADD COLUMN irt_discrimination REAL")
+        if "irt_fit_infit" not in cols:
+            conn.execute("ALTER TABLE content_item ADD COLUMN irt_fit_infit REAL")
+        if "irt_fit_outfit" not in cols:
+            conn.execute("ALTER TABLE content_item ADD COLUMN irt_fit_outfit REAL")
+
+    # IRT ability on user
+    if "user" in tables:
+        cols = _col_set(conn, "user")
+        if "irt_ability" not in cols:
+            conn.execute("ALTER TABLE user ADD COLUMN irt_ability REAL")
+        if "irt_ability_se" not in cols:
+            conn.execute("ALTER TABLE user ADD COLUMN irt_ability_se REAL")
+        if "learner_segment" not in cols:
+            conn.execute("ALTER TABLE user ADD COLUMN learner_segment TEXT")
+
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -7612,6 +8014,12 @@ MIGRATIONS = {
     124: _migrate_v124_to_v125,
     125: _migrate_v125_to_v126,
     126: _migrate_v126_to_v127,
+    127: _migrate_v127_to_v128,
+    128: _migrate_v128_to_v129,
+    129: _migrate_v129_to_v130,
+    130: _migrate_v130_to_v131,
+    131: _migrate_v131_to_v132,
+    132: _migrate_v132_to_v133,
 }
 
 

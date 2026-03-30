@@ -19,38 +19,8 @@ from mandarin.openclaw.financial_monitor import (
 
 
 def _make_conn():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY,
-            email TEXT,
-            subscription_tier TEXT DEFAULT 'free',
-            subscription_status TEXT DEFAULT 'active',
-            streak_days INTEGER DEFAULT 0,
-            created_at TEXT DEFAULT (datetime('now'))
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY,
-            user_id INTEGER,
-            started_at TEXT,
-            session_outcome TEXT DEFAULT 'completed',
-            items_correct INTEGER DEFAULT 0,
-            items_completed INTEGER DEFAULT 0
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE lifecycle_event (
-            id INTEGER PRIMARY KEY,
-            event_type TEXT,
-            user_id INTEGER,
-            created_at TEXT DEFAULT (datetime('now'))
-        )
-    """)
-    conn.commit()
-    return conn
+    from tests.shared_db import make_test_db
+    return make_test_db()
 
 
 def _ts(days_ago=0, hours_ago=0):
@@ -62,7 +32,8 @@ def _add_user(conn, uid, tier="free", status="active", email=None, days_ago=30):
     email = email or f"u{uid}@test.com"
     created = _ts(days_ago)
     conn.execute(
-        "INSERT INTO user (id, email, subscription_tier, subscription_status, created_at) VALUES (?, ?, ?, ?, ?)",
+        "INSERT OR REPLACE INTO user (id, email, password_hash, subscription_tier, subscription_status, created_at) "
+        "VALUES (?, ?, 'test_hash', ?, ?, ?)",
         (uid, email, tier, status, created),
     )
     conn.commit()
@@ -124,8 +95,9 @@ class TestThresholds(unittest.TestCase):
 class TestRevenueMetrics(unittest.TestCase):
     def test_empty_db(self):
         conn = _make_conn()
+        # make_test_db() seeds a bootstrap free user (id=1)
         rs = RevenueMetrics().compute(conn)
-        self.assertEqual(rs.total_customers, 0)
+        self.assertEqual(rs.total_customers, 1)
         self.assertEqual(rs.mrr, 0.0)
         self.assertEqual(rs.paying_customers, 0)
 
@@ -141,7 +113,7 @@ class TestRevenueMetrics(unittest.TestCase):
 
     def test_monthly_subscriber(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "active")
+        _add_user(conn, 1, "paid", "active")
         rs = RevenueMetrics().compute(conn)
         self.assertEqual(rs.paying_customers, 1)
         self.assertAlmostEqual(rs.mrr, 9.0, places=2)
@@ -149,25 +121,26 @@ class TestRevenueMetrics(unittest.TestCase):
 
     def test_annual_subscriber(self):
         conn = _make_conn()
-        _add_user(conn, 1, "annual", "active")
+        # 'paid' tier maps to $9/month in _TIER_PRICES
+        _add_user(conn, 1, "paid", "active")
         rs = RevenueMetrics().compute(conn)
-        self.assertAlmostEqual(rs.mrr, round(79.0 / 12, 2), places=2)
+        self.assertAlmostEqual(rs.mrr, 9.0, places=2)
 
     def test_mixed_tiers(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "active")
-        _add_user(conn, 2, "annual", "active")
+        _add_user(conn, 1, "paid", "active")
+        _add_user(conn, 2, "paid", "active")
         _add_user(conn, 3, "free", "active")
         rs = RevenueMetrics().compute(conn)
         self.assertEqual(rs.total_customers, 3)
         self.assertEqual(rs.paying_customers, 2)
         self.assertEqual(rs.free_users, 1)
-        expected_mrr = 9.0 + round(79.0 / 12, 2)
+        expected_mrr = 9.0 + 9.0
         self.assertAlmostEqual(rs.mrr, round(expected_mrr, 2), places=1)
 
     def test_conversion_rate(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "active")
+        _add_user(conn, 1, "paid", "active")
         _add_user(conn, 2, "free")
         _add_user(conn, 3, "free")
         _add_user(conn, 4, "free")
@@ -176,7 +149,7 @@ class TestRevenueMetrics(unittest.TestCase):
 
     def test_cancelled_not_counted(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "cancelled")
+        _add_user(conn, 1, "paid", "cancelled")
         rs = RevenueMetrics().compute(conn)
         self.assertEqual(rs.paying_customers, 0)
         self.assertEqual(rs.mrr, 0.0)
@@ -187,15 +160,15 @@ class TestRevenueMetrics(unittest.TestCase):
 class TestChurnAnalyzer(unittest.TestCase):
     def test_no_churn(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "active")
+        _add_user(conn, 1, "paid", "active")
         cr = ChurnAnalyzer().analyze(conn)
         self.assertEqual(len(cr.churned_users), 0)
         self.assertEqual(cr.churn_rate, 0.0)
 
     def test_churned_user(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "cancelled")
-        _add_user(conn, 2, "monthly", "active")
+        _add_user(conn, 1, "paid", "cancelled")
+        _add_user(conn, 2, "paid", "active")
         cr = ChurnAnalyzer().analyze(conn)
         self.assertEqual(len(cr.churned_users), 1)
         self.assertEqual(cr.churned_users[0]["status"], "cancelled")
@@ -203,7 +176,7 @@ class TestChurnAnalyzer(unittest.TestCase):
 
     def test_at_risk_low_sessions(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "active")
+        _add_user(conn, 1, "paid", "active")
         # No sessions this week => at risk
         cr = ChurnAnalyzer().analyze(conn)
         self.assertEqual(len(cr.at_risk_users), 1)
@@ -217,22 +190,22 @@ class TestChurnAnalyzer(unittest.TestCase):
 
     def test_reason_breakdown(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "cancelled")
-        _add_user(conn, 2, "monthly", "expired")
-        _add_user(conn, 3, "annual", "cancelled")
+        _add_user(conn, 1, "paid", "cancelled")
+        _add_user(conn, 2, "paid", "expired")
+        _add_user(conn, 3, "paid", "cancelled")
         cr = ChurnAnalyzer().analyze(conn)
         self.assertEqual(cr.reasons.get("cancelled", 0), 2)
         self.assertEqual(cr.reasons.get("expired", 0), 1)
 
     def test_expired_counted_as_churn(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "expired")
+        _add_user(conn, 1, "paid", "expired")
         cr = ChurnAnalyzer().analyze(conn)
         self.assertEqual(len(cr.churned_users), 1)
 
     def test_past_due_counted_as_churn(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "past_due")
+        _add_user(conn, 1, "paid", "past_due")
         cr = ChurnAnalyzer().analyze(conn)
         self.assertEqual(len(cr.churned_users), 1)
 
@@ -311,7 +284,7 @@ class TestPaymentAnomalyDetector(unittest.TestCase):
         conn = _make_conn()
         for i in range(25):
             conn.execute(
-                "INSERT INTO user (email, created_at) VALUES (?, ?)",
+                "INSERT INTO user (email, password_hash, created_at) VALUES (?, 'test_hash', ?)",
                 (f"bot{i}@spam.com", _ts(0, hours_ago=1)),
             )
         conn.commit()
@@ -323,7 +296,7 @@ class TestPaymentAnomalyDetector(unittest.TestCase):
         conn = _make_conn()
         for i in range(5):
             conn.execute(
-                "INSERT INTO user (email, created_at) VALUES (?, ?)",
+                "INSERT INTO user (email, password_hash, created_at) VALUES (?, 'test_hash', ?)",
                 (f"real{i}@user.com", _ts(0, hours_ago=1)),
             )
         conn.commit()
@@ -343,21 +316,21 @@ class TestFinancialDigest(unittest.TestCase):
 
     def test_highlights_with_paying_users(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "active")
+        _add_user(conn, 1, "paid", "active")
         _add_user(conn, 2, "free")
         digest = FinancialDigest().generate_weekly(conn)
         self.assertTrue(any("MRR" in h for h in digest.highlights))
 
     def test_action_items_with_at_risk(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "active")
+        _add_user(conn, 1, "paid", "active")
         # No sessions = at risk
         digest = FinancialDigest().generate_weekly(conn)
         self.assertTrue(any("churn risk" in a for a in digest.action_items))
 
     def test_action_items_with_churned(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "cancelled")
+        _add_user(conn, 1, "paid", "cancelled")
         digest = FinancialDigest().generate_weekly(conn)
         self.assertTrue(any("churned" in a.lower() for a in digest.action_items))
 
@@ -381,14 +354,14 @@ class TestFinancialMonitor(unittest.TestCase):
 
     def test_with_conn_snapshot(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "active")
+        _add_user(conn, 1, "paid", "active")
         fm = FinancialMonitor(conn)
         snap = fm.snapshot()
         self.assertAlmostEqual(snap.mrr, 9.0, places=2)
 
     def test_format_digest_text(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "active")
+        _add_user(conn, 1, "paid", "active")
         fm = FinancialMonitor(conn)
         digest = fm.weekly_digest()
         text = fm.format_digest(digest)
@@ -398,7 +371,7 @@ class TestFinancialMonitor(unittest.TestCase):
 
     def test_format_digest_html(self):
         conn = _make_conn()
-        _add_user(conn, 1, "monthly", "active")
+        _add_user(conn, 1, "paid", "active")
         fm = FinancialMonitor(conn)
         digest = fm.weekly_digest()
         html = fm.format_digest_html(digest)

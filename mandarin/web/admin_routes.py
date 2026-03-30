@@ -30,6 +30,7 @@ _WORK_ITEM_ALLOWED_FIELDS = frozenset({
     "category", "title", "description", "size", "effort",
     "status", "priority", "acceptance_criteria", "owner",
     "estimate", "service_class", "implementation_type",
+    "due_date", "item_type",
 })
 
 logger = logging.getLogger(__name__)
@@ -860,9 +861,10 @@ def _parse_acceptance_criteria(description: str) -> dict:
 
 
 def _suggest_next_pull(conn):
-    """Suggest the next work item to pull from 'ready' based on service class priority.
+    """Suggest the next work item to pull from 'ready' based on service class + WSJF.
 
     Priority order: expedite > fixed_date > standard > intangible.
+    Within same class: WSJF score descending, then due_date urgency, then FIFO.
     Returns dict with suggested item or None.
     """
     SERVICE_CLASS_PRIORITY = {
@@ -871,16 +873,26 @@ def _suggest_next_pull(conn):
     try:
         rows = conn.execute(
             """SELECT id, title, COALESCE(service_class, 'standard') AS service_class,
-                      estimate, created_at
+                      estimate, created_at, due_date,
+                      COALESCE(business_value, 0) AS bv,
+                      COALESCE(time_criticality, 0) AS tc,
+                      COALESCE(risk_reduction, 0) AS rr,
+                      COALESCE(job_size, 1) AS js
                FROM work_item WHERE status = 'ready'
                ORDER BY created_at ASC"""
         ).fetchall()
         if not rows:
             return None
-        # Sort by service class priority, then by creation date
         items = [dict(r) for r in rows]
+        for item in items:
+            # WSJF = (business_value + time_criticality + risk_reduction) / job_size
+            denom = max(item["js"], 1)
+            item["wsjf"] = (item["bv"] + item["tc"] + item["rr"]) / denom
+        # Sort: service class priority, then WSJF descending, then due_date urgency, then FIFO
         items.sort(key=lambda x: (
             SERVICE_CLASS_PRIORITY.get(x["service_class"], 99),
+            -x["wsjf"],
+            x.get("due_date") or "9999-12-31",
             x["created_at"] or "",
         ))
         best = items[0]
@@ -889,6 +901,8 @@ def _suggest_next_pull(conn):
             "title": best["title"],
             "service_class": best["service_class"],
             "estimate": best.get("estimate"),
+            "due_date": best.get("due_date"),
+            "wsjf": round(best["wsjf"], 2),
             "message": f"Suggested next pull: \"{best['title']}\" ({best['service_class']})",
         }
     except Exception:
@@ -907,7 +921,9 @@ def admin_work_items():
                           created_at, ready_at, started_at, completed_at,
                           blocked_at, unblocked_at,
                           COALESCE(service_class, 'standard') AS service_class,
-                          review_at, estimate, implementation_type, blocked_reason
+                          review_at, estimate, implementation_type, blocked_reason,
+                          due_date, COALESCE(total_blocked_hours, 0) AS total_blocked_hours,
+                          business_value, time_criticality, risk_reduction, job_size
                    FROM work_item
                    ORDER BY
                      CASE status
@@ -920,19 +936,37 @@ def admin_work_items():
                      END,
                      created_at DESC"""
             ).fetchall()
+            # SLA targets for computing SLA %
+            _SLA_TARGETS = {
+                "expedite": 48, "fixed_date": 168, "standard": 336, "intangible": 672,
+            }
             items = []
             for r in rows:
                 item = dict(r)
                 item["acceptance_criteria"] = _parse_acceptance_criteria(item.get("description") or "")
                 # Age in days for started items
-                if item.get("started_at") and item["status"] in ("in_progress", "review"):
+                if item.get("started_at") and item["status"] in ("in_progress", "review", "blocked"):
                     try:
                         from datetime import datetime as _dt
                         started = _dt.fromisoformat(item["started_at"])
                         age = (_dt.now(UTC) - started.replace(tzinfo=UTC)).days
                         item["age_days"] = age
+                        # SLA % consumed
+                        elapsed_hours = (_dt.now(UTC) - started.replace(tzinfo=UTC)).total_seconds() / 3600
+                        max_hours = _SLA_TARGETS.get(item["service_class"], 336)
+                        item["sla_pct"] = round(min(elapsed_hours / max_hours * 100, 999), 1)
                     except Exception:
                         item["age_days"] = None
+                        item["sla_pct"] = None
+                # WSJF score
+                try:
+                    js = max(item.get("job_size") or 1, 1)
+                    item["wsjf"] = round(
+                        ((item.get("business_value") or 0) + (item.get("time_criticality") or 0)
+                         + (item.get("risk_reduction") or 0)) / js, 2
+                    )
+                except Exception:
+                    item["wsjf"] = 0
                 items.append(item)
         return jsonify({"items": items})
     except sqlite3.OperationalError:
@@ -969,58 +1003,99 @@ def admin_create_work_item():
         return jsonify({"error": "Failed to create work item"}), 500
 
 
+def _get_wip_limit(conn, service_class: str) -> int:
+    """Get WIP limit for a service class from kanban_config, falling back to defaults."""
+    _DEFAULTS = {"expedite": 1, "fixed_date": 2, "standard": 3, "intangible": 2}
+    try:
+        row = conn.execute(
+            "SELECT wip_limit FROM kanban_config WHERE service_class = ?",
+            (service_class,),
+        ).fetchone()
+        return row["wip_limit"] if row else _DEFAULTS.get(service_class, 3)
+    except Exception:
+        return _DEFAULTS.get(service_class, 3)
+
+
+def _get_total_wip_limit(conn) -> int:
+    """Sum of all per-class WIP limits."""
+    try:
+        row = conn.execute("SELECT SUM(wip_limit) as total FROM kanban_config").fetchone()
+        return row["total"] if row and row["total"] else 8  # fallback
+    except Exception:
+        return 8
+
+
 @admin_bp.route("/api/admin/work-items/<int:item_id>", methods=["PUT"])
 @admin_required
 @api_error_handler("Update work item")
 def admin_update_work_item(item_id):
-    """Update work item status (auto-sets timestamps, enforces WIP limits)."""
-    WIP_LIMIT_IN_PROGRESS = 5
-
+    """Update work item status (auto-sets timestamps, enforces per-class WIP limits)."""
     data = request.get_json()
     if not data:
         return jsonify({"error": "No data provided"}), 400
     try:
         with db.connection() as conn:
-            # Get current status
+            # Get current status + service class
             current = conn.execute(
-                "SELECT status, implementation_type FROM work_item WHERE id = ?", (item_id,)
+                "SELECT status, implementation_type, COALESCE(service_class, 'standard') AS service_class "
+                "FROM work_item WHERE id = ?", (item_id,)
             ).fetchone()
             if not current:
                 return jsonify({"error": "Work item not found"}), 404
 
             new_status = data.get("status", current["status"])
             old_status = current["status"]
+            sclass = data.get("service_class", current["service_class"]) or "standard"
 
-            # WIP limit enforcement: reject when moving to in_progress (unless force)
+            # Per-service-class WIP limit enforcement
             wip_warning = None
             if new_status == "in_progress" and old_status != "in_progress":
-                wip_count = conn.execute(
+                # Check per-class limit
+                class_wip = conn.execute(
+                    "SELECT COUNT(*) as cnt FROM work_item "
+                    "WHERE status = 'in_progress' AND COALESCE(service_class, 'standard') = ?",
+                    (sclass,),
+                ).fetchone()["cnt"]
+                class_limit = _get_wip_limit(conn, sclass)
+
+                # Also check overall limit
+                total_wip = conn.execute(
                     "SELECT COUNT(*) as cnt FROM work_item WHERE status = 'in_progress'"
                 ).fetchone()["cnt"]
-                if wip_count >= WIP_LIMIT_IN_PROGRESS:
+                total_limit = _get_total_wip_limit(conn)
+
+                limit_exceeded = class_wip >= class_limit or total_wip >= total_limit
+                if limit_exceeded:
                     force = data.get("force", False)
                     force_reason = data.get("force_reason", "")
+                    exceeded_msg = (
+                        f"{sclass} class: {class_wip}/{class_limit}"
+                        if class_wip >= class_limit
+                        else f"overall: {total_wip}/{total_limit}"
+                    )
                     if not force:
                         return jsonify({
-                            "error": "WIP limit reached. Complete or move an existing item before starting new work.",
-                            "wip_count": wip_count,
-                            "wip_limit": WIP_LIMIT_IN_PROGRESS,
+                            "error": f"WIP limit reached ({exceeded_msg}). Complete or move an existing item before starting new work.",
+                            "wip_count": class_wip,
+                            "wip_limit": class_limit,
+                            "total_wip": total_wip,
+                            "total_limit": total_limit,
                         }), 409
-                    # Force override — log the reason
                     logger.warning(
-                        "WIP limit override for item %d: %d items in progress (limit %d). Reason: %s",
-                        item_id, wip_count, WIP_LIMIT_IN_PROGRESS, force_reason or "none given"
+                        "WIP limit override for item %d (%s): %s. Reason: %s",
+                        item_id, sclass, exceeded_msg, force_reason or "none given"
                     )
                     wip_warning = (
-                        f"WIP limit overridden: {wip_count + 1} items in progress "
-                        f"(limit: {WIP_LIMIT_IN_PROGRESS}). Reason: {force_reason or 'none given'}"
+                        f"WIP limit overridden ({exceeded_msg}). "
+                        f"Reason: {force_reason or 'none given'}"
                     )
 
             updates = []
             values = []
 
             for col in ("title", "description", "item_type", "status",
-                         "service_class", "estimate", "implementation_type"):
+                         "service_class", "estimate", "implementation_type",
+                         "due_date"):
                 if col in data and col in _WORK_ITEM_ALLOWED_FIELDS:
                     updates.append(f"{col} = ?")
                     values.append(data[col])
@@ -1031,9 +1106,21 @@ def admin_update_work_item(item_id):
                 if data.get("blocked_reason"):
                     updates.append("blocked_reason = ?")
                     values.append(data["blocked_reason"])
-            # When unblocking, record unblocked_at and clear blocked_reason
+            # When unblocking, record unblocked_at, accumulate blocked time
             if old_status == "blocked" and new_status != "blocked":
                 updates.append("unblocked_at = datetime('now')")
+                # Accumulate blocked hours
+                try:
+                    blocked_row = conn.execute(
+                        "SELECT blocked_at FROM work_item WHERE id = ?", (item_id,)
+                    ).fetchone()
+                    if blocked_row and blocked_row["blocked_at"]:
+                        updates.append(
+                            "total_blocked_hours = COALESCE(total_blocked_hours, 0) "
+                            "+ (julianday('now') - julianday(blocked_at)) * 24.0"
+                        )
+                except Exception:
+                    pass  # total_blocked_hours column may not exist yet
 
             # Auto-set timestamps based on status transitions
             if new_status != old_status:
@@ -1053,6 +1140,26 @@ def admin_update_work_item(item_id):
             sql = f"UPDATE work_item SET {', '.join(updates)} WHERE id = ?"
             conn.execute(sql, values)
             conn.commit()
+
+            # Create notification on status change
+            if new_status != old_status:
+                try:
+                    title_row = conn.execute(
+                        "SELECT title FROM work_item WHERE id = ?", (item_id,)
+                    ).fetchone()
+                    item_title = title_row["title"] if title_row else f"Item #{item_id}"
+                    notif_type = "status_change"
+                    if new_status == "blocked":
+                        notif_type = "blocked"
+                    conn.execute(
+                        "INSERT INTO kanban_notification "
+                        "(work_item_id, notification_type, message) VALUES (?, ?, ?)",
+                        (item_id, notif_type,
+                         f"'{item_title}' moved from {old_status} to {new_status}"),
+                    )
+                    conn.commit()
+                except Exception:
+                    pass  # notification table may not exist yet
 
             # Pull system suggestion: after marking done, suggest next item to pull
             pull_suggestion = None
@@ -1078,6 +1185,118 @@ def admin_update_work_item(item_id):
     except (sqlite3.Error, KeyError, TypeError) as e:
         logger.error("Update work item error: %s", e)
         return jsonify({"error": "Failed to update work item"}), 500
+
+
+@admin_bp.route("/api/admin/work-items/pull-suggestion")
+@admin_required
+@api_error_handler("PullSuggestion")
+def admin_pull_suggestion():
+    """Suggest the next work item to pull from 'ready' based on service class + WSJF."""
+    with db.connection() as conn:
+        suggestion = _suggest_next_pull(conn)
+    return jsonify({"suggestion": suggestion})
+
+
+@admin_bp.route("/api/admin/kanban/config")
+@admin_required
+@api_error_handler("KanbanConfig")
+def admin_kanban_config():
+    """Return current Kanban configuration (WIP limits per service class)."""
+    with db.connection() as conn:
+        try:
+            rows = conn.execute(
+                "SELECT service_class, wip_limit, target_cycle_hours, max_cycle_hours "
+                "FROM kanban_config ORDER BY service_class"
+            ).fetchall()
+            config = {r["service_class"]: dict(r) for r in rows}
+        except Exception:
+            config = {}
+        # Also return current WIP counts
+        try:
+            wip_rows = conn.execute(
+                "SELECT COALESCE(service_class, 'standard') AS sc, COUNT(*) AS cnt "
+                "FROM work_item WHERE status = 'in_progress' GROUP BY sc"
+            ).fetchall()
+            wip_counts = {r["sc"]: r["cnt"] for r in wip_rows}
+        except Exception:
+            wip_counts = {}
+    return jsonify({"config": config, "wip_counts": wip_counts})
+
+
+@admin_bp.route("/api/admin/kanban/config", methods=["PUT"])
+@admin_required
+@api_error_handler("KanbanConfigUpdate")
+def admin_kanban_config_update():
+    """Update WIP limits per service class."""
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+    with db.connection() as conn:
+        for sclass, settings in data.items():
+            if sclass not in ("expedite", "fixed_date", "standard", "intangible"):
+                continue
+            wip = settings.get("wip_limit")
+            if wip is not None and isinstance(wip, int) and 1 <= wip <= 20:
+                conn.execute(
+                    "UPDATE kanban_config SET wip_limit = ?, updated_at = datetime('now') "
+                    "WHERE service_class = ?",
+                    (wip, sclass),
+                )
+        conn.commit()
+    return jsonify({"status": "updated"})
+
+
+@admin_bp.route("/api/admin/kanban/notifications")
+@admin_required
+@api_error_handler("KanbanNotifications")
+def admin_kanban_notifications():
+    """Return recent Kanban notifications (unread first)."""
+    with db.connection() as conn:
+        try:
+            rows = conn.execute(
+                "SELECT id, work_item_id, notification_type, message, read_at, created_at "
+                "FROM kanban_notification ORDER BY read_at IS NOT NULL, created_at DESC LIMIT 50"
+            ).fetchall()
+            return jsonify({"notifications": [dict(r) for r in rows],
+                            "unread_count": sum(1 for r in rows if not r["read_at"])})
+        except Exception:
+            return jsonify({"notifications": [], "unread_count": 0})
+
+
+@admin_bp.route("/api/admin/kanban/notifications/read", methods=["POST"])
+@admin_required
+def admin_kanban_notifications_read():
+    """Mark notifications as read."""
+    data = request.get_json()
+    with db.connection() as conn:
+        if data and data.get("ids"):
+            placeholders = ",".join("?" for _ in data["ids"])
+            conn.execute(
+                "UPDATE kanban_notification SET read_at = datetime('now') "
+                "WHERE id IN (" + placeholders + ")",
+                data["ids"],
+            )
+        else:
+            conn.execute(
+                "UPDATE kanban_notification SET read_at = datetime('now') "
+                "WHERE read_at IS NULL"
+            )
+        conn.commit()
+    return jsonify({"status": "ok"})
+
+
+@admin_bp.route("/api/admin/kanban/flow-metrics")
+@admin_required
+@api_error_handler("KanbanFlowMetrics")
+def admin_kanban_flow_metrics():
+    """Return comprehensive Kanban flow metrics."""
+    with db.connection() as conn:
+        try:
+            from ..quality.flow_metrics import get_flow_summary
+            return jsonify(get_flow_summary(conn))
+        except Exception as e:
+            logger.error("Flow metrics error: %s", e)
+            return jsonify({"error": "Flow metrics unavailable"}), 500
 
 
 @admin_bp.route("/api/admin/revenue")
@@ -1171,7 +1390,7 @@ def admin_revenue():
                 "estimated_ltv": ltv,
                 "mrr_trend_3mo": mrr_trend,
                 "cost_breakdown": {
-                    "hosting": hosting_cost,
+                    "hosting": HOSTING_COST_MONTHLY,
                     "stripe_fees": stripe_fees,
                     "total": total_costs,
                 },
@@ -2910,6 +3129,52 @@ def admin_risk_taxonomy():
     """Return the risk taxonomy definition."""
     from ..quality.methodology import get_risk_taxonomy
     return jsonify(get_risk_taxonomy())
+
+# ── Andon + Email Effectiveness ──────────────────────────────────
+# Counter-metrics endpoints already exist at /api/admin/counter-metrics (line ~5170)
+
+@admin_bp.route("/api/admin/quality/andon")
+@admin_required
+@api_error_handler("AndonDashboard")
+def admin_andon_dashboard():
+    """Return recent andon events for the admin dashboard."""
+    try:
+        from .andon import get_andon_dashboard
+        events = get_andon_dashboard(g.db, hours=72)
+        return jsonify({"events": events, "count": len(events)})
+    except Exception:
+        return jsonify({"events": [], "count": 0})
+
+
+@admin_bp.route("/api/admin/quality/email-effectiveness")
+@admin_required
+@api_error_handler("EmailEffectiveness")
+def admin_email_effectiveness():
+    """Return email quality metrics: sent, opened, clicked, converted."""
+    try:
+        rows = g.db.execute("""
+            SELECT email_type,
+                   COUNT(*) AS sent,
+                   SUM(CASE WHEN opened_at IS NOT NULL THEN 1 ELSE 0 END) AS opened,
+                   SUM(CASE WHEN clicked_at IS NOT NULL THEN 1 ELSE 0 END) AS clicked,
+                   SUM(CASE WHEN converted_at IS NOT NULL THEN 1 ELSE 0 END) AS converted
+            FROM email_send_log
+            WHERE sent_at > datetime('now', '-30 days')
+            GROUP BY email_type
+            ORDER BY sent DESC
+        """).fetchall()
+        return jsonify({
+            "types": [
+                {"type": r[0], "sent": r[1], "opened": r[2],
+                 "clicked": r[3], "converted": r[4],
+                 "open_rate": round(r[2] / max(1, r[1]) * 100, 1),
+                 "click_rate": round(r[3] / max(1, r[1]) * 100, 1)}
+                for r in rows
+            ]
+        })
+    except Exception:
+        return jsonify({"types": []})
+
 
 # ── Product Intelligence Engine ──────────────────────────────────
 @admin_bp.route("/api/admin/product-intelligence")

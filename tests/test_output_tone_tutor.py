@@ -12,10 +12,21 @@ import unittest
 from tests.shared_db import make_test_db as _make_db
 
 
+def _ensure_content_item(conn):
+    """Ensure a content_item with id=1 exists for FK references."""
+    row = conn.execute("SELECT id FROM content_item WHERE id = 1").fetchone()
+    if not row:
+        conn.execute(
+            "INSERT INTO content_item (hanzi, pinyin, english) VALUES ('测试', 'cè shì', 'test')"
+        )
+        conn.commit()
+
+
 def _insert_tone_drills(conn, tone=0, tone_sandhi=0, minimal_pair=0, listening_tone=0,
                         tone_correct_pct=1.0, sandhi_correct_pct=1.0,
                         mp_correct_pct=1.0, lt_correct_pct=1.0):
     """Insert tone drill review_events with specified counts and accuracy."""
+    _ensure_content_item(conn)
     for dtype, count, pct in [
         ("tone", tone, tone_correct_pct),
         ("tone_sandhi", tone_sandhi, sandhi_correct_pct),
@@ -25,7 +36,7 @@ def _insert_tone_drills(conn, tone=0, tone_sandhi=0, minimal_pair=0, listening_t
         correct_count = int(count * pct)
         for i in range(count):
             conn.execute(
-                "INSERT INTO review_event (content_item_id, drill_type, is_correct) VALUES (1, ?, ?)",
+                "INSERT INTO review_event (content_item_id, modality, drill_type, correct) VALUES (1, 'tone', ?, ?)",
                 (dtype, 1 if i < correct_count else 0),
             )
     conn.commit()
@@ -136,16 +147,17 @@ class TestOutputProduction(unittest.TestCase):
     def test_production_recognition_gap(self):
         from mandarin.intelligence.output_tone_tutor import analyze_output_production
         conn = _make_db()
+        _ensure_content_item(conn)
         # Recognition: 90% accuracy (45/50)
         for i in range(50):
             conn.execute(
-                "INSERT INTO review_event (content_item_id, drill_type, is_correct) VALUES (1, 'mc', ?)",
+                "INSERT INTO review_event (content_item_id, modality, drill_type, correct) VALUES (1, 'reading', 'mc', ?)",
                 (1 if i < 45 else 0,),
             )
         # Production: 50% accuracy (25/50)
         for i in range(50):
             conn.execute(
-                "INSERT INTO review_event (content_item_id, drill_type, is_correct) VALUES (1, 'translation', ?)",
+                "INSERT INTO review_event (content_item_id, modality, drill_type, correct) VALUES (1, 'writing', 'translation', ?)",
                 (1 if i < 25 else 0,),
             )
         conn.commit()
@@ -159,7 +171,7 @@ class TestTutorProcessing(unittest.TestCase):
 
     def _setup_tutor_session(self, conn):
         """Insert a content item, tutor session, correction, and flag."""
-        conn.execute("INSERT INTO content_item (hanzi, pinyin, meaning) VALUES ('你好', 'nǐ hǎo', 'hello')")
+        conn.execute("INSERT INTO content_item (hanzi, pinyin, english) VALUES ('你好', 'nǐ hǎo', 'hello')")
         conn.execute("""
             INSERT INTO tutor_sessions (user_id, session_date, tutor_name)
             VALUES (1, '2026-03-10', 'Li laoshi')

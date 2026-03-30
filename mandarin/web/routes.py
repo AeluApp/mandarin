@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 
 # Routes that don't require authentication
-_PUBLIC_PREFIXES = ("/auth/", "/api/health", "/api/health/live", "/api/health/ready", "/api/webhook/", "/api/webhooks/", "/api/auth/token", "/api/error-report", "/api/client-events", "/api/openclaw/", "/api/widget/data", "/api/study-lists/shared/", "/static/", "/lti/", "/robots.txt", "/sitemap.xml")
+_PUBLIC_PREFIXES = ("/auth/", "/api/health", "/api/health/live", "/api/health/ready", "/api/webhook/", "/api/webhooks/", "/api/auth/token", "/api/error-report", "/api/client-events", "/api/openclaw/", "/api/widget/data", "/api/study-lists/shared/", "/api/experiment/", "/api/referral/", "/api/feedback/nps", "/static/", "/lti/", "/robots.txt", "/sitemap.xml", "/.well-known/")
 
 # Landing-page paths served to unauthenticated visitors
 _LANDING_DIR = str(Path(__file__).resolve().parent.parent.parent / "marketing" / "landing")
@@ -529,6 +529,22 @@ def register_routes(app):
             logger.warning("client events insert failed", exc_info=True)
 
         return "", 204
+
+    # ── Security: security.txt (RFC 9116) ──────────────────────────
+
+    @app.route("/.well-known/security.txt")
+    def security_txt():
+        """Serve security.txt for vulnerability disclosure (RFC 9116)."""
+        try:
+            from pathlib import Path
+            txt_path = Path(app.static_folder) / ".well-known" / "security.txt"
+            if txt_path.exists():
+                return app.response_class(txt_path.read_text(), mimetype="text/plain")
+        except Exception:
+            pass
+        return app.response_class(
+            "Contact: mailto:security@aelu.app\n", mimetype="text/plain"
+        )
 
     # ── SEO: robots.txt and sitemap.xml ─────────────────────────────
 

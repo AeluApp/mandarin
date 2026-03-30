@@ -74,6 +74,7 @@ class WeeklyDigest:
 
 # Pricing tiers (from settings.py, duplicated here for independence)
 _TIER_PRICES = {
+    "paid": 9.0,
     "monthly": 9.0,
     "pro": 9.0,
     "annual": 79.0,

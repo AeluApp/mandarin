@@ -150,6 +150,46 @@ _TEMPLATES: list[dict[str, Any]] = [
         "scope": "ui",
         "duration_days": 21,
     },
+    # Awwwards-tier visual quality templates
+    {
+        "match": {"dimension": "visual_vibe", "keywords": ["scroll", "choreography", "parallax", "reveal"]},
+        "name": "auto_scroll_choreography_depth",
+        "description": "Test continuous scroll-scrubbed animations vs one-shot reveals",
+        "hypothesis": "Continuous scroll-driven animations improve landing page engagement and conversion",
+        "variants": ["control", "continuous_scroll"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    {
+        "match": {"dimension": "visual_vibe", "keywords": ["micro", "interaction", "form", "input", "focus"]},
+        "name": "auto_micro_interaction_richness",
+        "description": "Test enhanced form focus effects (label float, underline grow)",
+        "hypothesis": "Richer micro-interactions improve session completion rate and perceived quality",
+        "variants": ["control", "rich_micro_interactions"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    {
+        "match": {"dimension": "visual_vibe", "keywords": ["transition", "view", "page", "navigate", "cinematic"]},
+        "name": "auto_view_transition_cinematic",
+        "description": "Test crossfade+morph view transitions vs instant page navigation",
+        "hypothesis": "Cinematic view transitions improve page views per session and session duration",
+        "variants": ["control", "cinematic_transitions"],
+        "scope": "ui",
+        "duration_days": 14,
+    },
+    # Sound design (values_decision — requires human approval)
+    {
+        "match": {"dimension": "visual_vibe", "keywords": ["sound", "audio", "click", "chime", "feedback"]},
+        "name": "auto_sound_design_test",
+        "description": "Test subtle UI sounds (button click, drill complete chime) for perceived quality",
+        "hypothesis": "Subtle sound feedback paired with visual transitions improves perceived "
+                      "craftsmanship and session satisfaction without interfering with Mandarin tones "
+                      "(all UI sounds above 500Hz per brand rules, muted by default)",
+        "variants": ["control", "subtle_sounds"],
+        "scope": "ui",
+        "duration_days": 21,
+    },
     # UX templates
     {
         "match": {"dimension": "ux", "keywords": ["completion", "abandon", "drop"]},

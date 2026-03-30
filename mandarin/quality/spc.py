@@ -102,6 +102,60 @@ def detect_out_of_control(data_points: list[float], limits: dict) -> list[dict]:
     return unique
 
 
+def detect_ewma_violation(observations, lambda_=0.2, L=3.0):
+    """Detect EWMA (Exponentially Weighted Moving Average) control chart violations.
+
+    EWMA is more sensitive to small, sustained shifts than Shewhart charts.
+
+    Args:
+        observations: List of dicts with 'value' key (floats)
+        lambda_: Smoothing parameter (0 < λ ≤ 1). Default 0.2.
+        L: Width of control limits in sigma units. Default 3.0.
+
+    Returns:
+        List of violation dicts with 'index', 'value', 'ewma', 'ucl', 'lcl', 'description'.
+    """
+    if not observations or len(observations) < 3:
+        return []
+
+    values = [o["value"] for o in observations if o.get("value") is not None]
+    if len(values) < 3:
+        return []
+
+    n = len(values)
+    mean = sum(values) / n
+    variance = sum((x - mean) ** 2 for x in values) / (n - 1) if n > 1 else 0
+    sigma = variance ** 0.5
+
+    if sigma == 0:
+        return []
+
+    violations = []
+    z = mean  # Initialize EWMA to process mean
+
+    for i, val in enumerate(values):
+        z = lambda_ * val + (1 - lambda_) * z
+        # Time-varying control limits
+        factor = (lambda_ / (2 - lambda_)) * (1 - (1 - lambda_) ** (2 * (i + 1)))
+        limit_width = L * sigma * (factor ** 0.5)
+        ucl = mean + limit_width
+        lcl = mean - limit_width
+
+        if z > ucl or z < lcl:
+            side = "above UCL" if z > ucl else "below LCL"
+            violations.append({
+                "index": i,
+                "value": val,
+                "ewma": round(z, 4),
+                "ucl": round(ucl, 4),
+                "lcl": round(lcl, 4),
+                "description": f"EWMA violation at observation {i}: EWMA={z:.4f} {side} "
+                               f"(UCL={ucl:.4f}, LCL={lcl:.4f}). Indicates sustained process shift.",
+            })
+
+    return violations
+
+
 def get_spc_charts(conn) -> dict:
     """Generate SPC chart data for key quality indicators."""
     charts = {}

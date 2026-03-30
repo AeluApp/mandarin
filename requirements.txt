@@ -46,4 +46,6 @@ litellm>=1.30.0,<2.0
 lancedb>=0.5.0,<1.0
 mem0ai>=0.1.0,<2.0
 dspy-ai>=2.4.0,<4.0
-langgraph>=0.2.0,<1.0
+langgraph>=1.0.10,<2.0
+langgraph-checkpoint>=4.0.0,<5.0
+pygments>=2.19.0,<3.0

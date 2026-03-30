@@ -41,8 +41,9 @@ def _insert_audit(conn, dimension_scores=None):
         "engineering": {"score": 80.0, "grade": "B", "finding_count": 0, "confidence": "high"},
     }
     cur = conn.execute("""
-        INSERT INTO product_audit (overall_grade, overall_score, dimension_scores)
-        VALUES ('C', 65.0, ?)
+        INSERT INTO product_audit (overall_grade, overall_score, dimension_scores,
+                                   findings_json, findings_count, critical_count, high_count)
+        VALUES ('C', 65.0, ?, '[]', 0, 0, 0)
     """, (json.dumps(scores),))
     conn.commit()
     return cur.lastrowid

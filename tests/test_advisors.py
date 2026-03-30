@@ -31,64 +31,9 @@ from mandarin.intelligence.advisors import (
 # ---------------------------------------------------------------------------
 
 def make_conn():
-    """Return an in-memory SQLite connection with row_factory and required tables."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.executescript("""
-        CREATE TABLE IF NOT EXISTS user (
-            id INTEGER PRIMARY KEY,
-            email TEXT,
-            is_active INTEGER DEFAULT 1,
-            subscription_tier TEXT DEFAULT 'free'
-        );
-
-        CREATE TABLE IF NOT EXISTS pi_finding (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            audit_id INTEGER,
-            created_at TEXT DEFAULT (datetime('now')),
-            updated_at TEXT DEFAULT (datetime('now')),
-            dimension TEXT,
-            severity TEXT,
-            title TEXT,
-            analysis TEXT,
-            status TEXT DEFAULT 'investigating',
-            hypothesis TEXT,
-            falsification TEXT,
-            root_cause_tag TEXT,
-            linked_finding_id INTEGER,
-            metric_name TEXT,
-            metric_value_at_detection REAL,
-            times_seen INTEGER DEFAULT 1,
-            last_seen_audit_id INTEGER,
-            resolved_at TEXT,
-            resolution_notes TEXT
-        );
-
-        CREATE TABLE IF NOT EXISTS pi_advisor_opinion (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            finding_id INTEGER,
-            advisor TEXT CHECK(advisor IN ('retention','learning','growth','stability')),
-            created_at TEXT DEFAULT (datetime('now')),
-            recommendation TEXT,
-            priority_score REAL DEFAULT 0,
-            effort_estimate REAL,
-            rationale TEXT,
-            tradeoff_notes TEXT
-        );
-
-        CREATE TABLE IF NOT EXISTS pi_advisor_resolution (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            finding_id INTEGER,
-            created_at TEXT DEFAULT (datetime('now')),
-            winning_advisor TEXT,
-            resolution_rationale TEXT,
-            tradeoff_summary TEXT,
-            weekly_effort_budget REAL,
-            constraint_notes TEXT
-        );
-    """)
-    conn.commit()
-    return conn
+    """Return an in-memory SQLite connection with the full production schema."""
+    from tests.shared_db import make_test_db
+    return make_test_db()
 
 
 def insert_finding(conn, dimension="retention", severity="high",
@@ -272,7 +217,7 @@ class TestRetentionAdvisor:
 
     def test_domain_multiplier_applied_when_conn_provided_retention_dim(self):
         conn = make_conn()
-        conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@b.com')")
+        conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (1, 'a@b.com', 'test_hash')")
         conn.commit()
         finding = make_finding(dimension="retention", severity="high")
         result = self.advisor.evaluate(finding, conn)

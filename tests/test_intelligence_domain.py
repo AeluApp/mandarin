@@ -10,6 +10,7 @@ from datetime import datetime, timezone, timedelta, UTC
 
 import pytest
 
+from tests.shared_db import make_test_db
 from mandarin.intelligence.analyzers_domain import (
     analyze_srs_funnel,
     analyze_error_taxonomy,
@@ -27,9 +28,11 @@ from mandarin.intelligence.analyzers_domain import (
 # ---------------------------------------------------------------------------
 
 def _make_conn():
-    """Create a minimal in-memory SQLite connection with row_factory set."""
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
+    """Create an in-memory SQLite connection with full production schema."""
+    conn = make_test_db()
+    # Disable FK enforcement so analyzer tests can insert test data
+    # without needing to satisfy every referential constraint
+    conn.execute("PRAGMA foreign_keys=OFF")
     return conn
 
 
@@ -53,22 +56,6 @@ def _assert_finding_shape(finding: dict) -> None:
 @pytest.fixture
 def srs_conn():
     conn = _make_conn()
-    conn.execute("""
-        CREATE TABLE progress (
-            id INTEGER PRIMARY KEY,
-            content_item_id INTEGER,
-            user_id INTEGER DEFAULT 1,
-            modality TEXT DEFAULT 'reading',
-            mastery_stage TEXT DEFAULT 'seen',
-            updated_at TEXT,
-            weak_cycle_count INTEGER DEFAULT 0,
-            historically_weak INTEGER DEFAULT 0,
-            repetitions INTEGER DEFAULT 0,
-            ease_factor REAL DEFAULT 2.5,
-            interval_days REAL DEFAULT 1.0
-        )
-    """)
-    conn.commit()
     return conn
 
 
@@ -83,12 +70,12 @@ def test_srs_funnel_stuck_stabilizing_triggers_high(srs_conn):
     # Insert 8 items stuck at stabilizing for 20 days, 2 at other stages
     for i in range(8):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?,?,?)",
+            "INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date) VALUES (?,'reading',?,?)",
             (i + 1, "stabilizing", _ago(20)),
         )
     for i in range(2):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?,?,?)",
+            "INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date) VALUES (?,'reading',?,?)",
             (100 + i, "stable", _ago(1)),
         )
     srs_conn.commit()
@@ -109,12 +96,12 @@ def test_srs_funnel_stuck_stabilizing_below_threshold_no_finding(srs_conn):
     # 3 stuck, 7 at stable — 30% < 50% threshold
     for i in range(3):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?,?,?)",
+            "INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date) VALUES (?,'reading',?,?)",
             (i + 1, "stabilizing", _ago(20)),
         )
     for i in range(7):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at) VALUES (?,?,?)",
+            "INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date) VALUES (?,'reading',?,?)",
             (100 + i, "stable", _ago(1)),
         )
     srs_conn.commit()
@@ -130,8 +117,8 @@ def test_srs_funnel_regressions_trigger_medium(srs_conn):
     for i in range(6):
         srs_conn.execute("""
             INSERT INTO progress
-                (content_item_id, mastery_stage, updated_at, weak_cycle_count, repetitions)
-            VALUES (?,?,?,?,?)
+                (content_item_id, modality, mastery_stage, last_review_date, weak_cycle_count, repetitions)
+            VALUES (?,'reading',?,?,?,?)
         """, (i + 1, "learning", _ago(1), 2, 15))
     srs_conn.commit()
 
@@ -148,8 +135,8 @@ def test_srs_funnel_regressions_at_threshold_no_finding(srs_conn):
     for i in range(5):
         srs_conn.execute("""
             INSERT INTO progress
-                (content_item_id, mastery_stage, updated_at, weak_cycle_count, repetitions)
-            VALUES (?,?,?,?,?)
+                (content_item_id, modality, mastery_stage, last_review_date, weak_cycle_count, repetitions)
+            VALUES (?,'reading',?,?,?,?)
         """, (i + 1, "learning", _ago(1), 1, 12))
     srs_conn.commit()
 
@@ -163,12 +150,12 @@ def test_srs_funnel_historically_weak_triggers_medium(srs_conn):
     # 3 weak, 9 normal — 25% > 20% threshold
     for i in range(3):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at, historically_weak) VALUES (?,?,?,?)",
+            "INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date, historically_weak) VALUES (?,'reading',?,?,?)",
             (i + 1, "learning", _ago(1), 1),
         )
     for i in range(9):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at, historically_weak) VALUES (?,?,?,?)",
+            "INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date, historically_weak) VALUES (?,'reading',?,?,?)",
             (100 + i, "stable", _ago(1), 0),
         )
     srs_conn.commit()
@@ -183,12 +170,12 @@ def test_srs_funnel_historically_weak_below_threshold_no_finding(srs_conn):
     """10% historically_weak should not trigger."""
     for i in range(1):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at, historically_weak) VALUES (?,?,?,?)",
+            "INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date, historically_weak) VALUES (?,'reading',?,?,?)",
             (i + 1, "learning", _ago(1), 1),
         )
     for i in range(9):
         srs_conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at, historically_weak) VALUES (?,?,?,?)",
+            "INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date, historically_weak) VALUES (?,'reading',?,?,?)",
             (100 + i, "stable", _ago(1), 0),
         )
     srs_conn.commit()
@@ -205,15 +192,6 @@ def test_srs_funnel_historically_weak_below_threshold_no_finding(srs_conn):
 @pytest.fixture
 def error_conn():
     conn = _make_conn()
-    conn.execute("""
-        CREATE TABLE error_log (
-            id INTEGER PRIMARY KEY,
-            error_type TEXT,
-            created_at TEXT,
-            content_item_id INTEGER DEFAULT 1
-        )
-    """)
-    conn.commit()
     return conn
 
 
@@ -227,13 +205,13 @@ def test_error_taxonomy_growing_error_type_triggers_finding(error_conn):
     # Prior 4 weeks (5–35 days ago): 4 total → avg 1/week
     for day in [10, 15, 20, 25]:
         error_conn.execute(
-            "INSERT INTO error_log (error_type, created_at) VALUES (?,?)",
+            "INSERT INTO error_log (error_type, content_item_id, modality, created_at) VALUES (?,1,'reading',?)",
             ("tone", _ago(day)),
         )
     # Current week: 5 — that's +400% above prior avg of 1
     for _ in range(5):
         error_conn.execute(
-            "INSERT INTO error_log (error_type, created_at) VALUES (?,?)",
+            "INSERT INTO error_log (error_type, content_item_id, modality, created_at) VALUES (?,1,'reading',?)",
             ("tone", _ago(2)),
         )
     error_conn.commit()
@@ -250,14 +228,14 @@ def test_error_taxonomy_high_severity_when_growth_over_50pct(error_conn):
     # Prior 4 weeks: 1 per week (4 total)
     for day in [10, 15, 20, 25]:
         error_conn.execute(
-            "INSERT INTO error_log (error_type, created_at) VALUES (?,?)",
-            ("stroke_order", _ago(day)),
+            "INSERT INTO error_log (error_type, content_item_id, modality, created_at) VALUES (?,1,'reading',?)",
+            ("grammar", _ago(day)),
         )
     # Current week: 10 events — 900% growth
     for _ in range(10):
         error_conn.execute(
-            "INSERT INTO error_log (error_type, created_at) VALUES (?,?)",
-            ("stroke_order", _ago(3)),
+            "INSERT INTO error_log (error_type, content_item_id, modality, created_at) VALUES (?,1,'reading',?)",
+            ("grammar", _ago(3)),
         )
     error_conn.commit()
 
@@ -273,7 +251,7 @@ def test_error_taxonomy_no_growth_no_finding(error_conn):
     for day in range(5, 36, 7):
         for _ in range(4):
             error_conn.execute(
-                "INSERT INTO error_log (error_type, created_at) VALUES (?,?)",
+                "INSERT INTO error_log (error_type, content_item_id, modality, created_at) VALUES (?,1,'reading',?)",
                 ("tone", _ago(day)),
             )
     error_conn.commit()
@@ -287,7 +265,7 @@ def test_error_taxonomy_register_mismatch_triggers_medium(error_conn):
     """More than 5 register_mismatch errors in 30 days triggers a medium finding."""
     for _ in range(6):
         error_conn.execute(
-            "INSERT INTO error_log (error_type, created_at) VALUES (?,?)",
+            "INSERT INTO error_log (error_type, content_item_id, modality, created_at) VALUES (?,1,'reading',?)",
             ("register_mismatch", _ago(5)),
         )
     error_conn.commit()
@@ -302,7 +280,7 @@ def test_error_taxonomy_register_mismatch_at_threshold_no_finding(error_conn):
     """Exactly 5 register_mismatch errors should not trigger."""
     for _ in range(5):
         error_conn.execute(
-            "INSERT INTO error_log (error_type, created_at) VALUES (?,?)",
+            "INSERT INTO error_log (error_type, content_item_id, modality, created_at) VALUES (?,1,'reading',?)",
             ("register_mismatch", _ago(5)),
         )
     error_conn.commit()
@@ -319,17 +297,6 @@ def test_error_taxonomy_register_mismatch_at_threshold_no_finding(error_conn):
 @pytest.fixture
 def modality_conn():
     conn = _make_conn()
-    conn.execute("""
-        CREATE TABLE progress (
-            id INTEGER PRIMARY KEY,
-            user_id INTEGER DEFAULT 1,
-            content_item_id INTEGER,
-            modality TEXT,
-            mastery_stage TEXT,
-            updated_at TEXT DEFAULT '2024-01-01'
-        )
-    """)
-    conn.commit()
     return conn
 
 
@@ -400,33 +367,6 @@ def test_cross_modality_fewer_than_5_gaps_no_finding(modality_conn):
 @pytest.fixture
 def curriculum_conn():
     conn = _make_conn()
-    conn.executescript("""
-        CREATE TABLE IF NOT EXISTS session_log (
-            id INTEGER PRIMARY KEY, user_id INTEGER,
-            started_at TEXT DEFAULT (datetime('now')),
-            items_planned INTEGER DEFAULT 10, items_completed INTEGER DEFAULT 8,
-            duration_seconds INTEGER DEFAULT 300, early_exit INTEGER DEFAULT 0,
-            boredom_flags INTEGER DEFAULT 0, client_platform TEXT
-        );
-        CREATE TABLE grammar_point (
-            id INTEGER PRIMARY KEY,
-            name TEXT,
-            category TEXT DEFAULT 'basic'
-        );
-        CREATE TABLE grammar_progress (
-            id INTEGER PRIMARY KEY,
-            grammar_point_id INTEGER
-        );
-        CREATE TABLE skill (
-            id INTEGER PRIMARY KEY,
-            name TEXT
-        );
-        CREATE TABLE content_skill (
-            id INTEGER PRIMARY KEY,
-            skill_id INTEGER,
-            content_item_id INTEGER
-        );
-    """)
     # Seed 3 active users with recent sessions (minimum for curriculum analysis)
     for uid in range(1, 4):
         conn.execute(
@@ -447,7 +387,7 @@ def test_curriculum_low_grammar_coverage_triggers_high(curriculum_conn):
     """Coverage below 25% triggers a high finding."""
     for i in range(20):
         curriculum_conn.execute("INSERT INTO grammar_point (name, category) VALUES (?,?)",
-                                (f"point_{i}", "basic"))
+                                (f"point_{i}", "structure"))
     # Only drill 2 out of 20 = 10% coverage
     curriculum_conn.execute("INSERT INTO grammar_progress (grammar_point_id) VALUES (1)")
     curriculum_conn.execute("INSERT INTO grammar_progress (grammar_point_id) VALUES (2)")
@@ -465,7 +405,7 @@ def test_curriculum_medium_grammar_coverage(curriculum_conn):
     """Coverage between 25–50% triggers a medium finding."""
     for i in range(10):
         curriculum_conn.execute("INSERT INTO grammar_point (name, category) VALUES (?,?)",
-                                (f"point_{i}", "basic"))
+                                (f"point_{i}", "structure"))
     # Drill 4 out of 10 = 40%
     for i in range(1, 5):
         curriculum_conn.execute("INSERT INTO grammar_progress (grammar_point_id) VALUES (?)", (i,))
@@ -481,7 +421,7 @@ def test_curriculum_sufficient_coverage_no_grammar_finding(curriculum_conn):
     """Coverage at or above 50% should not trigger the grammar coverage finding."""
     for i in range(10):
         curriculum_conn.execute("INSERT INTO grammar_point (name, category) VALUES (?,?)",
-                                (f"point_{i}", "basic"))
+                                (f"point_{i}", "structure"))
     # Drill 6 out of 10 = 60%
     for i in range(1, 7):
         curriculum_conn.execute("INSERT INTO grammar_progress (grammar_point_id) VALUES (?)", (i,))
@@ -497,7 +437,7 @@ def test_curriculum_weak_category_triggers_medium(curriculum_conn):
     # Category A: 5 points, 0 drilled
     for i in range(5):
         curriculum_conn.execute("INSERT INTO grammar_point (name, category) VALUES (?,?)",
-                                (f"cat_a_{i}", "particles"))
+                                (f"cat_a_{i}", "particle"))
     curriculum_conn.commit()
 
     findings = analyze_curriculum_coverage(curriculum_conn)
@@ -537,32 +477,19 @@ def test_curriculum_linked_skills_no_orphan_finding(curriculum_conn):
 @pytest.fixture
 def hsk_conn():
     conn = _make_conn()
-    conn.executescript("""
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY,
-            content_item_id INTEGER,
-            correct INTEGER DEFAULT 1,
-            created_at TEXT
-        );
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY,
-            hsk_level INTEGER
-        );
-    """)
-    conn.commit()
     return conn
 
 
 def _insert_reviews(conn, item_id, hsk_level, total, errors, days_ago=5):
     """Insert a content_item and matching review_events."""
-    conn.execute("INSERT OR IGNORE INTO content_item (id, hsk_level) VALUES (?,?)",
-                 (item_id, hsk_level))
+    conn.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english, hsk_level) VALUES (?,?,?,?,?)",
+                 (item_id, f"字{item_id}", f"zi{item_id}", f"word{item_id}", hsk_level))
     ts = _ago(days_ago)
     for i in range(total):
         correct = 0 if i < errors else 1
         conn.execute(
-            "INSERT INTO review_event (content_item_id, correct, created_at) VALUES (?,?,?)",
-            (item_id, correct, ts),
+            "INSERT INTO review_event (content_item_id, modality, correct, created_at) VALUES (?,?,?,?)",
+            (item_id, "reading", correct, ts),
         )
 
 
@@ -644,21 +571,13 @@ def test_hsk_cliff_respects_minimum_10_reviews(hsk_conn):
 @pytest.fixture
 def tone_conn():
     conn = _make_conn()
-    conn.execute("""
-        CREATE TABLE audio_recording (
-            id INTEGER PRIMARY KEY,
-            tone_scores_json TEXT,
-            created_at TEXT
-        )
-    """)
-    conn.commit()
     return conn
 
 
 def _insert_recording(conn, syllables: list, days_ago: int = 1):
     conn.execute(
-        "INSERT INTO audio_recording (tone_scores_json, created_at) VALUES (?,?)",
-        (json.dumps(syllables), _ago(days_ago)),
+        "INSERT INTO audio_recording (content_item_id, file_path, tone_scores_json, created_at) VALUES (?,?,?,?)",
+        (1, "/tmp/test.wav", json.dumps(syllables), _ago(days_ago)),
     )
 
 
@@ -754,8 +673,8 @@ def test_tone_phonology_malformed_json_handled_gracefully(tone_conn):
     """Malformed tone_scores_json should not raise — findings may be empty."""
     for _ in range(12):
         tone_conn.execute(
-            "INSERT INTO audio_recording (tone_scores_json, created_at) VALUES (?,?)",
-            ("not-valid-json", _ago(1)),
+            "INSERT INTO audio_recording (content_item_id, file_path, tone_scores_json, created_at) VALUES (?,?,?,?)",
+            (1, "/tmp/test.wav", "not-valid-json", _ago(1)),
         )
     tone_conn.commit()
 
@@ -771,21 +690,6 @@ def test_tone_phonology_malformed_json_handled_gracefully(tone_conn):
 @pytest.fixture
 def scheduler_conn():
     conn = _make_conn()
-    conn.executescript("""
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY,
-            plan_snapshot TEXT,
-            started_at TEXT,
-            items_planned INTEGER DEFAULT 10,
-            items_completed INTEGER DEFAULT 8
-        );
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY,
-            drill_type TEXT,
-            created_at TEXT
-        );
-    """)
-    conn.commit()
     return conn
 
 
@@ -854,17 +758,17 @@ def test_scheduler_decisions_thompson_convergence_triggers_medium(scheduler_conn
     """One drill type comprising >70% of 2-week reviews triggers a Thompson Sampling finding."""
     for _ in range(75):
         scheduler_conn.execute(
-            "INSERT INTO review_event (drill_type, created_at) VALUES (?,?)",
+            "INSERT INTO review_event (content_item_id, modality, correct, drill_type, created_at) VALUES (1, 'reading', 1, ?,?)",
             ("mc", _ago(5)),
         )
     for _ in range(25):
         scheduler_conn.execute(
-            "INSERT INTO review_event (drill_type, created_at) VALUES (?,?)",
+            "INSERT INTO review_event (content_item_id, modality, correct, drill_type, created_at) VALUES (1, 'reading', 1, ?,?)",
             ("reverse_mc", _ago(5)),
         )
     # Add a third type to satisfy the len >= 3 condition
     scheduler_conn.execute(
-        "INSERT INTO review_event (drill_type, created_at) VALUES (?,?)",
+        "INSERT INTO review_event (content_item_id, modality, correct, drill_type, created_at) VALUES (1, 'reading', 1, ?,?)",
         ("tone", _ago(5)),
     )
     scheduler_conn.commit()
@@ -912,20 +816,6 @@ def test_scheduler_decisions_good_completion_no_finding(scheduler_conn):
 @pytest.fixture
 def encounter_conn():
     conn = _make_conn()
-    conn.executescript("""
-        CREATE TABLE vocab_encounter (
-            id INTEGER PRIMARY KEY,
-            content_item_id INTEGER,
-            looked_up INTEGER DEFAULT 1,
-            created_at TEXT
-        );
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY,
-            content_item_id INTEGER,
-            created_at TEXT
-        );
-    """)
-    conn.commit()
     return conn
 
 
@@ -940,7 +830,7 @@ def test_encounter_feedback_loop_low_drill_rate_triggers_high(encounter_conn):
     # 20 looked-up encounters — none of them ever drilled
     for i in range(20):
         encounter_conn.execute(
-            "INSERT INTO vocab_encounter (content_item_id, looked_up, created_at) VALUES (?,?,?)",
+            "INSERT INTO vocab_encounter (content_item_id, hanzi, source_type, looked_up, created_at) VALUES (?, '字', 'reading', ?,?)",
             (i + 1, 1, _ago(10)),
         )
     encounter_conn.commit()
@@ -958,12 +848,12 @@ def test_encounter_feedback_loop_medium_severity_between_10_and_30_pct(encounter
     # 20 encounters, 3 drilled = 15%
     for i in range(20):
         encounter_conn.execute(
-            "INSERT INTO vocab_encounter (content_item_id, looked_up, created_at) VALUES (?,?,?)",
+            "INSERT INTO vocab_encounter (content_item_id, hanzi, source_type, looked_up, created_at) VALUES (?, '字', 'reading', ?,?)",
             (i + 1, 1, _ago(10)),
         )
     for i in range(3):
         encounter_conn.execute(
-            "INSERT INTO review_event (content_item_id, created_at) VALUES (?,?)",
+            "INSERT INTO review_event (content_item_id, modality, correct, created_at) VALUES (?,'reading',1,?)",
             (i + 1, _ago(5)),
         )
     encounter_conn.commit()
@@ -978,13 +868,13 @@ def test_encounter_feedback_loop_good_rate_no_rate_finding(encounter_conn):
     """>=30% drill rate should not trigger the low-drill-rate finding."""
     for i in range(20):
         encounter_conn.execute(
-            "INSERT INTO vocab_encounter (content_item_id, looked_up, created_at) VALUES (?,?,?)",
+            "INSERT INTO vocab_encounter (content_item_id, hanzi, source_type, looked_up, created_at) VALUES (?, '字', 'reading', ?,?)",
             (i + 1, 1, _ago(10)),
         )
     # Drill 10 of the 20 = 50%
     for i in range(10):
         encounter_conn.execute(
-            "INSERT INTO review_event (content_item_id, created_at) VALUES (?,?)",
+            "INSERT INTO review_event (content_item_id, modality, correct, created_at) VALUES (?,'reading',1,?)",
             (i + 1, _ago(5)),
         )
     encounter_conn.commit()
@@ -999,11 +889,11 @@ def test_encounter_feedback_loop_high_latency_triggers_medium(encounter_conn):
     # 20 encounters 20 days ago, all drilled 10 days later (latency = 10 days)
     for i in range(20):
         encounter_conn.execute(
-            "INSERT INTO vocab_encounter (content_item_id, looked_up, created_at) VALUES (?,?,?)",
+            "INSERT INTO vocab_encounter (content_item_id, hanzi, source_type, looked_up, created_at) VALUES (?, '字', 'reading', ?,?)",
             (i + 1, 1, _ago(20)),
         )
         encounter_conn.execute(
-            "INSERT INTO review_event (content_item_id, created_at) VALUES (?,?)",
+            "INSERT INTO review_event (content_item_id, modality, correct, created_at) VALUES (?,'reading',1,?)",
             (i + 1, _ago(10)),
         )
     encounter_conn.commit()
@@ -1018,12 +908,12 @@ def test_encounter_feedback_loop_low_latency_no_latency_finding(encounter_conn):
     """Encounters drilled within 1 day should not trigger the latency finding."""
     for i in range(20):
         encounter_conn.execute(
-            "INSERT INTO vocab_encounter (content_item_id, looked_up, created_at) VALUES (?,?,?)",
+            "INSERT INTO vocab_encounter (content_item_id, hanzi, source_type, looked_up, created_at) VALUES (?, '字', 'reading', ?,?)",
             (i + 1, 1, _ago(10)),
         )
         # Drill same-ish day (1 day later) — within acceptable window
         encounter_conn.execute(
-            "INSERT INTO review_event (content_item_id, created_at) VALUES (?,?)",
+            "INSERT INTO review_event (content_item_id, modality, correct, created_at) VALUES (?,'reading',1,?)",
             (i + 1, _ago(9)),
         )
     encounter_conn.commit()
@@ -1038,7 +928,7 @@ def test_encounter_feedback_loop_only_looked_up_counted(encounter_conn):
     # 15 rows but looked_up=0 — should not reach the threshold of 10
     for i in range(15):
         encounter_conn.execute(
-            "INSERT INTO vocab_encounter (content_item_id, looked_up, created_at) VALUES (?,?,?)",
+            "INSERT INTO vocab_encounter (content_item_id, hanzi, source_type, looked_up, created_at) VALUES (?, '字', 'reading', ?,?)",
             (i + 1, 0, _ago(5)),
         )
     encounter_conn.commit()
@@ -1054,31 +944,12 @@ def test_encounter_feedback_loop_only_looked_up_counted(encounter_conn):
 def test_all_findings_have_required_keys():
     """Any finding produced by any domain analyzer must have all required keys."""
     conn = _make_conn()
-    conn.executescript("""
-        CREATE TABLE progress (
-            id INTEGER PRIMARY KEY, content_item_id INTEGER, user_id INTEGER DEFAULT 1,
-            modality TEXT DEFAULT 'reading', mastery_stage TEXT DEFAULT 'stabilizing',
-            updated_at TEXT, weak_cycle_count INTEGER DEFAULT 2,
-            historically_weak INTEGER DEFAULT 0, repetitions INTEGER DEFAULT 15,
-            ease_factor REAL DEFAULT 2.5, interval_days REAL DEFAULT 1.0
-        );
-        CREATE TABLE error_log (id INTEGER PRIMARY KEY, error_type TEXT, created_at TEXT, content_item_id INTEGER DEFAULT 1);
-        CREATE TABLE grammar_point (id INTEGER PRIMARY KEY, name TEXT, category TEXT DEFAULT 'basic');
-        CREATE TABLE grammar_progress (id INTEGER PRIMARY KEY, grammar_point_id INTEGER);
-        CREATE TABLE skill (id INTEGER PRIMARY KEY, name TEXT);
-        CREATE TABLE content_skill (id INTEGER PRIMARY KEY, skill_id INTEGER, content_item_id INTEGER);
-        CREATE TABLE review_event (id INTEGER PRIMARY KEY, content_item_id INTEGER, correct INTEGER DEFAULT 1, created_at TEXT, drill_type TEXT DEFAULT 'mc');
-        CREATE TABLE content_item (id INTEGER PRIMARY KEY, hsk_level INTEGER);
-        CREATE TABLE audio_recording (id INTEGER PRIMARY KEY, tone_scores_json TEXT, created_at TEXT);
-        CREATE TABLE session_log (id INTEGER PRIMARY KEY, plan_snapshot TEXT, started_at TEXT, items_planned INTEGER DEFAULT 10, items_completed INTEGER DEFAULT 5);
-        CREATE TABLE vocab_encounter (id INTEGER PRIMARY KEY, content_item_id INTEGER, looked_up INTEGER DEFAULT 1, created_at TEXT);
-    """)
 
     # Seed enough data to trigger at least some findings across all analyzers
     ts = _ago(20)
     for i in range(10):
         conn.execute(
-            "INSERT INTO progress (content_item_id, mastery_stage, updated_at, weak_cycle_count, repetitions) VALUES (?,?,?,?,?)",
+            "INSERT INTO progress (content_item_id, modality, mastery_stage, last_review_date, weak_cycle_count, repetitions) VALUES (?,'reading',?,?,?,?)",
             (i + 1, "stabilizing", ts, 1, 12),
         )
     conn.commit()

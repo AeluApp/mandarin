@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>Aelu — Weekly Workflow Digest</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Source Serif 4', Georgia, serif;
+      background-color: #F2EBE0;
+      color: #2A3650;
+      -webkit-text-size-adjust: 100%;
+    }
+    .wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+    .header {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 28px;
+      color: #2A3650;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #5A6678;
+      margin-bottom: 24px;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid #D8D0C4;
+      margin: 24px 0;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      color: #2A3650;
+      margin-bottom: 12px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #D8D0C4;
+      font-size: 14px;
+    }
+    .stat-label { color: #5A6678; }
+    .stat-value { color: #2A3650; font-weight: 600; }
+    .stat-value--warning { color: #806058; }
+    .stat-value--good { color: #5A7A5A; }
+    .item-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .item-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #D8D0C4;
+      font-size: 14px;
+    }
+    .item-class {
+      display: inline-block;
+      width: 3px;
+      height: 12px;
+      border-radius: 1px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .item-class--expedite { background: #806058; }
+    .item-class--fixed_date { background: #946070; }
+    .item-class--standard { background: #5A6678; }
+    .item-class--intangible { background: transparent; }
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: #5A6678;
+      text-align: center;
+    }
+    .footer a { color: #946070; text-decoration: none; }
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      body { background-color: #1C2028; color: #E4DDD0; }
+      .header { color: #E4DDD0; }
+      .subtitle { color: #A09888; }
+      .divider { border-color: #3A3530; }
+      .section-title { color: #E4DDD0; }
+      .stat-label { color: #A09888; }
+      .stat-value { color: #E4DDD0; }
+      .stat-value--warning { color: #A8988E; }
+      .stat-value--good { color: #7A9A7A; }
+      .item-list li { border-color: #3A3530; }
+      .item-class--expedite { background: #A8988E; }
+      .item-class--fixed_date { background: #B07888; }
+      .item-class--standard { background: #A09888; }
+      .stat-row { border-color: #3A3530; }
+      .footer { color: #A09888; }
+      .footer a { color: #B07888; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">Weekly Workflow Digest</div>
+    <div class="subtitle">{{ week_start }} — {{ week_end }}</div>
+
+    <hr class="divider">
+
+    <div class="section-title">Summary</div>
+    <div class="stat-row">
+      <span class="stat-label">Items completed</span>
+      <span class="stat-value">{{ completed_count }}</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Currently in progress</span>
+      <span class="stat-value">{{ in_progress_count }}</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Blocked items</span>
+      <span class="stat-value{% if blocked_count > 0 %} stat-value--warning{% endif %}">{{ blocked_count }}</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">SLA compliance</span>
+      <span class="stat-value{% if sla_compliance >= 0.8 %} stat-value--good{% else %} stat-value--warning{% endif %}">{{ (sla_compliance * 100)|round(0) }}%</span>
+    </div>
+
+    {% if completed_items %}
+    <hr class="divider">
+    <div class="section-title">Completed This Week</div>
+    <ul class="item-list">
+      {% for item in completed_items %}
+      <li>
+        <span class="item-class item-class--{{ item.service_class }}"></span>
+        {{ item.title }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if blocked_items %}
+    <hr class="divider">
+    <div class="section-title">Blocked</div>
+    <ul class="item-list">
+      {% for item in blocked_items %}
+      <li>
+        <span class="item-class item-class--{{ item.service_class }}"></span>
+        {{ item.title }} — <em style="color:#5A6678;">{{ item.blocked_reason or 'No reason given' }}</em>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if wip_status %}
+    <hr class="divider">
+    <div class="section-title">WIP by Service Class</div>
+    {% for sc, info in wip_status.items() %}
+    <div class="stat-row">
+      <span class="stat-label">{{ sc|capitalize }}</span>
+      <span class="stat-value{% if info.count >= info.limit %} stat-value--warning{% endif %}">{{ info.count }} / {{ info.limit }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if pull_suggestion %}
+    <hr class="divider">
+    <div class="section-title">Suggested Next Pull</div>
+    <p style="font-size:14px;">{{ pull_suggestion.message }}</p>
+    {% endif %}
+
+    <div class="footer">
+      <p>Aelu — Kanban workflow digest</p>
+      <p><a href="{{ admin_url }}">Open Admin Dashboard</a></p>
+    </div>
+  </div>
+</body>
+</html>

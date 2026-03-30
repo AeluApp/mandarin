@@ -10,6 +10,7 @@ import sqlite3
 from datetime import date, datetime, timedelta, timezone, UTC
 
 from mandarin.web.middleware import _compute_streak
+from tests.shared_db import make_test_db
 
 
 # ---- Helpers ----
@@ -20,19 +21,7 @@ def _utc_today():
 
 
 def _make_streak_db():
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    conn.execute("""
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER DEFAULT 1,
-            started_at TEXT,
-            items_completed INTEGER DEFAULT 0,
-            session_outcome TEXT DEFAULT 'completed'
-        )
-    """)
-    conn.commit()
-    return conn
+    return make_test_db()
 
 
 def _add_session(conn, d: date, completed: int = 5):

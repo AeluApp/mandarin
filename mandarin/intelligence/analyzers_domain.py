@@ -340,7 +340,7 @@ def analyze_curriculum_coverage(conn) -> list[dict]:
     orphan_skills = _safe_query_all(conn, """
         SELECT s.id, s.name FROM skill s
         LEFT JOIN content_skill cs ON s.id = cs.skill_id
-        WHERE cs.id IS NULL
+        WHERE cs.skill_id IS NULL
     """)
     if orphan_skills:
         skill_names = ", ".join(r["name"] for r in orphan_skills[:5])

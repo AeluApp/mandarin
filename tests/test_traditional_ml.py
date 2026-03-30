@@ -23,115 +23,15 @@ from mandarin.ml.model_store import save_model, load_model, load_model_metadata
 
 @pytest.fixture
 def conn():
-    """In-memory SQLite with ML-relevant tables."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
-    c.execute("PRAGMA foreign_keys=ON")
-
-    c.executescript("""
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY,
-            hanzi TEXT, pinyin TEXT, english TEXT,
-            hsk_level INTEGER DEFAULT 1,
-            status TEXT DEFAULT 'drill_ready',
-            source TEXT,
-            example_sentence_hanzi TEXT,
-            example_sentence_pinyin TEXT,
-            example_sentence_english TEXT
-        );
-
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            session_id INTEGER,
-            content_item_id INTEGER NOT NULL,
-            modality TEXT NOT NULL,
-            drill_type TEXT,
-            correct INTEGER NOT NULL,
-            confidence TEXT DEFAULT 'full',
-            response_ms INTEGER,
-            error_type TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now')),
-            FOREIGN KEY (content_item_id) REFERENCES content_item(id)
-        );
-
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            started_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE learner_profile (
-            id INTEGER PRIMARY KEY,
-            level_reading INTEGER DEFAULT 1
-        );
-
-        CREATE TABLE error_log (
-            id INTEGER PRIMARY KEY,
-            content_item_id INTEGER
-        );
-
-        CREATE TABLE pi_finding (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            audit_id INTEGER,
-            created_at TEXT DEFAULT (datetime('now')),
-            updated_at TEXT DEFAULT (datetime('now')),
-            dimension TEXT,
-            severity TEXT,
-            title TEXT,
-            analysis TEXT,
-            status TEXT DEFAULT 'investigating',
-            times_seen INTEGER DEFAULT 1,
-            last_seen_audit_id INTEGER,
-            metric_name TEXT,
-            metric_value_at_detection REAL
-        );
-
-        CREATE TABLE pi_difficulty_predictions (
-            id TEXT PRIMARY KEY,
-            review_event_id INTEGER,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            content_item_id INTEGER NOT NULL,
-            session_id INTEGER,
-            predicted_accuracy REAL NOT NULL,
-            difficulty_class TEXT NOT NULL,
-            prediction_confidence REAL NOT NULL,
-            model_available INTEGER NOT NULL DEFAULT 1,
-            actual_correct INTEGER,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE pi_finding_embeddings (
-            finding_id INTEGER PRIMARY KEY,
-            title_at_embedding TEXT NOT NULL,
-            embedding_bytes BLOB NOT NULL,
-            embedded_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE pi_ml_model_versions (
-            id TEXT PRIMARY KEY,
-            model_name TEXT NOT NULL,
-            trained_at TEXT NOT NULL DEFAULT (datetime('now')),
-            model_path TEXT NOT NULL,
-            sample_count INTEGER NOT NULL,
-            val_accuracy REAL,
-            baseline_accuracy REAL,
-            improvement REAL,
-            active INTEGER NOT NULL DEFAULT 1,
-            retired_at TEXT
-        );
-
-        CREATE TABLE pi_ml_pipeline_runs (
-            id TEXT PRIMARY KEY,
-            run_at TEXT NOT NULL DEFAULT (datetime('now')),
-            results_json TEXT NOT NULL
-        );
-    """)
+    """In-memory SQLite with the full production schema."""
+    from tests.shared_db import make_test_db
+    c = make_test_db()
 
     # Seed test data
-    c.execute("INSERT INTO learner_profile (id, level_reading) VALUES (1, 2)")
-    c.execute("INSERT INTO content_item (id, hanzi, pinyin, english, hsk_level) VALUES (1, '你好', 'nǐ hǎo', 'hello', 1)")
-    c.execute("INSERT INTO content_item (id, hanzi, pinyin, english, hsk_level) VALUES (2, '谢谢', 'xiè xie', 'thanks', 1)")
-    c.execute("INSERT INTO session_log (id) VALUES (1)")
+    c.execute("INSERT OR IGNORE INTO learner_profile (user_id, level_reading) VALUES (1, 2)")
+    c.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english, hsk_level) VALUES (1, '你好', 'nǐ hǎo', 'hello', 1)")
+    c.execute("INSERT OR IGNORE INTO content_item (id, hanzi, pinyin, english, hsk_level) VALUES (2, '谢谢', 'xiè xie', 'thanks', 1)")
+    c.execute("INSERT OR IGNORE INTO session_log (id) VALUES (1)")
     c.commit()
     return c
 

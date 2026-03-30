@@ -21,161 +21,14 @@ from mandarin.intelligence.cohort_analysis import (
     generate_cohort_snapshot,
     _analyze_cohort_health,
 )
-
-
-def _create_schema(c):
-    """Create minimal schema for engagement tests."""
-    c.executescript("""
-        CREATE TABLE user (
-            id INTEGER PRIMARY KEY,
-            email TEXT, display_name TEXT, role TEXT DEFAULT 'student',
-            is_admin INTEGER DEFAULT 0
-        );
-
-        CREATE TABLE content_item (
-            id INTEGER PRIMARY KEY,
-            hanzi TEXT, pinyin TEXT, english TEXT,
-            hsk_level INTEGER DEFAULT 1,
-            status TEXT DEFAULT 'drill_ready'
-        );
-
-        CREATE TABLE session_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER DEFAULT 1,
-            started_at TEXT NOT NULL DEFAULT (datetime('now')),
-            ended_at TEXT,
-            duration_seconds INTEGER,
-            session_type TEXT DEFAULT 'standard',
-            items_planned INTEGER DEFAULT 0,
-            items_completed INTEGER DEFAULT 0,
-            items_correct INTEGER DEFAULT 0,
-            early_exit INTEGER DEFAULT 0,
-            boredom_flags INTEGER DEFAULT 0,
-            days_since_last_session INTEGER,
-            session_started_hour INTEGER,
-            session_day_of_week INTEGER,
-            session_outcome TEXT DEFAULT 'started',
-            client_platform TEXT DEFAULT 'web',
-            experiment_variant TEXT,
-            modality_counts TEXT DEFAULT '{}',
-            mapping_groups_used TEXT,
-            plan_snapshot TEXT,
-            last_activity_at TEXT
-        );
-        CREATE INDEX idx_session_log_user ON session_log(user_id, started_at);
-
-        CREATE TABLE review_event (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL DEFAULT 1,
-            session_id INTEGER,
-            content_item_id INTEGER NOT NULL,
-            modality TEXT NOT NULL,
-            drill_type TEXT,
-            correct INTEGER NOT NULL,
-            confidence TEXT DEFAULT 'full',
-            response_ms INTEGER,
-            error_type TEXT,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE vocab_encounter (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER DEFAULT 1,
-            content_item_id INTEGER,
-            hanzi TEXT,
-            source_type TEXT,
-            source_id INTEGER,
-            looked_up INTEGER DEFAULT 0,
-            created_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE classroom (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            teacher_user_id INTEGER NOT NULL,
-            name TEXT NOT NULL,
-            description TEXT DEFAULT '',
-            invite_code TEXT UNIQUE NOT NULL,
-            max_students INTEGER DEFAULT 30,
-            status TEXT DEFAULT 'active',
-            created_at TEXT NOT NULL DEFAULT (datetime('now')),
-            updated_at TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE classroom_student (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            classroom_id INTEGER NOT NULL,
-            user_id INTEGER NOT NULL,
-            joined_at TEXT NOT NULL DEFAULT (datetime('now')),
-            status TEXT DEFAULT 'active',
-            UNIQUE(classroom_id, user_id)
-        );
-
-        CREATE TABLE pi_engagement_snapshots (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            snapshot_date TEXT NOT NULL,
-            sessions_7d INTEGER DEFAULT 0,
-            sessions_14d INTEGER DEFAULT 0,
-            avg_accuracy_7d REAL,
-            avg_duration_7d REAL,
-            early_exits_7d INTEGER DEFAULT 0,
-            boredom_flags_7d INTEGER DEFAULT 0,
-            avg_response_ms_7d REAL,
-            items_reviewed_7d INTEGER DEFAULT 0,
-            encounters_7d INTEGER DEFAULT 0,
-            abandonment_risk REAL DEFAULT 0.0,
-            risk_level TEXT DEFAULT 'low',
-            risk_factors TEXT DEFAULT '{}',
-            created_at TEXT DEFAULT (datetime('now')),
-            UNIQUE(user_id, snapshot_date)
-        );
-
-        CREATE TABLE pi_engagement_events (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            event_type TEXT NOT NULL,
-            event_data TEXT DEFAULT '{}',
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-
-        CREATE TABLE pi_cohort_snapshots (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            classroom_id INTEGER NOT NULL,
-            snapshot_date TEXT NOT NULL,
-            total_students INTEGER DEFAULT 0,
-            active_students_7d INTEGER DEFAULT 0,
-            avg_accuracy REAL,
-            avg_sessions_per_student REAL,
-            at_risk_count INTEGER DEFAULT 0,
-            high_risk_count INTEGER DEFAULT 0,
-            avg_abandonment_risk REAL,
-            engagement_trend TEXT DEFAULT 'stable',
-            created_at TEXT DEFAULT (datetime('now')),
-            UNIQUE(classroom_id, snapshot_date)
-        );
-
-        CREATE TABLE pi_teacher_interventions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            teacher_user_id INTEGER NOT NULL,
-            student_user_id INTEGER NOT NULL,
-            classroom_id INTEGER,
-            intervention_type TEXT NOT NULL,
-            notes TEXT,
-            risk_at_intervention REAL,
-            risk_after_7d REAL,
-            effective INTEGER,
-            created_at TEXT DEFAULT (datetime('now'))
-        );
-    """)
+from tests.shared_db import make_test_db
 
 
 @pytest.fixture
 def conn():
-    """In-memory SQLite with engagement/classroom tables."""
-    c = sqlite3.connect(":memory:")
-    c.row_factory = sqlite3.Row
+    """In-memory SQLite with the full production schema."""
+    c = make_test_db()
     c.execute("PRAGMA foreign_keys=OFF")
-    _create_schema(c)
     return c
 
 
@@ -221,7 +74,7 @@ def test_extract_session_features_with_data(conn):
 
 
 def test_abandonment_risk_no_sessions(conn):
-    conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@a.com')")
+    conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (1, 'a@a.com', 'h')")
     conn.commit()
     result = compute_abandonment_risk(conn, user_id=1)
     # No sessions → recency factor fires (0.30) → medium risk
@@ -234,7 +87,7 @@ def test_abandonment_risk_no_sessions(conn):
 
 
 def test_abandonment_risk_active_user(conn):
-    conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@a.com')")
+    conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (1, 'a@a.com', 'h')")
     now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     yesterday = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
     for ts in [now, yesterday]:
@@ -261,7 +114,7 @@ def test_abandonment_risk_active_user(conn):
 
 
 def test_abandonment_risk_frequency_decline(conn):
-    conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@a.com')")
+    conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (1, 'a@a.com', 'h')")
     # 3 sessions in prior week, 0 in current week
     for i in range(3):
         ts = (datetime.now(UTC) - timedelta(days=8 + i)).strftime("%Y-%m-%d %H:%M:%S")
@@ -280,7 +133,7 @@ def test_abandonment_risk_frequency_decline(conn):
 
 
 def test_abandonment_risk_frustration(conn):
-    conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@a.com')")
+    conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (1, 'a@a.com', 'h')")
     now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     conn.execute("""
         INSERT INTO session_log (user_id, started_at, items_completed, items_correct,
@@ -297,7 +150,7 @@ def test_abandonment_risk_frustration(conn):
 
 
 def test_engagement_snapshot_idempotent(conn):
-    conn.execute("INSERT INTO user (id, email) VALUES (1, 'a@a.com')")
+    conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (1, 'a@a.com', 'h')")
     conn.commit()
 
     today = datetime.now(UTC).strftime("%Y-%m-%d")
@@ -316,10 +169,10 @@ def test_engagement_snapshot_idempotent(conn):
 
 
 def test_cohort_snapshot_counts(conn):
-    conn.execute("INSERT INTO user (id, email) VALUES (10, 'teacher@a.com')")
+    conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (10, 'teacher@a.com', 'h')")
     conn.execute("INSERT INTO classroom (id, teacher_user_id, name, invite_code) VALUES (1, 10, 'HSK1', 'abc')")
     for uid in [1, 2, 3]:
-        conn.execute("INSERT INTO user (id, email) VALUES (?, ?)", (uid, f"s{uid}@a.com"))
+        conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (?, ?, 'h')", (uid, f"s{uid}@a.com"))
         conn.execute("INSERT INTO classroom_student (classroom_id, user_id) VALUES (1, ?)", (uid,))
     conn.commit()
 
@@ -332,9 +185,9 @@ def test_cohort_snapshot_counts(conn):
 
 
 def test_cohort_snapshot_declining_trend(conn):
-    conn.execute("INSERT INTO user (id, email) VALUES (10, 'teacher@a.com')")
+    conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (10, 'teacher@a.com', 'h')")
     conn.execute("INSERT INTO classroom (id, teacher_user_id, name, invite_code) VALUES (1, 10, 'HSK1', 'abc')")
-    conn.execute("INSERT INTO user (id, email) VALUES (1, 's1@a.com')")
+    conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (1, 's1@a.com', 'h')")
     conn.execute("INSERT INTO classroom_student (classroom_id, user_id) VALUES (1, 1)")
 
     # Insert a prior snapshot with low risk
@@ -407,8 +260,8 @@ def test_analysis_scope_cohort():
 
 
 def test_intervention_logging_and_scoring(conn):
-    conn.execute("INSERT INTO user (id, email) VALUES (1, 's@a.com')")
-    conn.execute("INSERT INTO user (id, email) VALUES (10, 't@a.com')")
+    conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (1, 's@a.com', 'h')")
+    conn.execute("INSERT OR REPLACE INTO user (id, email, password_hash) VALUES (10, 't@a.com', 'h')")
 
     # Log intervention with high risk
     conn.execute("""

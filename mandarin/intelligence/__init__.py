@@ -339,6 +339,62 @@ def run_product_audit(conn) -> dict:
     except ImportError:
         pass
 
+    # Import Awwwards/FWA benchmark analyzers (scroll choreography, view transitions, micro-interactions)
+    try:
+        from .analyzers_awwwards_benchmark import ANALYZERS as AWWWARDS_ANALYZERS
+        all_analyzers = all_analyzers + AWWWARDS_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import Lean Six Sigma analyzers (DMAIC closure, counter-metrics, NPS, email effectiveness)
+    try:
+        from .analyzers_lean_six_sigma import ANALYZERS as LSS_ANALYZERS
+        all_analyzers = all_analyzers + LSS_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import Kanban health analyzers (WIP, aging, expedite dilution, SLA)
+    try:
+        from .analyzers_kanban_health import ANALYZERS as KANBAN_ANALYZERS
+        all_analyzers = all_analyzers + KANBAN_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import experiment health analyzers (SRM, power, collisions, Bayesian)
+    try:
+        from .analyzers_experiment_health import ANALYZERS as EXPERIMENT_ANALYZERS
+        all_analyzers = all_analyzers + EXPERIMENT_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import Goodhart / anti-gaming health analyzers
+    try:
+        from .analyzers_goodhart import ANALYZERS as GOODHART_ANALYZERS
+        all_analyzers = all_analyzers + GOODHART_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import security health analyzers (MFA, scans, violations, login spikes)
+    try:
+        from .analyzers_security import ANALYZERS as SECURITY_ANALYZERS
+        all_analyzers = all_analyzers + SECURITY_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import statistics health analyzers (SPC, IRT, segmentation, forecasting)
+    try:
+        from .analyzers_statistics import ANALYZERS as STATISTICS_ANALYZERS
+        all_analyzers = all_analyzers + STATISTICS_ANALYZERS
+    except ImportError:
+        pass
+
+    # Import software engineering health analyzers (migrations, errors, DB size)
+    try:
+        from .analyzers_swe import ANALYZERS as SWE_ANALYZERS
+        all_analyzers = all_analyzers + SWE_ANALYZERS
+    except ImportError:
+        pass
+
     # Import copy/content truth-drift analyzers (pricing, features, privacy, legal)
     try:
         from .analyzers_copy_drift import ANALYZERS as COPY_DRIFT_ANALYZERS

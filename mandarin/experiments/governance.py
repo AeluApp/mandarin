@@ -219,3 +219,68 @@ def log_ramp_change(
             "reason": reason,
         },
     )
+
+
+def detect_collisions(conn: sqlite3.Connection, threshold: float = 0.30) -> list[dict]:
+    """Detect experiments with overlapping user populations.
+
+    For each pair of running experiments, count shared users in
+    experiment_assignment. If overlap > threshold, flag as collision risk.
+
+    Returns list of collision dicts with experiment names and overlap %.
+    """
+    try:
+        running = conn.execute(
+            "SELECT id, name FROM experiment WHERE status = 'running'"
+        ).fetchall()
+    except sqlite3.OperationalError:
+        return []
+
+    if len(running) < 2:
+        return []
+
+    collisions = []
+    experiments = [dict(r) for r in running]
+
+    for i in range(len(experiments)):
+        for j in range(i + 1, len(experiments)):
+            exp_a = experiments[i]
+            exp_b = experiments[j]
+            try:
+                row = conn.execute(
+                    """
+                    SELECT COUNT(DISTINCT a1.user_id) AS shared
+                    FROM experiment_assignment a1
+                    JOIN experiment_assignment a2
+                        ON a1.user_id = a2.user_id
+                    WHERE a1.experiment_id = ? AND a2.experiment_id = ?
+                    """,
+                    (exp_a["id"], exp_b["id"]),
+                ).fetchone()
+                shared = row["shared"] if row else 0
+
+                # Total unique users in either experiment
+                total_row = conn.execute(
+                    """
+                    SELECT COUNT(DISTINCT user_id) AS total
+                    FROM experiment_assignment
+                    WHERE experiment_id IN (?, ?)
+                    """,
+                    (exp_a["id"], exp_b["id"]),
+                ).fetchone()
+                total = total_row["total"] if total_row else 1
+
+                overlap = shared / max(total, 1)
+                if overlap >= threshold:
+                    collisions.append({
+                        "experiment_a": exp_a["name"],
+                        "experiment_b": exp_b["name"],
+                        "shared_users": shared,
+                        "total_users": total,
+                        "overlap_pct": round(overlap * 100, 1),
+                        "risk": "high" if overlap > 0.5 else "medium",
+                    })
+            except sqlite3.OperationalError:
+                continue
+
+    return collisions
