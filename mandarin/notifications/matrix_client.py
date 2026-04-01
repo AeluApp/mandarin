@@ -24,7 +24,7 @@ from html import escape as _esc
 
 import requests
 
-from ..settings import MATRIX_HOMESERVER, MATRIX_ACCESS_TOKEN, MATRIX_USER_ID
+from ..settings import MATRIX_HOMESERVER, MATRIX_ACCESS_TOKEN, MATRIX_USER_ID, MATRIX_ROOM_ID
 
 logger = logging.getLogger(__name__)
 
@@ -216,15 +216,16 @@ def send_message(
 # ---------------------------------------------------------------------------
 
 def send_notification(message: str, html_message: str | None = None) -> bool:
-    """Send a notification to the configured MATRIX_USER_ID.
+    """Send a notification to the configured room or DM.
 
-    This is the simplest way to push a message — it always goes to the
-    owner's DM room.
+    Uses MATRIX_ROOM_ID directly when set (avoids DM-with-self lookup issues).
+    Falls back to MATRIX_USER_ID DM resolution when no room ID is configured.
     """
     if not _is_configured():
         logger.debug("Matrix: not configured, skipping notification")
         return True
-    return send_message(MATRIX_USER_ID, message, html_message)
+    target = MATRIX_ROOM_ID if MATRIX_ROOM_ID else MATRIX_USER_ID
+    return send_message(target, message, html_message)
 
 
 def send_approval_request(post: dict) -> bool:

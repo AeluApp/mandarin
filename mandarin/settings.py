@@ -98,6 +98,8 @@ MARKETING_NOTIFY_EMAIL = os.environ.get("MARKETING_NOTIFY_EMAIL", "")
 MATRIX_HOMESERVER   = os.environ.get("MATRIX_HOMESERVER", "")
 MATRIX_ACCESS_TOKEN = os.environ.get("MATRIX_ACCESS_TOKEN", "")
 MATRIX_USER_ID      = os.environ.get("MATRIX_USER_ID", "")
+# Optional: hardcode the notification room ID to skip DM-with-self lookup
+MATRIX_ROOM_ID      = os.environ.get("MATRIX_ROOM_ID", "")
 
 PLAUSIBLE_DOMAIN = os.environ.get("PLAUSIBLE_DOMAIN", "")  # e.g. "aeluapp.com"
 PLAUSIBLE_API_KEY = os.environ.get("PLAUSIBLE_API_KEY", "")
