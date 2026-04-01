@@ -1511,7 +1511,6 @@ def seed():
     """
     from .importer import import_hsk_level
     from .grammar_seed import seed_grammar_and_skills
-    from .grammar_linker import link_all
 
     console.print()
     console.print("  [bold]Seeding reference data…[/bold]")
@@ -1519,12 +1518,12 @@ def seed():
 
     with db.connection() as conn:
         # ── 1. Grammar points + skills ──────────────────────────────────
+        # Note: link_all() is intentionally omitted here — it does O(n×m)
+        # substring matching across all content items and takes too long for
+        # a release command.  Run `mandarin seed-grammar` on-demand to populate
+        # content_grammar / content_skill links.
         added_g, added_s = seed_grammar_and_skills(conn)
-        g_links, s_links = link_all(conn)
-        console.print(
-            f"  Grammar:   +{added_g} points, +{added_s} skills  "
-            f"({g_links} grammar links, {s_links} skill links)"
-        )
+        console.print(f"  Grammar:   +{added_g} points, +{added_s} skills")
 
         # ── 2. HSK vocabulary, levels 1-9 ───────────────────────────────
         total_added = 0

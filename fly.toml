@@ -8,6 +8,7 @@ primary_region = "ewr"
   # Seeds all reference data (grammar, HSK 1-9 vocab) idempotently on every deploy,
   # keeping production and local dev in sync on reference data.
   release_command = "mandarin seed"
+  release_command_timeout = "600"
 
 [env]
   IS_PRODUCTION = "true"
