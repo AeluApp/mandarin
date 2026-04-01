@@ -87,6 +87,13 @@ def admin_dashboard():
     return render_template("admin.html")
 
 
+@admin_bp.route("/admin/marketing/queue")
+@admin_required
+def admin_marketing_queue_page():
+    """Marketing approval queue page."""
+    return render_template("admin_queue.html")
+
+
 @admin_bp.route("/api/admin/mfa-compliance")
 @admin_required
 @api_error_handler("MFA Compliance")
