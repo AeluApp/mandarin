@@ -4,6 +4,8 @@ import sqlite3
 from pathlib import Path
 from typing import List, Optional
 
+from mandarin._paths import DATA_DIR
+
 
 def get_grammar_points(conn: sqlite3.Connection, hsk_max: int = 9) -> list[dict]:
     """Get grammar points up to the given HSK level."""
@@ -122,7 +124,7 @@ def should_suggest_next_hsk(conn: sqlite3.Connection, user_id: int = 1) -> int |
         return None
 
     next_level = max_level + 1
-    hsk_file = Path(__file__).parent.parent.parent / "data" / "hsk" / f"hsk{next_level}.json"
+    hsk_file = DATA_DIR / "hsk" / f"hsk{next_level}.json"
     if hsk_file.exists():
         return next_level
     return None

@@ -4,6 +4,7 @@ Covers: tone coverage, tone transfer gap, sandhi proportion, character similarit
 output grading cascade, production-recognition gap, tutor session processing,
 tutor auto-matching, vocab encounter creation, migration v68→v69.
 """
+# phantom-schema-checked
 
 import sqlite3
 import unittest

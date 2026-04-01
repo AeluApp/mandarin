@@ -13,10 +13,9 @@ import sys
 from pathlib import Path
 
 from .db.core import DB_PATH
+from mandarin._paths import DATA_DIR
 
 logger = logging.getLogger(__name__)
-
-DATA_DIR = Path(__file__).parent.parent / "data"
 
 # Required data files with minimum expected entries
 REQUIRED_DATA_FILES = {

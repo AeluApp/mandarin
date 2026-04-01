@@ -1,6 +1,25 @@
 """Shared test fixtures for the mandarin test suite."""
 
 import os
+
+# TEST-ONLY SAFEGUARD — do not replicate in production config.
+#
+# PyTorch (via sentence-transformers/fuzzy_dedup) and LightGBM (difficulty_model)
+# each bundle their own libomp.  When both are loaded in the same process on
+# Python 3.14, competing multi-threaded OpenMP initialisation races and produces
+# a SIGSEGV.  Constraining OpenMP to 1 thread serialises initialisation and
+# eliminates the race.
+#
+# This is a runtime constraint workaround for a library-interaction conflict in
+# the Python 3.14 + PyTorch + LightGBM stack.  The upstream libraries themselves
+# are unchanged.  CI runs Python 3.12 where this conflict does not occur;
+# setdefault() means any CI-level override (e.g. OMP_NUM_THREADS=4) is preserved.
+#
+# Must be set before any C-extension is imported — module load time here ensures
+# that.  Related: librosa/sounddevice tests are separately quarantined under the
+# @pytest.mark.tone_audio marker pending a librosa Python 3.14 release.
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+
 import sqlite3
 import tempfile
 from pathlib import Path

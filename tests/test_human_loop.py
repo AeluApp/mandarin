@@ -12,6 +12,7 @@ behavior. Covers all eight public functions:
   - apply_overrides        (active overrides filter findings)
   - classify_and_escalate_all (sorting by escalation level)
 """
+# phantom-schema-checked
 
 import json
 import sqlite3

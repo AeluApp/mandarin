@@ -22,6 +22,8 @@ import threading
 from pathlib import Path
 from typing import Optional
 
+from mandarin._paths import DATA_DIR
+
 logger = logging.getLogger(__name__)
 
 # ── Edge-TTS voices ──────────────────────────────────────────────────
@@ -39,7 +41,7 @@ _TTS_HELPER = str(Path(__file__).resolve().parent.parent / "tools" / "tts")
 _tts_helper_available: bool | None = None
 
 # Persistent cache (pre-generated audio survives restarts)
-_PERSISTENT_AUDIO_DIR = str(Path(__file__).resolve().parent.parent / "data" / "audio_cache")
+_PERSISTENT_AUDIO_DIR = str(DATA_DIR / "audio_cache")
 os.makedirs(_PERSISTENT_AUDIO_DIR, exist_ok=True)
 
 # Temp cache (on-demand generation)

@@ -11,9 +11,11 @@ import json
 import logging
 import os
 
+from mandarin._paths import DATA_DIR
+
 logger = logging.getLogger(__name__)
 
-_DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
+_DATA_DIR = str(DATA_DIR)
 
 
 def _load_json(filename):

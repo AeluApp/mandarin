@@ -2,6 +2,7 @@
 
 import logging
 import sqlite3
+from datetime import datetime, timezone, UTC
 
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
@@ -399,10 +400,28 @@ def placement_submit():
             )
             conn.commit()
 
+            # Compute time-to-onboarding for telemetry
+            duration_seconds = None
+            try:
+                row_ts = conn.execute(
+                    "SELECT created_at FROM user WHERE id = ?", (current_user.id,)
+                ).fetchone()
+                if row_ts and row_ts["created_at"]:
+                    s = str(row_ts["created_at"]).replace("Z", "+00:00")
+                    if "+" not in s:
+                        s += "+00:00"
+                    signup_dt = datetime.fromisoformat(s)
+                    if signup_dt.tzinfo is None:
+                        signup_dt = signup_dt.replace(tzinfo=UTC)
+                    duration_seconds = int((datetime.now(UTC) - signup_dt).total_seconds())
+            except Exception:
+                pass
+
             # Lifecycle events
             try:
                 from ..marketing_hooks import log_lifecycle_event
-                log_lifecycle_event("onboarding_complete", user_id=str(current_user.id), conn=conn)
+                log_lifecycle_event("onboarding_complete", user_id=str(current_user.id), conn=conn,
+                                    duration_seconds=duration_seconds)
             except Exception:
                 pass
 
@@ -413,10 +432,88 @@ def placement_submit():
 
         result["items_seeded"] = seeded
         result["ready_for_first_session"] = seeded > 0
+        result["onboarding_duration_seconds"] = duration_seconds
         return jsonify(result)
     except (sqlite3.Error, KeyError, ValueError, TypeError) as e:
         logger.error("Placement submit error (%s): %s", type(e).__name__, e)
         return jsonify({"error": "Could not score placement quiz"}), 500
+
+
+@onboarding_bp.route("/api/onboarding/placement/skip", methods=["POST"])
+@login_required
+@api_error_handler("PlacementSkip")
+def placement_skip():
+    """Skip placement quiz — set level to HSK 1 and go straight to first drill.
+
+    Called when user taps "Skip — start from HSK 1" during the placement quiz.
+    Seeds HSK 1 content, marks onboarding complete with default settings.
+    """
+    try:
+        # Discard any in-progress adaptive session
+        _adaptive_sessions.pop(current_user.id, None)
+
+        with db.connection() as conn:
+            conn.execute(
+                """UPDATE learner_profile
+                   SET level_reading = 1, level_listening = 1,
+                       level_speaking = 1, level_ime = 1, level_chunks = 1,
+                       updated_at = datetime('now')
+                   WHERE user_id = ?""",
+                (current_user.id,)
+            )
+
+            seeded = _auto_seed_content(conn, current_user.id)
+
+            conn.execute(
+                """UPDATE user SET onboarding_complete = 1, daily_goal = COALESCE(daily_goal, 'standard'),
+                   updated_at = datetime('now') WHERE id = ?""",
+                (current_user.id,)
+            )
+            conn.execute(
+                """UPDATE learner_profile
+                   SET preferred_session_length = COALESCE(NULLIF(preferred_session_length, 0), 12),
+                       target_sessions_per_week = COALESCE(NULLIF(target_sessions_per_week, 0), 5),
+                       updated_at = datetime('now')
+                   WHERE user_id = ?""",
+                (current_user.id,)
+            )
+            conn.commit()
+
+            duration_seconds = None
+            try:
+                row_ts = conn.execute(
+                    "SELECT created_at FROM user WHERE id = ?", (current_user.id,)
+                ).fetchone()
+                if row_ts and row_ts["created_at"]:
+                    s = str(row_ts["created_at"]).replace("Z", "+00:00")
+                    if "+" not in s:
+                        s += "+00:00"
+                    signup_dt = datetime.fromisoformat(s)
+                    if signup_dt.tzinfo is None:
+                        signup_dt = signup_dt.replace(tzinfo=UTC)
+                    duration_seconds = int((datetime.now(UTC) - signup_dt).total_seconds())
+            except Exception:
+                pass
+
+            try:
+                from ..marketing_hooks import log_lifecycle_event
+                log_lifecycle_event("onboarding_complete", user_id=str(current_user.id), conn=conn,
+                                    placement_skipped=True, duration_seconds=duration_seconds)
+            except Exception:
+                pass
+
+        endowed = _compute_endowed_progress(1)
+        return jsonify({
+            "estimated_level": 1,
+            "skipped": True,
+            "endowed_progress": endowed,
+            "items_seeded": seeded,
+            "ready_for_first_session": seeded > 0,
+            "onboarding_duration_seconds": duration_seconds,
+        })
+    except (sqlite3.Error, KeyError, ValueError, TypeError) as e:
+        logger.error("Placement skip error (%s): %s", type(e).__name__, e)
+        return jsonify({"error": "Could not skip placement quiz"}), 500
 
 
 @onboarding_bp.route("/api/onboarding/goal/skip", methods=["POST"])

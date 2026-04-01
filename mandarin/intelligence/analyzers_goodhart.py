@@ -19,9 +19,29 @@ _RECOGNITION_ONLY_WARN = 0.20
 
 # ── Check 1: Product rule violations ────────────────────────────────
 
+# Minimum number of active users (review events in last 30 days) required before
+# product-rule alerts are meaningful.  Below this threshold, a single bad session
+# from one user can tank every metric — suppress rather than false-alarm.
+_MIN_USERS_FOR_ALERT = 10
+
+
 def check_product_rule_violations(conn):
     """Flag product rule violations from recent counter-metric snapshots."""
     findings = []
+
+    # Guard: insufficient data makes all product-rule metrics unreliable.
+    try:
+        active_users = _safe_scalar(
+            conn,
+            "SELECT COUNT(DISTINCT user_id) FROM review_event "
+            "WHERE created_at > datetime('now', '-30 days')",
+            default=0,
+        ) or 0
+        if active_users < _MIN_USERS_FOR_ALERT:
+            return findings  # Too few users for reliable counter-metrics
+    except Exception:
+        pass  # If query fails, proceed anyway (schema may differ)
+
     try:
         # Get the most recent snapshot with alerts
         row = _safe_query(conn,

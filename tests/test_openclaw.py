@@ -1,4 +1,5 @@
 """Tests for the OpenClaw messaging-first admin stack."""
+# phantom-schema-checked
 
 import json
 import os

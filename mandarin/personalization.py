@@ -11,6 +11,8 @@ import random
 from pathlib import Path
 from typing import List, Optional
 
+from mandarin._paths import DATA_DIR
+
 logger = logging.getLogger(__name__)
 
 
@@ -54,7 +56,7 @@ INTEREST_DOMAINS = {
 }
 
 
-_DATA_DIR = Path(__file__).parent.parent / "data" / "contexts"
+_DATA_DIR = DATA_DIR / "contexts"
 
 # Cache loaded contexts
 _context_cache: dict = {}

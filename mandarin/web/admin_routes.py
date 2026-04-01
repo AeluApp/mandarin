@@ -5,6 +5,7 @@ import logging
 import os
 import re
 import sqlite3
+import time
 from datetime import datetime, timezone, UTC
 from functools import wraps
 
@@ -3177,16 +3178,33 @@ def admin_email_effectiveness():
 
 
 # ── Product Intelligence Engine ──────────────────────────────────
+# In-memory cache: running 155+ analyzers takes ~68s.  Cache for 5 minutes
+# to make page reloads instant; ?force=1 bypasses the cache.
+_INTELLIGENCE_CACHE: dict = {"result": None, "expires_at": 0.0}
+_INTELLIGENCE_CACHE_TTL = 300  # seconds
+
+
 @admin_bp.route("/api/admin/product-intelligence")
 @admin_required
 @api_error_handler("ProductIntelligence")
 def admin_product_intelligence():
     """Run product audit and return findings with dimension scores."""
     try:
+        force = request.args.get("force") == "1"
+        now = time.monotonic()
+        if (
+            not force
+            and _INTELLIGENCE_CACHE["result"] is not None
+            and now < _INTELLIGENCE_CACHE["expires_at"]
+        ):
+            return jsonify(_INTELLIGENCE_CACHE["result"])
+
         from ..product_intelligence import run_product_audit
         with db.connection() as conn:
             result = run_product_audit(conn)
-            return jsonify(result)
+        _INTELLIGENCE_CACHE["result"] = result
+        _INTELLIGENCE_CACHE["expires_at"] = time.monotonic() + _INTELLIGENCE_CACHE_TTL
+        return jsonify(result)
     except Exception as e:
         logger.error("Product intelligence error: %s", e)
         return jsonify({"error": "Product intelligence unavailable: " + str(e)}), 500

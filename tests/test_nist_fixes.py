@@ -231,6 +231,7 @@ class TestAdminMFA:
 # 4 & 5. Audio sanity validation
 # ---------------------------------------------------------------------------
 
+@pytest.mark.tone_audio
 class TestAudioSanityValidation:
 
     def test_rejects_empty_audio(self):

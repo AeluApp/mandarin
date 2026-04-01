@@ -14,6 +14,7 @@ from typing import List, Optional
 
 from . import db
 from .ui_labels import MODALITY_LABELS
+from mandarin._paths import DATA_DIR
 from .config import (
     TOD_MIN_SESSIONS, TOD_LOW_ACCURACY_THRESHOLD, TOD_LOW_ACCURACY_PENALTY,
     MISSING_MODALITY_NEED, MAX_DATA_MIX, MIX_MIN_ATTEMPTS, MIX_RAMP_RANGE,
@@ -1223,7 +1224,7 @@ def _load_confusable_chars() -> set[str]:
             return _confusable_chars_cache
         import json
         from pathlib import Path
-        path = Path(__file__).parent.parent / "data" / "confusable_pairs.json"
+        path = DATA_DIR / "confusable_pairs.json"
         chars = set()
         try:
             with open(path) as f:

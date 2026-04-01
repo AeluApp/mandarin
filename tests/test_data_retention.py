@@ -1,4 +1,5 @@
 """Tests for mandarin.data_retention — get_policies, purge_expired, _trim_crash_log."""
+# phantom-schema-checked
 
 import sqlite3
 from datetime import datetime, timedelta, timezone, UTC

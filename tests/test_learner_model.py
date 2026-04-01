@@ -1,4 +1,5 @@
 """Tests for Doc 16: Learner Model and Personalization Engine."""
+# phantom-schema-checked
 
 import sqlite3
 
@@ -394,6 +395,8 @@ class TestAnalyzer:
 
 
 class TestSchemaMigration:
+    """Inline schemas are intentional — these test a specific migration against a pre-migration DB."""
+
     def test_migration_creates_tables(self):
         conn = sqlite3.connect(":memory:")
         conn.row_factory = sqlite3.Row

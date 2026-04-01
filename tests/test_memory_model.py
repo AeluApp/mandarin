@@ -1,4 +1,5 @@
 """Tests for Doc 13: FSRS memory model, interference, interleaving, load management."""
+# phantom-schema-checked
 
 import sqlite3
 import math
@@ -488,6 +489,8 @@ class TestBackfill:
 
 
 class TestSchemaMigration:
+    """Inline schemas are intentional — these test a specific migration against a pre-migration DB."""
+
     def test_migration_creates_tables(self):
         conn = sqlite3.connect(":memory:")
         conn.row_factory = sqlite3.Row

@@ -425,6 +425,16 @@ def _is_cloud_model(model_name: str) -> bool:
 IS_CLOUD_MODEL = _is_cloud_model(LITELLM_MODEL)
 MODEL_SIZE_B = _extract_model_size_b(LITELLM_MODEL)
 
+# LLM_ENABLED: true when an LLM is intentionally configured for this environment.
+# Defaults to true if a cloud API key is present; false for local dev without Ollama.
+# Set LLM_ENABLED=true in production env to ensure health checks fire correctly.
+LLM_ENABLED = (
+    bool(os.environ.get("LLM_ENABLED", ""))
+    or bool(ANTHROPIC_API_KEY)
+    or bool(OPENAI_API_KEY)
+    or IS_CLOUD_MODEL
+)
+
 
 def validate_production_config() -> dict[str, list[str]]:
     """Check that all required production env vars are set.

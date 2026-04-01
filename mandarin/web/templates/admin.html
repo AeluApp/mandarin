@@ -2114,7 +2114,7 @@
       status.textContent = "Refreshing\u2026";
       spinner.style.display = "inline-block";
       rerunBtn.style.display = "none";
-      _intelPromise = adminFetch("/api/admin/product-intelligence").then(function(d) {
+      _intelPromise = adminFetch("/api/admin/product-intelligence?force=1").then(function(d) {
         _intelData = d;
         _renderAuditResults(d, true);
         return d;

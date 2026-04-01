@@ -1,4 +1,5 @@
 """Tests for mandarin.openclaw.support_agent — FAQ matching, escalation, ticket management."""
+# phantom-schema-checked
 
 import sqlite3
 import unittest

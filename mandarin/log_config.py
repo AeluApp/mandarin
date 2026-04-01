@@ -12,7 +12,9 @@ import time
 from datetime import datetime, timezone, UTC
 from pathlib import Path
 
-_DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+from mandarin._paths import DATA_DIR
+
+_DATA_DIR = DATA_DIR
 
 # Canonical log paths — importable by any module that needs them
 DRILL_ERROR_LOG = _DATA_DIR / "drill_errors.log"

@@ -1,5 +1,6 @@
 """Tests for GenAI layer (Doc 12) — session intelligence, corpus analysis,
 generative feedback, prompt registry, embeddings, whisper pronunciation."""
+# phantom-schema-checked
 
 import json
 import sqlite3

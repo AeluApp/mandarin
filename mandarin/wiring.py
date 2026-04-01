@@ -8,8 +8,9 @@ import re
 import sys
 from pathlib import Path
 
+from mandarin._paths import DATA_DIR
+
 STATIC_DIR = Path(__file__).parent / "web" / "static"
-DATA_DIR = Path(__file__).parent.parent / "data"
 WEB_DIR = Path(__file__).parent / "web"
 
 # Classes that are legitimately dynamic (composed with variables, not literals)

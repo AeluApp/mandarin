@@ -15,9 +15,11 @@ import logging
 import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone, UTC
+from pathlib import Path
 from typing import Optional
 
 from .ollama_client import generate, is_ollama_available, OllamaResponse
+from mandarin._paths import DATA_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -160,7 +162,7 @@ def assess_passage_quality(conn, passage_id: str, user_id: int = 1) -> dict:
     passage = None
     try:
         from pathlib import Path
-        passages_path = Path(__file__).parent.parent.parent / "data" / "reading_passages.json"
+        passages_path = DATA_DIR / "reading_passages.json"
         if passages_path.exists():
             with open(passages_path, encoding="utf-8") as f:
                 raw = json.load(f)
@@ -938,7 +940,7 @@ class ContentQualityAnalyzer:
 
         try:
             from pathlib import Path
-            passages_path = Path(__file__).parent.parent.parent / "data" / "reading_passages.json"
+            passages_path = DATA_DIR / "reading_passages.json"
             if not passages_path.exists():
                 return findings
             with open(passages_path, encoding="utf-8") as f:

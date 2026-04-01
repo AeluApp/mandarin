@@ -331,6 +331,58 @@ def add_hsk(
             console.print(f"\n  {e}\n")
 
 
+@app.command(name="add-audio")
+def add_audio(
+    hsk_level: int = typer.Option(0, "--hsk", help="Only generate for this HSK level (0 = all)"),
+    limit: int = typer.Option(0, "--limit", help="Max items to process (0 = no limit)"),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Count items without generating"),
+    voice: str = typer.Option("female", help="TTS voice (female, male, female_young)"),
+):
+    """Pre-generate TTS audio for content items and cache to disk."""
+    from .audio import generate_audio_file, get_persistent_audio_dir
+
+    with db.connection() as conn:
+        query = "SELECT id, hanzi FROM content_item WHERE hanzi IS NOT NULL AND audio_available = 0"
+        params: list = []
+        if hsk_level > 0:
+            query += " AND hsk_level = ?"
+            params.append(hsk_level)
+        query += " ORDER BY hsk_level ASC, id ASC"
+        if limit > 0:
+            query += f" LIMIT {limit}"
+
+        items = conn.execute(query, params).fetchall()
+
+        if dry_run:
+            console.print(f"\n  [dry run] {len(items)} items need audio generation.\n")
+            return
+
+        if not items:
+            console.print("\n  All content items already have audio.\n")
+            return
+
+        console.print(f"\n  Generating audio for {len(items)} items (voice={voice})...")
+        generated = 0
+        failed = 0
+        for item in items:
+            fname = generate_audio_file(item["hanzi"], voice=voice)
+            if fname:
+                conn.execute(
+                    "UPDATE content_item SET audio_available = 1, audio_file_path = ? WHERE id = ?",
+                    (fname, item["id"]),
+                )
+                generated += 1
+            else:
+                failed += 1
+            if generated % 50 == 0 and generated > 0:
+                conn.commit()
+                console.print(f"    ... {generated}/{len(items)}")
+
+        conn.commit()
+        console.print(f"  Done: {generated} generated, {failed} failed.")
+        console.print(f"  Audio cache: {get_persistent_audio_dir()}\n")
+
+
 @app.command(name="tag-lenses")
 def tag_lenses(
     dry_run: bool = typer.Option(False, "--dry-run", help="Show what would be tagged without changing"),
@@ -1447,6 +1499,53 @@ def skills():
             console.print(cov_sk_table)
 
         console.print()
+
+
+@app.command(name="seed")
+def seed():
+    """Idempotently seed all reference data: HSK vocabulary (1-9) and grammar points.
+
+    Safe to run multiple times — existing rows are skipped. Runs automatically
+    on every Fly.io deploy via the release_command in fly.toml, ensuring
+    production and local dev stay in sync on reference data.
+    """
+    from .importer import import_hsk_level
+    from .grammar_seed import seed_grammar_and_skills
+    from .grammar_linker import link_all
+
+    console.print()
+    console.print("  [bold]Seeding reference data…[/bold]")
+    console.print()
+
+    with db.connection() as conn:
+        # ── 1. Grammar points + skills ──────────────────────────────────
+        added_g, added_s = seed_grammar_and_skills(conn)
+        g_links, s_links = link_all(conn)
+        console.print(
+            f"  Grammar:   +{added_g} points, +{added_s} skills  "
+            f"({g_links} grammar links, {s_links} skill links)"
+        )
+
+        # ── 2. HSK vocabulary, levels 1-9 ───────────────────────────────
+        total_added = 0
+        total_skipped = 0
+        for level in range(1, 10):
+            try:
+                added, skipped = import_hsk_level(conn, level)
+                if added > 0:
+                    console.print(f"  HSK {level}:    +{added} items  ({skipped} already present)")
+                total_added += added
+                total_skipped += skipped
+            except FileNotFoundError:
+                console.print(f"  HSK {level}:    [dim]data file not found — skipping[/dim]")
+
+        console.print(
+            f"  Vocab:     +{total_added} new  /  {total_skipped} already present"
+        )
+
+    console.print()
+    console.print("  [dim]Seed complete.[/dim]")
+    console.print()
 
 
 @app.command(name="seed-grammar")

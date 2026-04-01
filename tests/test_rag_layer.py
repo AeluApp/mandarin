@@ -1,4 +1,5 @@
 """Tests for Doc 21: RAG Layer for HSK 6+ and GenAI Hardening."""
+# phantom-schema-checked
 
 import json
 import sqlite3

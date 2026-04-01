@@ -25,6 +25,10 @@ jobs:
           pip install -e ".[dev]"
 
       - name: Run tests with coverage (parallel, CI Hypothesis profile)
+        # Note: tests/conftest.py sets OMP_NUM_THREADS=1 via setdefault() as a
+        # Python 3.14 local-dev safeguard (PyTorch + LightGBM libomp conflict).
+        # This job runs Python 3.12 where the conflict does not occur; the env
+        # var has no material effect here but is benign if inherited.
         env:
           HYPOTHESIS_PROFILE: ci
         run: >
@@ -35,6 +39,13 @@ jobs:
 
       - name: Verify risk-weighted coverage floors
         run: python scripts/coverage_floors.py
+
+      - name: Security scan (bandit — HIGH severity is blocking)
+        run: python scripts/run_security_scan.py
+
+      - name: Run tone audio tests (allowed to fail on Python 3.14+)
+        continue-on-error: true
+        run: pytest tests/ -m tone_audio -v --tb=short
 
   test-t2-nightly:
     runs-on: ubuntu-latest

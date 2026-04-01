@@ -21,6 +21,7 @@ from datetime import datetime, timezone, timedelta, UTC
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from .security import log_security_event, SecurityEvent, Severity
+from mandarin._paths import DATA_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +37,7 @@ _EMAIL_RE = re.compile(r'^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$')
 
 # Common password list — loaded lazily on first use
 _common_passwords: set | None = None
-_COMMON_PASSWORDS_PATH = Path(__file__).parent.parent / "data" / "common_passwords.txt"
+_COMMON_PASSWORDS_PATH = DATA_DIR / "common_passwords.txt"
 
 
 def _load_common_passwords() -> set:

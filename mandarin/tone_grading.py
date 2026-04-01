@@ -15,6 +15,8 @@ from datetime import datetime, timezone, UTC
 from pathlib import Path
 from typing import List, Optional, Tuple
 
+from mandarin._paths import DATA_DIR
+
 logger = logging.getLogger(__name__)
 
 try:
@@ -43,7 +45,7 @@ from .tone_features import (
 
 SAMPLE_RATE = 16000  # 16kHz mono — sufficient for voice
 MAX_RECORD_SECONDS = 5
-RECORDINGS_DIR = Path(__file__).parent.parent / "data" / "recordings"
+RECORDINGS_DIR = DATA_DIR / "recordings"
 
 
 def validate_audio_sanity(audio_data, sample_rate=16000):
