@@ -17,8 +17,27 @@ from ..settings import DB_PATH as _SETTINGS_DB_PATH
 
 DB_DIR = _SETTINGS_DB_PATH.parent
 DB_PATH = _SETTINGS_DB_PATH
-SCHEMA_PATH = Path(__file__).parent.parent.parent / "schema.sql"
-PROFILE_JSON_PATH = Path(__file__).parent.parent.parent / "learner_profile.json"
+
+
+def _resolve_app_root_file(filename: str) -> Path:
+    """Resolve a file that lives at the repo/app root in both dev and Docker.
+
+    In development (editable install): __file__ is inside mandarin/db/,
+    so parent.parent.parent is the repo root.
+    In Docker (pip install .): the package lands in site-packages/ but the
+    file was COPY'd to /app/ by the Dockerfile.
+    """
+    dev_candidate = Path(__file__).parent.parent.parent / filename
+    if dev_candidate.exists():
+        return dev_candidate
+    docker_candidate = Path("/app") / filename
+    if docker_candidate.exists():
+        return docker_candidate
+    return dev_candidate  # callers get FileNotFoundError on open
+
+
+SCHEMA_PATH = _resolve_app_root_file("schema.sql")
+PROFILE_JSON_PATH = _resolve_app_root_file("learner_profile.json")
 
 
 def load_learner_profile_json() -> dict[str, object]:
