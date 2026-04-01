@@ -134,6 +134,18 @@ def queue_reddit_post(
 
     queue_id = cursor.lastrowid
     logger.info("Reddit post queued for approval (queue_id=%d, r/%s)", queue_id, subreddit)
+    # Notify owner via Beeper for approval
+    try:
+        from ..notifications.matrix_client import send_approval_request
+        send_approval_request({
+            "id": queue_id,
+            "platform": "reddit",
+            "subreddit": subreddit,
+            "title": title,
+            "body": body,
+        })
+    except Exception:
+        logger.debug("Matrix approval notification failed (non-fatal)", exc_info=True)
     return queue_id
 
 
