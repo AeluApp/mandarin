@@ -3,6 +3,12 @@ set -e
 
 mkdir -p /data
 
+# If arguments are provided (e.g. release_command "mandarin seed"), run them directly.
+# This is the standard Docker entrypoint pattern so that Fly release commands work.
+if [ "$#" -gt 0 ]; then
+    exec "$@"
+fi
+
 # If Litestream S3 bucket is configured, restore DB and run under replication
 if [ -n "$LITESTREAM_S3_BUCKET" ]; then
     echo "Restoring database from Litestream replica..."

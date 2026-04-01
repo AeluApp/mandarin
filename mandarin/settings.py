@@ -94,6 +94,11 @@ MAILING_ADDRESS = os.environ.get("MAILING_ADDRESS", "Aelu")
 NEWSLETTER_TO = os.environ.get("NEWSLETTER_TO", "")
 MARKETING_NOTIFY_EMAIL = os.environ.get("MARKETING_NOTIFY_EMAIL", "")
 
+# ── Notifications — Matrix / Beeper ───────────────────
+MATRIX_HOMESERVER   = os.environ.get("MATRIX_HOMESERVER", "")
+MATRIX_ACCESS_TOKEN = os.environ.get("MATRIX_ACCESS_TOKEN", "")
+MATRIX_USER_ID      = os.environ.get("MATRIX_USER_ID", "")
+
 PLAUSIBLE_DOMAIN = os.environ.get("PLAUSIBLE_DOMAIN", "")  # e.g. "aeluapp.com"
 PLAUSIBLE_API_KEY = os.environ.get("PLAUSIBLE_API_KEY", "")
 

@@ -2,7 +2,8 @@
 
 import logging
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, render_template, request
+from flask_login import login_required
 
 from .. import db
 from .api_errors import api_error_handler
@@ -11,6 +12,13 @@ from .middleware import _get_user_id
 logger = logging.getLogger(__name__)
 
 conversation_bp = Blueprint("conversation", __name__)
+
+
+@conversation_bp.route("/conversation")
+@login_required
+def conversation_page():
+    """Standalone conversation practice page."""
+    return render_template("conversation.html")
 
 
 @conversation_bp.route("/api/conversation/scenarios")
