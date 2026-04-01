@@ -367,7 +367,7 @@ html[data-theme="dark"] {
 
 /* Explicit body background for dark mode — ensures no linen bleed-through */
 html[data-theme="dark"] body {
-  background-color: #1C2028;
+  background-color: var(--color-base);
   background-image:
     radial-gradient(ellipse at 20% 0%, var(--mesh-color-2) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 10%, var(--mesh-color-3) 0%, transparent 45%),
@@ -377,7 +377,7 @@ html[data-theme="dark"] body {
 }
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #1C2028;
+    background-color: var(--color-base);
   }
 }
 
@@ -11620,7 +11620,7 @@ textarea {
   border: 1px solid var(--color-divider);
   cursor: pointer;
   color: var(--color-text);
-  border-radius: 4px;
+  border-radius: var(--radius);
   transition: background 0.12s;
 }
 
@@ -11683,8 +11683,8 @@ textarea {
   cursor: pointer;
 }
 
-.kanban-toggle-btn:first-child { border-radius: 4px 0 0 4px; }
-.kanban-toggle-btn:last-child { border-radius: 0 4px 4px 0; border-left: none; }
+.kanban-toggle-btn:first-child { border-radius: var(--radius); }
+.kanban-toggle-btn:last-child { border-radius: var(--radius); border-left: none; }
 
 .kanban-toggle-btn--active {
   background: var(--color-accent);
@@ -11758,14 +11758,14 @@ textarea {
 
 .queue-depth-bar {
   height: 8px;
-  border-radius: 4px;
+  border-radius: var(--radius);
   background: var(--color-surface-alt, var(--color-surface));
   overflow: hidden;
 }
 
 .queue-depth-fill {
   height: 100%;
-  border-radius: 4px;
+  border-radius: var(--radius);
   transition: width 0.3s var(--ease-upward, ease-out), background-color 0.3s;
 }
 
@@ -11774,4 +11774,18 @@ textarea {
   font-size: var(--text-xs);
   color: var(--color-text-dim);
   margin-top: 4px;
+}
+
+/* ── Motion accessibility — global catch-all ──────────────────────
+   Covers every @keyframes animation not individually guarded above.
+   JS-driven effects (WebGL, celebrations.js) gate on their own
+   prefersReducedMotion check.
+   ──────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
