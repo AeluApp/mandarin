@@ -3242,13 +3242,20 @@ def admin_product_intelligence():
             t.start()
             return jsonify(_INTELLIGENCE_CACHE["result"])
 
-        # Cold start or forced — must compute synchronously
-        from ..product_intelligence import run_product_audit
-        with db.connection() as conn:
-            result = run_product_audit(conn)
-        _INTELLIGENCE_CACHE["result"] = result
-        _INTELLIGENCE_CACHE["expires_at"] = time.monotonic() + _INTELLIGENCE_CACHE_TTL
-        return jsonify(result)
+        # Forced refresh — compute synchronously (admin explicitly requested)
+        if force:
+            from ..product_intelligence import run_product_audit
+            with db.connection() as conn:
+                result = run_product_audit(conn)
+            _INTELLIGENCE_CACHE["result"] = result
+            _INTELLIGENCE_CACHE["expires_at"] = time.monotonic() + _INTELLIGENCE_CACHE_TTL
+            return jsonify(result)
+
+        # Cold start — kick off background computation, return loading state.
+        # The frontend should poll until loading=false.
+        t = threading.Thread(target=_refresh_intelligence_cache_bg, daemon=True)
+        t.start()
+        return jsonify({"loading": True, "message": "Audit running in background — refresh in 60s"}), 202
     except Exception as e:
         logger.error("Product intelligence error: %s", e)
         return jsonify({"error": "Product intelligence unavailable: " + str(e)}), 500
