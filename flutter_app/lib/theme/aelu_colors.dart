@@ -32,7 +32,7 @@ class AeluColors {
 
   // ── Semantic aliases ──
   static const Color streakGold = Color(0xFFD4A574);
-  static const Color incorrect = Color(0xFF6A4840);       // --color-incorrect (warm brown, 6.79:1 on light)
+  static const Color incorrect = Color(0xFF806058);       // --color-incorrect (warm brown — tokens #806058)
   static const Color muted = Color(0xFF8A8278);
   static const Color mutedDark = Color(0xFFA89A90);       // 5.98:1 on dark
   static const Color divider = Color(0xFFD4CEC4);
