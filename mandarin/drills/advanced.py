@@ -14,10 +14,11 @@ from .base import (
 )
 from .hints import get_hanzi_hint
 from .mc import run_mc_drill
+from mandarin._paths import DATA_DIR
 
 logger = logging.getLogger(__name__)
 
-_DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "data")
+_DATA_DIR = str(DATA_DIR)
 
 
 def _load_json(filename):
@@ -436,7 +437,7 @@ def _load_measure_words() -> list:
         if _MEASURE_WORDS_CACHE is not None:
             return _MEASURE_WORDS_CACHE
 
-        mw_path = Path(__file__).parent.parent.parent / "data" / "measure_words.json"
+        mw_path = DATA_DIR / "measure_words.json"
         try:
             with open(mw_path) as f:
                 raw = json.load(f)

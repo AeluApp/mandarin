@@ -3,6 +3,13 @@ primary_region = "ewr"
 
 [build]
 
+[deploy]
+  # Runs in a temporary VM before traffic switches to the new release.
+  # Seeds all reference data (grammar, HSK 1-9 vocab) idempotently on every deploy,
+  # keeping production and local dev in sync on reference data.
+  release_command = "mandarin seed"
+  release_command_timeout = "10m"
+
 [env]
   IS_PRODUCTION = "true"
   PORT = "8080"

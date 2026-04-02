@@ -1,4 +1,5 @@
 """Tests for Doc 23 C-02: Prompt Observability."""
+# phantom-schema-checked
 
 import unittest
 

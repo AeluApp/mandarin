@@ -10931,7 +10931,50 @@ function showPlacementQuiz(wizardOverlay) {
     '<div class="auth-logo"><div class="logo-mark" aria-hidden="true">\u6F2B</div>' +
     '<div class="logo-text">Placement Quiz</div></div>' +
     '<div class="onboarding-wizard-intro">Answer these questions so we can find your level. Don\'t worry about getting them all right.</div>' +
-    '<div id="placement-quiz-body"><span class="settings-hint">Loading questions\u2026</span></div>';
+    '<div id="placement-quiz-body"><span class="settings-hint">Loading questions\u2026</span></div>' +
+    '<div style="margin-top:var(--space-3);text-align:center">' +
+      '<button class="btn-link btn-sm" id="placement-skip-btn">Skip \u2014 start from HSK 1</button>' +
+    '</div>';
+
+  // Skip placement — set HSK 1 and go straight to first drill
+  var skipPlacementBtn = document.getElementById("placement-skip-btn");
+  if (skipPlacementBtn) {
+    skipPlacementBtn.addEventListener("click", function() {
+      skipPlacementBtn.disabled = true;
+      var body = document.getElementById("placement-quiz-body");
+      if (body) body.innerHTML = '<span class="settings-hint">Setting up HSK 1\u2026</span>';
+      apiFetch("/api/onboarding/placement/skip", {method: "POST"})
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.error) {
+            if (body) body.innerHTML = '<p class="settings-hint">' + escapeHtml(data.error) + '</p>';
+            skipPlacementBtn.disabled = false;
+            return;
+          }
+          wizardOverlay.classList.add("onboarding-exit");
+          setTimeout(function() { if (wizardOverlay.parentNode) wizardOverlay.remove(); }, 500);
+          _refreshDashboardAfterOnboarding();
+          var bridge = document.createElement("div");
+          bridge.className = "onboarding-bridge";
+          bridge.innerHTML = '<div class="onboarding-bridge-inner">'
+            + '<div class="onboarding-bridge-logo">\u6F2B</div>'
+            + '<div class="onboarding-bridge-text">Starting your first session\u2026</div>'
+            + '</div>';
+          document.body.appendChild(bridge);
+          requestAnimationFrame(function() { bridge.classList.add("onboarding-bridge-visible"); });
+          setTimeout(function() {
+            bridge.classList.remove("onboarding-bridge-visible");
+            bridge.classList.add("onboarding-bridge-exit");
+            setTimeout(function() { if (bridge.parentNode) bridge.remove(); }, 500);
+            startSession("standard");
+          }, 1200);
+        })
+        .catch(function() {
+          skipPlacementBtn.disabled = false;
+          if (body) body.innerHTML = '<span class="settings-hint">Loading questions\u2026</span>';
+        });
+    });
+  }
 
   apiFetch("/api/onboarding/placement/start")
     .then(function(r) { return r.json(); })

@@ -13,8 +13,9 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from . import db
+from mandarin._paths import DATA_DIR
 
-HSK_DATA_DIR = Path(__file__).parent.parent / "data" / "hsk"
+HSK_DATA_DIR = DATA_DIR / "hsk"
 
 
 def _load_canonical(level: int) -> list[dict]:

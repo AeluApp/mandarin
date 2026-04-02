@@ -1,4 +1,5 @@
 """Tests for strategic intelligence — thesis, editorial, competitor analysis (Doc 10)."""
+# phantom-schema-checked
 
 import json
 import unittest

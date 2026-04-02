@@ -2077,8 +2077,19 @@
       return "";
     }
 
-    // Pre-fetch audit as soon as admin page loads (before tab click)
-    _intelPromise = adminFetch("/api/admin/product-intelligence").then(function(d) {
+    // Pre-fetch audit as soon as admin page loads (before tab click).
+    // Handles 202 "loading" state: polls every 15s until data is ready.
+    function _fetchIntelWithPolling(url) {
+      return adminFetch(url).then(function(d) {
+        if (d && d.loading) {
+          return new Promise(function(resolve) {
+            setTimeout(function() { resolve(_fetchIntelWithPolling("/api/admin/product-intelligence")); }, 15000);
+          });
+        }
+        return d;
+      });
+    }
+    _intelPromise = _fetchIntelWithPolling("/api/admin/product-intelligence").then(function(d) {
       _intelData = d;
       return d;
     });
@@ -2092,7 +2103,7 @@
         var status = document.getElementById("intel-status");
         var spinner = document.getElementById("intel-spinner");
         var el = document.getElementById("intelligence-content");
-        status.textContent = "Loading audit\u2026";
+        status.textContent = "Running audit\u2026 (first run takes ~60s)";
         spinner.style.display = "inline-block";
         el.innerHTML = '';
         _intelPromise.then(function(d) {
@@ -2114,7 +2125,7 @@
       status.textContent = "Refreshing\u2026";
       spinner.style.display = "inline-block";
       rerunBtn.style.display = "none";
-      _intelPromise = adminFetch("/api/admin/product-intelligence").then(function(d) {
+      _intelPromise = adminFetch("/api/admin/product-intelligence?force=1").then(function(d) {
         _intelData = d;
         _renderAuditResults(d, true);
         return d;

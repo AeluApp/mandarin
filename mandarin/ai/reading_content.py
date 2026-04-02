@@ -10,6 +10,7 @@ from typing import Optional
 
 from .ollama_client import generate, is_ollama_available
 from .validation import validate_generated_content
+from mandarin._paths import DATA_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +40,7 @@ Use simplified characters only. Write naturally — avoid textbook smell (教材
 Keep sentences short and clear for the target HSK level.
 Include 分寸 — disciplined aptness, not flashiness."""
 
-_READING_PASSAGES_PATH = Path(__file__).parent.parent.parent / "data" / "reading_passages.json"
+_READING_PASSAGES_PATH = DATA_DIR / "reading_passages.json"
 
 
 def generate_reading_passage(

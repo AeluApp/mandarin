@@ -5,6 +5,8 @@ import logging
 import os
 import re
 import sqlite3
+import threading
+import time
 from datetime import datetime, timezone, UTC
 from functools import wraps
 
@@ -84,6 +86,13 @@ def admin_required(f):
 def admin_dashboard():
     """Admin dashboard page."""
     return render_template("admin.html")
+
+
+@admin_bp.route("/admin/marketing/queue")
+@admin_required
+def admin_marketing_queue_page():
+    """Marketing approval queue page."""
+    return render_template("admin_queue.html")
 
 
 @admin_bp.route("/api/admin/mfa-compliance")
@@ -3177,16 +3186,76 @@ def admin_email_effectiveness():
 
 
 # ── Product Intelligence Engine ──────────────────────────────────
-@admin_bp.route("/api/admin/product-intelligence")
-@admin_required
-@api_error_handler("ProductIntelligence")
-def admin_product_intelligence():
-    """Run product audit and return findings with dimension scores."""
+# In-memory cache: running 155+ analyzers takes ~68s.  Cache for 30 minutes;
+# stale-while-revalidate: return stale data instantly and refresh in background.
+# ?force=1 bypasses the cache and always runs synchronously.
+_INTELLIGENCE_CACHE: dict = {"result": None, "expires_at": 0.0, "refreshing": False}
+_INTELLIGENCE_CACHE_TTL = 1800  # 30 minutes — admin-only, low churn
+
+
+def _refresh_intelligence_cache_bg() -> None:
+    """Background thread: refresh the product audit cache without blocking requests."""
+    if _INTELLIGENCE_CACHE["refreshing"]:
+        return  # already in progress
+    _INTELLIGENCE_CACHE["refreshing"] = True
     try:
         from ..product_intelligence import run_product_audit
         with db.connection() as conn:
             result = run_product_audit(conn)
+        _INTELLIGENCE_CACHE["result"] = result
+        _INTELLIGENCE_CACHE["expires_at"] = time.monotonic() + _INTELLIGENCE_CACHE_TTL
+        logger.info("Product intelligence cache refreshed in background.")
+    except Exception as e:
+        logger.error("Background intelligence refresh failed: %s", e)
+    finally:
+        _INTELLIGENCE_CACHE["refreshing"] = False
+
+
+@admin_bp.route("/api/admin/product-intelligence")
+@admin_required
+@api_error_handler("ProductIntelligence")
+def admin_product_intelligence():
+    """Run product audit and return findings with dimension scores.
+
+    Strategy:
+    - Cache fresh  → return immediately (typical case, <1 ms).
+    - Cache stale  → return stale data immediately + trigger background refresh
+                     so the *next* request gets fresh data without a 68 s wait.
+    - No cache yet → compute synchronously (first cold start only).
+    - ?force=1     → bypass cache, compute synchronously.
+    """
+    try:
+        force = request.args.get("force") == "1"
+        now = time.monotonic()
+        cache_fresh = (
+            _INTELLIGENCE_CACHE["result"] is not None
+            and now < _INTELLIGENCE_CACHE["expires_at"]
+        )
+
+        # Fresh cache — instant return
+        if not force and cache_fresh:
+            return jsonify(_INTELLIGENCE_CACHE["result"])
+
+        # Stale cache — return immediately, kick off background refresh
+        if not force and _INTELLIGENCE_CACHE["result"] is not None:
+            t = threading.Thread(target=_refresh_intelligence_cache_bg, daemon=True)
+            t.start()
+            return jsonify(_INTELLIGENCE_CACHE["result"])
+
+        # Forced refresh — compute synchronously (admin explicitly requested)
+        if force:
+            from ..product_intelligence import run_product_audit
+            with db.connection() as conn:
+                result = run_product_audit(conn)
+            _INTELLIGENCE_CACHE["result"] = result
+            _INTELLIGENCE_CACHE["expires_at"] = time.monotonic() + _INTELLIGENCE_CACHE_TTL
             return jsonify(result)
+
+        # Cold start — kick off background computation, return loading state.
+        # The frontend should poll until loading=false.
+        t = threading.Thread(target=_refresh_intelligence_cache_bg, daemon=True)
+        t.start()
+        return jsonify({"loading": True, "message": "Audit running in background — refresh in 60s"}), 202
     except Exception as e:
         logger.error("Product intelligence error: %s", e)
         return jsonify({"error": "Product intelligence unavailable: " + str(e)}), 500

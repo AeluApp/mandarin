@@ -3,6 +3,8 @@ leniency, speaker calibration, coaching feedback)."""
 
 import pytest
 
+pytestmark = pytest.mark.tone_audio
+
 
 # ── YIN F0 extraction ────────────────────────────────────────────
 

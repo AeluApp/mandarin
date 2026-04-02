@@ -442,7 +442,12 @@ def _analyze_copywriting(conn) -> list[dict]:
     )
     placeholder_hits = {}
     for name, content in templates.items():
-        matches = placeholder_pattern.findall(content)
+        # Strip HTML attribute values (e.g. placeholder="Enter name") and
+        # CSS pseudo-selectors (::placeholder) so form hints don't false-fire.
+        content_clean = re.sub(r'\bplaceholder\s*=\s*"[^"]*"', '', content)
+        content_clean = re.sub(r"\bplaceholder\s*=\s*'[^']*'", '', content_clean)
+        content_clean = re.sub(r'::placeholder\b', '', content_clean)
+        matches = placeholder_pattern.findall(content_clean)
         if matches:
             placeholder_hits[name] = matches
 

@@ -153,7 +153,14 @@ def _check_pricing_drift(conn) -> list[dict]:
         if not content:
             continue
 
-        amounts = _extract_dollar_amounts(content)
+        # Strip competitor/context sections explicitly marked as non-Aelu prices
+        content_clean = re.sub(
+            r'<!--\s*PRICE-IGNORE-START.*?-->(.*?)<!--\s*PRICE-IGNORE-END\s*-->',
+            '',
+            content,
+            flags=re.DOTALL | re.IGNORECASE,
+        )
+        amounts = _extract_dollar_amounts(content_clean)
         for amount in amounts:
             # Skip well-known non-pricing amounts (comparison table, etc.)
             if amount in ("0", "0.00", "0.50"):

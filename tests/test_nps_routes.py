@@ -5,6 +5,7 @@ Covers:
 - POST /api/feedback/nps — reject invalid scores
 - GET /api/admin/quality/nps — admin NPS dashboard endpoint
 """
+# phantom-schema-checked
 
 import json
 from unittest.mock import patch, MagicMock
@@ -40,18 +41,6 @@ def _make_fake_connection(conn):
 def nps_client(test_db):
     """Flask test client with the NPS table available."""
     conn, _ = test_db
-
-    # Ensure nps_response table exists
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS nps_response (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            score INTEGER NOT NULL,
-            feedback TEXT DEFAULT '',
-            responded_at TEXT NOT NULL DEFAULT (datetime('now'))
-        )
-    """)
-    conn.commit()
 
     from mandarin.web import create_app
 

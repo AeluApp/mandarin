@@ -1,4 +1,5 @@
 """Tests for mandarin.openclaw.onboarding_agent — lifecycle detection, risk signals, interventions."""
+# phantom-schema-checked
 
 import sqlite3
 import unittest
@@ -19,7 +20,8 @@ from mandarin.openclaw.onboarding_agent import (
 
 def _make_conn():
     conn = make_test_db()
-    # Add columns that the onboarding_agent code references but are not yet in schema.sql
+    # PHANTOM COLUMN: streak_days is not in the production schema.
+    # TODO: Add streak_days to user table migration when streak feature is activated.
     try:
         conn.execute("ALTER TABLE user ADD COLUMN streak_days INTEGER DEFAULT 0")
     except Exception:

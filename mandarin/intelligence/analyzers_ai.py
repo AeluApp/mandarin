@@ -14,6 +14,7 @@ import re
 import sqlite3
 
 from ._base import _finding, _safe_scalar, _safe_query_all
+from mandarin import settings as _settings
 
 _PROJECT_ROOT = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -96,6 +97,11 @@ def _analyze_genai_model_diversity(conn) -> list[dict]:
 def _analyze_genai_output_quality(conn) -> list[dict]:
     """Check LLM generation success rates and quality scores."""
     findings = []
+
+    # Skip reliability checks when LLM is not configured for this environment.
+    # Without API keys or local Ollama, all generation attempts will fail by design.
+    if not _settings.LLM_ENABLED:
+        return findings
 
     # Generation log stats
     total = _safe_scalar(conn, """

@@ -18,7 +18,8 @@ from tests.shared_db import make_test_db
 def _make_clv_db():
     """Create in-memory DB with the full production schema + payment_event."""
     conn = make_test_db()
-    # payment_event is not yet in the production migration chain but CLV needs it
+    # PHANTOM TABLE: payment_event is not in the production migration chain.
+    # TODO: Add payment_event to schema.sql when payment processing is activated.
     conn.execute("""CREATE TABLE IF NOT EXISTS payment_event (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,

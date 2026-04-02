@@ -13,6 +13,7 @@ from typing import List, Optional
 from collections.abc import Callable
 
 from . import db, display
+from mandarin._paths import DATA_DIR
 
 logger = logging.getLogger(__name__)
 from .scheduler import SessionPlan, DrillItem
@@ -1514,7 +1515,7 @@ def _show_real_world_task(conn, state: SessionState, show_fn: Callable) -> None:
     import json
     from pathlib import Path
 
-    tasks_path = Path(__file__).parent.parent / "data" / "real_world_tasks.json"
+    tasks_path = DATA_DIR / "real_world_tasks.json"
     try:
         with open(tasks_path) as f:
             data = json.load(f)

@@ -24,13 +24,15 @@ from datetime import datetime, timezone, UTC
 from pathlib import Path
 from typing import Optional
 
+from mandarin._paths import DATA_DIR
+
 logger = logging.getLogger(__name__)
 
 # ── Constants ────────────────────────────────────────────────────────────
 
 KOKORO_VOICE = "af_heart"  # Kokoro voice ID for Chinese
 KOKORO_SPEED = 0.85  # Slightly slower for learner clarity
-AUDIO_OUTPUT_DIR = Path(__file__).parent.parent.parent / "data" / "audio_tts"
+AUDIO_OUTPUT_DIR = DATA_DIR / "audio_tts"
 
 # Ensure output directory exists
 AUDIO_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

@@ -6,6 +6,7 @@ inputs gracefully, and maps scores correctly for exact/wrong matches.
 
 import pytest
 np = pytest.importorskip("numpy")
+pytestmark = pytest.mark.tone_audio
 
 
 # ---- classify_tone: valid outputs ----

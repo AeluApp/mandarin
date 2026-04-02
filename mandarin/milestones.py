@@ -18,6 +18,8 @@ import sqlite3
 from pathlib import Path
 from typing import List, Optional
 
+from mandarin._paths import DATA_DIR
+
 logger = logging.getLogger(__name__)
 
 _VALID_REQUIREMENT_KEYS = {"sessions", "items_seen", "hsk_stable", "lens_pct", "scenario_avg"}
@@ -27,7 +29,7 @@ _VALID_PHASES = {"foundation", "emerging", "growing", "strengthening",
 
 def _load_milestones() -> list:
     """Load milestones from data/milestones.json with validation."""
-    path = Path(__file__).parent.parent / "data" / "milestones.json"
+    path = DATA_DIR / "milestones.json"
     try:
         with open(path) as f:
             milestones = json.load(f)
@@ -80,7 +82,7 @@ def _load_real_world_tasks() -> list:
     global _REAL_WORLD_TASKS
     if _REAL_WORLD_TASKS is not None:
         return _REAL_WORLD_TASKS
-    path = Path(__file__).parent.parent / "data" / "real_world_tasks.json"
+    path = DATA_DIR / "real_world_tasks.json"
     try:
         with open(path) as f:
             data = json.load(f)

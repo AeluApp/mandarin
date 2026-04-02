@@ -14,14 +14,13 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Optional
 
-logger = logging.getLogger(__name__)
+from mandarin._paths import DATA_DIR as _DATA_DIR
 
-_DATA_DIR = Path(__file__).parent.parent.parent / "data"
+logger = logging.getLogger(__name__)
 
 # Minimum thresholds for "adequate" coverage
 MIN_ITEMS_PER_HSK_LEVEL = 30

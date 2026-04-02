@@ -1,4 +1,5 @@
 """Tests for mandarin.openclaw.imessage_bot — macOS iMessage integration."""
+# phantom-schema-checked  — iMessage chat.db schema, not production
 
 import sqlite3
 import unittest

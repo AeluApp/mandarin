@@ -303,6 +303,15 @@ def register():
                     log_lifecycle_event("signup", user_id=str(user_dict["id"]), conn=conn)
                 except Exception:
                     pass
+                # Beeper notification: new user
+                try:
+                    from ..notifications.matrix_client import send_notification
+                    _name_or_email = display_name or email
+                    send_notification(
+                        f"New user: {_name_or_email} ({email})"
+                    )
+                except Exception:
+                    pass
                 if _is_native_request():
                     return render_template("index.html")
                 return redirect(url_for("index"))

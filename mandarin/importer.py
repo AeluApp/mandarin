@@ -16,6 +16,8 @@ import io
 import sqlite3
 from pathlib import Path
 
+from mandarin._paths import DATA_DIR
+
 logger = logging.getLogger(__name__)
 from typing import List, Optional, Tuple
 
@@ -387,7 +389,7 @@ def import_hsk_level(conn, level: int, dry_run: bool = False) -> tuple[int, int]
     if not (1 <= level <= 9):
         raise ValueError(f"HSK level must be 1-9, got {level}")
 
-    hsk_file = Path(__file__).parent.parent / "data" / "hsk" / f"hsk{level}.json"
+    hsk_file = DATA_DIR / "hsk" / f"hsk{level}.json"
     if not hsk_file.exists():
         raise FileNotFoundError(f"HSK {level} data file not found: {hsk_file}")
 

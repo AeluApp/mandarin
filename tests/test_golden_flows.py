@@ -15,6 +15,7 @@ Golden flows:
 """
 
 import json
+import re
 import sqlite3
 from unittest.mock import patch
 
@@ -42,6 +43,19 @@ def _compat_generate_password_hash(password, **kwargs):
     return _orig_gen(password, method="pbkdf2:sha256")
 
 
+def _extract_csrf_token(html: str) -> str:
+    """Extract CSRF token from a rendered HTML page (hidden input or meta tag)."""
+    # Try hidden input first: <input ... name="csrf_token" value="...">
+    m = re.search(r'name="csrf_token"[^>]*value="([^"]+)"', html)
+    if m:
+        return m.group(1)
+    # Try meta tag: <meta name="csrf-token" content="...">
+    m = re.search(r'name="csrf-token"[^>]*content="([^"]+)"', html)
+    if m:
+        return m.group(1)
+    return ""
+
+
 @pytest.fixture(autouse=True)
 def _patch_password_hashing():
     with patch("mandarin.auth.generate_password_hash", _compat_generate_password_hash):
@@ -50,10 +64,9 @@ def _patch_password_hashing():
 
 @pytest.fixture
 def app_client(test_db):
-    """Flask test client with WTF CSRF disabled."""
+    """Flask test client with CSRF protection enabled (production-like)."""
     conn, _ = test_db
     app = create_app(testing=True)
-    app.config["WTF_CSRF_ENABLED"] = False
     fake = _FakeConn(conn)
     with patch("mandarin.db.connection", return_value=fake):
         with app.test_client() as c:
@@ -67,9 +80,13 @@ TEST_PASSWORD = "goldenflow9876543"
 def _create_and_login(client, conn, email=TEST_EMAIL, password=TEST_PASSWORD):
     user_dict = create_user(conn, email, password, "GoldenTest")
     conn.commit()
+    # Fetch login page to get CSRF token
+    resp = client.get("/auth/login")
+    csrf_token = _extract_csrf_token(resp.get_data(as_text=True))
     client.post("/auth/login", data={
         "email": email,
         "password": password,
+        "csrf_token": csrf_token,
     }, follow_redirects=True)
     return user_dict
 
@@ -124,10 +141,15 @@ class TestAuthLifecycle:
         resp = client.get("/api/status")
         assert resp.status_code in (302, 401)
 
-        # Login
+        # Fetch login page CSRF token
+        resp = client.get("/auth/login")
+        csrf_token = _extract_csrf_token(resp.get_data(as_text=True))
+
+        # Login (with CSRF token)
         resp = client.post("/auth/login", data={
             "email": TEST_EMAIL,
             "password": TEST_PASSWORD,
+            "csrf_token": csrf_token,
         }, follow_redirects=True)
         assert resp.status_code == 200
 
@@ -136,8 +158,14 @@ class TestAuthLifecycle:
                           headers={"X-Requested-With": "XMLHttpRequest"})
         assert resp.status_code == 200
 
-        # Logout (POST-only route)
-        resp = client.post("/auth/logout", follow_redirects=True)
+        # Fetch a fresh CSRF token (session changed after login)
+        resp = client.get("/")
+        fresh_csrf = _extract_csrf_token(resp.get_data(as_text=True))
+
+        # Logout (POST-only route, with fresh CSRF token)
+        resp = client.post("/auth/logout",
+                           headers={"X-CSRFToken": fresh_csrf},
+                           follow_redirects=True)
         assert resp.status_code == 200
 
         # After logout — protected endpoint should fail again

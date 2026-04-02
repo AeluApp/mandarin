@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 
 from .ollama_client import is_ollama_available
+from mandarin import settings
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +51,12 @@ def check_ollama_health(conn) -> dict:
 def generate_ai_health_findings(conn) -> list[dict]:
     """Intelligence findings for AI subsystem health."""
     findings = []
+
+    # If LLM is not configured for this environment (local dev without API keys
+    # or Ollama), skip AI health findings entirely — they would all be false alarms.
+    if not settings.LLM_ENABLED:
+        return findings
+
     health = check_ollama_health(conn)
 
     # Check if Ollama has been unavailable (no successful generations in 7 days)

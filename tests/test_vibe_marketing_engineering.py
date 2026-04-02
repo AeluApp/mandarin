@@ -1,4 +1,5 @@
 """Tests for vibe audit, marketing intelligence, feature usage, engineering health (Doc 9)."""
+# phantom-schema-checked
 
 import unittest
 from unittest.mock import patch

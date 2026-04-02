@@ -12,6 +12,7 @@ Covers:
 9.  GDPR delete anonymizes user record (email becomes deleted-N@deleted.local)
 10. GDPR delete creates data_deletion_request record
 """
+# phantom-schema-checked
 
 from __future__ import annotations
 
@@ -99,7 +100,11 @@ class TestSourceInspection:
 # ---------------------------------------------------------------------------
 
 class TestDataRetention:
-    """Test purge_expired logic against an in-memory SQLite database."""
+    """Test purge_expired logic against an in-memory SQLite database.
+
+    Inline schemas are intentional — these test edge cases (missing tables,
+    minimal schemas) to verify purge_expired handles them gracefully.
+    """
 
     def _make_conn(self):
         """Return a fresh in-memory connection with Row factory."""

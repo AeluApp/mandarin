@@ -111,7 +111,16 @@ def _intelligence_tick(conn):
         except Exception:
             logger.exception("Failed to run monthly intelligence audit")
 
-    # 3. Log lifecycle event
+    # 3. Send daily intelligence digest email
+    try:
+        from ..email import send_daily_intelligence_digest
+        sent = send_daily_intelligence_digest(conn)
+        if sent:
+            actions.append("intelligence digest sent")
+    except Exception:
+        logger.warning("Failed to send nightly intelligence digest", exc_info=True)
+
+    # 4. Log lifecycle event
     try:
         from ..marketing_hooks import log_lifecycle_event
         log_lifecycle_event(

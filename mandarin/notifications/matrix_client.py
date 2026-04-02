@@ -24,7 +24,7 @@ from html import escape as _esc
 
 import requests
 
-from ..settings import MATRIX_HOMESERVER, MATRIX_ACCESS_TOKEN, MATRIX_USER_ID
+from ..settings import MATRIX_HOMESERVER, MATRIX_ACCESS_TOKEN, MATRIX_USER_ID, MATRIX_ROOM_ID
 
 logger = logging.getLogger(__name__)
 
@@ -216,15 +216,16 @@ def send_message(
 # ---------------------------------------------------------------------------
 
 def send_notification(message: str, html_message: str | None = None) -> bool:
-    """Send a notification to the configured MATRIX_USER_ID.
+    """Send a notification to the configured room or DM.
 
-    This is the simplest way to push a message — it always goes to the
-    owner's DM room.
+    Uses MATRIX_ROOM_ID directly when set (avoids DM-with-self lookup issues).
+    Falls back to MATRIX_USER_ID DM resolution when no room ID is configured.
     """
     if not _is_configured():
         logger.debug("Matrix: not configured, skipping notification")
         return True
-    return send_message(MATRIX_USER_ID, message, html_message)
+    target = MATRIX_ROOM_ID if MATRIX_ROOM_ID else MATRIX_USER_ID
+    return send_message(target, message, html_message)
 
 
 def send_approval_request(post: dict) -> bool:
@@ -254,7 +255,7 @@ def send_approval_request(post: dict) -> bool:
         f"---\n"
         f"{body}\n"
         f"---\n"
-        f"Reply \"approve {post_id}\" or \"reject {post_id}\" to act on this post."
+        f"approve {post_id}  |  reject {post_id}  |  modify {post_id} <instructions>"
     )
 
     html = (
@@ -266,8 +267,11 @@ def send_approval_request(post: dict) -> bool:
         f"<tr><td><strong>Title</strong></td><td>{_esc(title)}</td></tr>"
         f"</table>"
         f"<blockquote>{_esc(body)}</blockquote>"
-        f"<p>Reply <code>approve {_esc(str(post_id))}</code> or "
-        f"<code>reject {_esc(str(post_id))}</code> to act on this post.</p>"
+        f"<p>"
+        f"<code>approve {_esc(str(post_id))}</code> &nbsp;|&nbsp; "
+        f"<code>reject {_esc(str(post_id))}</code> &nbsp;|&nbsp; "
+        f"<code>modify {_esc(str(post_id))} &lt;instructions&gt;</code>"
+        f"</p>"
     )
 
     return send_notification(plain, html)
@@ -358,11 +362,12 @@ def poll_replies() -> list[dict]:
     if not _is_configured():
         return []
 
-    room_id = _get_dm_room()
+    # Use the hardcoded room ID when available (avoids DM-with-self issues).
+    room_id = MATRIX_ROOM_ID if MATRIX_ROOM_ID else _get_dm_room()
     if not room_id:
         return []
 
-    # Build sync filter: only the DM room, only m.room.message events.
+    # Build sync filter: only the notification room, only m.room.message events.
     sync_filter = json.dumps({
         "room": {
             "rooms": [room_id],
@@ -409,13 +414,31 @@ def poll_replies() -> list[dict]:
             content = event.get("content", {})
             body = (content.get("body") or "").strip().lower()
 
-            # Parse "approve <id>" or "reject <id>"
+            # Parse "approve <id>", "reject <id>", or "modify <id> <instructions>"
             for action in ("approve", "reject"):
                 if body.startswith(action):
                     rest = body[len(action):].strip()
                     try:
                         post_id = int(rest)
                         commands.append({"action": action, "post_id": post_id})
+                    except (ValueError, TypeError):
+                        pass
+
+            if body.startswith("modify"):
+                # Use original (non-lowercased) body to preserve instructions casing
+                original_body = (content.get("body") or "").strip()
+                rest = original_body[len("modify"):].strip()
+                # rest is "<id> <instructions...>" or "<id>"
+                parts = rest.split(None, 1)
+                if parts:
+                    try:
+                        post_id = int(parts[0])
+                        instructions = parts[1] if len(parts) > 1 else ""
+                        commands.append({
+                            "action": "modify",
+                            "post_id": post_id,
+                            "instructions": instructions,
+                        })
                     except (ValueError, TypeError):
                         pass
 
@@ -456,7 +479,7 @@ def process_approval_commands(commands: list[dict]) -> list[str]:
         try:
             with db.connection() as conn:
                 row = conn.execute(
-                    "SELECT id, status, title, subreddit FROM marketing_post_queue WHERE id = ?",
+                    "SELECT id, status, platform, content_text FROM marketing_approval_queue WHERE id = ?",
                     (post_id,),
                 ).fetchone()
 
@@ -467,34 +490,58 @@ def process_approval_commands(commands: list[dict]) -> list[str]:
                     continue
 
                 current_status = row["status"]
+                platform = row["platform"]
+                # First line of content_text as a short label
+                label = (row["content_text"] or "").split("\n")[0][:80]
 
                 if action == "approve":
-                    if current_status not in ("pending", "ready_to_post"):
+                    if current_status not in ("pending", "needs_revision"):
                         msg = f"Post #{post_id} is '{current_status}', cannot approve."
                         results.append(msg)
                         send_notification(msg)
                         continue
                     conn.execute(
-                        "UPDATE marketing_post_queue SET status = 'approved', reviewed_at = datetime('now') WHERE id = ?",
+                        "UPDATE marketing_approval_queue SET status = 'approved', reviewed_at = datetime('now') WHERE id = ?",
                         (post_id,),
                     )
                     conn.commit()
-                    msg = f"Post #{post_id} (r/{row['subreddit']}: {row['title']}) approved."
+                    msg = f"✅ Post #{post_id} [{platform}] approved — {label}"
                     results.append(msg)
                     send_notification(msg)
 
                 elif action == "reject":
-                    if current_status not in ("pending", "ready_to_post"):
+                    if current_status not in ("pending", "needs_revision"):
                         msg = f"Post #{post_id} is '{current_status}', cannot reject."
                         results.append(msg)
                         send_notification(msg)
                         continue
                     conn.execute(
-                        "UPDATE marketing_post_queue SET status = 'rejected', reviewed_at = datetime('now'), reject_reason = 'Rejected via Matrix' WHERE id = ?",
+                        "UPDATE marketing_approval_queue SET status = 'rejected', reviewed_at = datetime('now'), reviewer_note = 'Rejected via Matrix' WHERE id = ?",
                         (post_id,),
                     )
                     conn.commit()
-                    msg = f"Post #{post_id} (r/{row['subreddit']}: {row['title']}) rejected."
+                    msg = f"🚫 Post #{post_id} [{platform}] rejected."
+                    results.append(msg)
+                    send_notification(msg)
+
+                elif action == "modify":
+                    if current_status not in ("pending", "needs_revision"):
+                        msg = f"Post #{post_id} is '{current_status}', cannot request modification."
+                        results.append(msg)
+                        send_notification(msg)
+                        continue
+                    instructions = cmd.get("instructions", "")
+                    conn.execute(
+                        """UPDATE marketing_approval_queue
+                           SET status = 'needs_revision',
+                               reviewed_at = datetime('now'),
+                               revision_instructions = ?
+                           WHERE id = ?""",
+                        (instructions, post_id),
+                    )
+                    conn.commit()
+                    instr_preview = (instructions[:60] + "…") if len(instructions) > 60 else instructions
+                    msg = f"✏️ Post #{post_id} [{platform}] marked for revision: {instr_preview}"
                     results.append(msg)
                     send_notification(msg)
 

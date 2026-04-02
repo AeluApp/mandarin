@@ -1,6 +1,6 @@
 """Placement quiz — adaptive level assessment for new users.
 
-15 multiple-choice questions spanning HSK 1-9. True adaptive staircase:
+10 multiple-choice questions spanning HSK 1-9. True adaptive staircase:
 each question's difficulty adjusts based on the previous answer.
 Correct → harder, incorrect → easier. Step size is 2 for the first 5
 questions (rapid convergence) and 1 thereafter (fine-tuning).
@@ -13,14 +13,16 @@ import random
 import sqlite3
 from pathlib import Path
 
+from mandarin._paths import DATA_DIR
+
 logger = logging.getLogger(__name__)
 
-_DATA_DIR = Path(__file__).parent.parent / "data" / "hsk"
+_DATA_DIR = DATA_DIR / "hsk"
 
 # Cache loaded questions
 _question_cache = None
 
-TOTAL_QUESTIONS = 15
+TOTAL_QUESTIONS = 10
 _RAPID_PHASE_END = 5  # First N questions use large step size
 _STEP_LARGE = 2       # Step size during rapid convergence phase
 _STEP_SMALL = 1       # Step size during fine-tuning phase

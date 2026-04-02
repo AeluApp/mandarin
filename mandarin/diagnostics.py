@@ -17,6 +17,7 @@ from typing import List, Tuple
 
 from . import db
 from .scheduler import DrillItem, SessionPlan, _item_is_drillable
+from mandarin._paths import DATA_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +32,7 @@ def _load_hsk_requirements() -> dict:
     global _hsk_requirements_cache
     if _hsk_requirements_cache is not None:
         return _hsk_requirements_cache
-    json_path = Path(__file__).parent.parent / "data" / "hsk_requirements.json"
+    json_path = DATA_DIR / "hsk_requirements.json"
     try:
         with open(json_path) as f:
             data = json.load(f)
@@ -58,7 +59,7 @@ def _compute_hsk_sizes() -> tuple:
     _fallback_band = {1: 500, 2: 772, 3: 973, 4: 1000, 5: 1071, 6: 1140, 7: 1868, 8: 1868, 9: 1870}
     band = {}
     for level in range(1, 10):
-        hsk_file = Path(__file__).parent.parent / "data" / "hsk" / f"hsk{level}.json"
+        hsk_file = DATA_DIR / "hsk" / f"hsk{level}.json"
         if hsk_file.exists():
             try:
                 data = json.load(hsk_file.open(encoding="utf-8"))

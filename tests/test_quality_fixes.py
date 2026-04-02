@@ -16,6 +16,7 @@ Tests each fixed defect pattern to prevent regressions:
 - M8: security.py alert catch widened
 - M9: Token revoke logs LOGOUT event
 """
+# phantom-schema-checked
 
 import sqlite3
 import tempfile

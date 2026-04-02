@@ -16,11 +16,12 @@ from typing import List, Optional
 
 from . import display
 from .drills import DrillResult
+from mandarin._paths import DATA_DIR
 
 logger = logging.getLogger(__name__)
 
-CATALOG_PATH = Path(__file__).parent.parent / "data" / "media_catalog.json"
-PASSAGES_PATH = Path(__file__).parent.parent / "data" / "reading_passages.json"
+CATALOG_PATH = DATA_DIR / "media_catalog.json"
+PASSAGES_PATH = DATA_DIR / "reading_passages.json"
 
 # Content lens mapping — catalog tags → DB lens column names
 LENS_MAP = {

@@ -39,27 +39,6 @@ def conn():
         INSERT OR IGNORE INTO user (id, email, password_hash, display_name, is_admin)
         VALUES (1, 'test@example.com', 'hash', 'Test', 1)
     """)
-    # Ensure tables needed for self-healing
-    c.executescript("""
-        CREATE TABLE IF NOT EXISTS request_timing (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            endpoint TEXT,
-            duration_ms REAL,
-            status_code INTEGER,
-            recorded_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE IF NOT EXISTS scheduler_lock (
-            name TEXT PRIMARY KEY,
-            locked_by TEXT,
-            locked_at TEXT,
-            expires_at TEXT
-        );
-        CREATE TABLE IF NOT EXISTS feature_flag (
-            name TEXT PRIMARY KEY,
-            enabled INTEGER DEFAULT 0,
-            updated_at TEXT DEFAULT (datetime('now'))
-        );
-    """)
     c.commit()
     yield c
     c.close()

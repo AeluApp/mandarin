@@ -17,8 +17,27 @@ from ..settings import DB_PATH as _SETTINGS_DB_PATH
 
 DB_DIR = _SETTINGS_DB_PATH.parent
 DB_PATH = _SETTINGS_DB_PATH
-SCHEMA_PATH = Path(__file__).parent.parent.parent / "schema.sql"
-PROFILE_JSON_PATH = Path(__file__).parent.parent.parent / "learner_profile.json"
+
+
+def _resolve_app_root_file(filename: str) -> Path:
+    """Resolve a file that lives at the repo/app root in both dev and Docker.
+
+    In development (editable install): __file__ is inside mandarin/db/,
+    so parent.parent.parent is the repo root.
+    In Docker (pip install .): the package lands in site-packages/ but the
+    file was COPY'd to /app/ by the Dockerfile.
+    """
+    dev_candidate = Path(__file__).parent.parent.parent / filename
+    if dev_candidate.exists():
+        return dev_candidate
+    docker_candidate = Path("/app") / filename
+    if docker_candidate.exists():
+        return docker_candidate
+    return dev_candidate  # callers get FileNotFoundError on open
+
+
+SCHEMA_PATH = _resolve_app_root_file("schema.sql")
+PROFILE_JSON_PATH = _resolve_app_root_file("learner_profile.json")
 
 
 def load_learner_profile_json() -> dict[str, object]:
@@ -135,7 +154,7 @@ def get_pool_stats() -> dict:
     }
 
 
-SCHEMA_VERSION = 133  # Increment when adding migrations
+SCHEMA_VERSION = 134  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -7237,10 +7256,11 @@ def _migrate_v119_to_v120(conn):
             content_text TEXT NOT NULL,
             reason TEXT,
             status TEXT DEFAULT 'pending'
-                CHECK(status IN ('pending', 'approved', 'rejected', 'expired')),
+                CHECK(status IN ('pending', 'approved', 'rejected', 'expired', 'needs_revision')),
             submitted_at TEXT DEFAULT (datetime('now')),
             reviewed_at TEXT,
-            reviewer_note TEXT
+            reviewer_note TEXT,
+            revision_instructions TEXT
         );
 
         -- Post execution log (dedup + audit trail)
@@ -7886,6 +7906,43 @@ def _migrate_v132_to_v133(conn):
     conn.commit()
 
 
+def _migrate_v133_to_v134(conn):
+    """v133->v134: Add needs_revision status + revision_instructions to marketing_approval_queue."""
+    tables = _table_set(conn)
+    if "marketing_approval_queue" not in tables:
+        return  # Table will be created fresh with the new schema
+
+    # Recreate table with updated CHECK constraint and new column.
+    # SQLite does not support ALTER TABLE ... MODIFY CONSTRAINT.
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS marketing_approval_queue_new (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content_id TEXT NOT NULL,
+            variant_id TEXT,
+            platform TEXT NOT NULL,
+            content_text TEXT NOT NULL,
+            reason TEXT,
+            status TEXT DEFAULT 'pending'
+                CHECK(status IN ('pending', 'approved', 'rejected', 'expired', 'needs_revision')),
+            submitted_at TEXT DEFAULT (datetime('now')),
+            reviewed_at TEXT,
+            reviewer_note TEXT,
+            revision_instructions TEXT
+        )
+    """)
+    conn.execute("""
+        INSERT INTO marketing_approval_queue_new
+            (id, content_id, variant_id, platform, content_text, reason,
+             status, submitted_at, reviewed_at, reviewer_note)
+        SELECT id, content_id, variant_id, platform, content_text, reason,
+               status, submitted_at, reviewed_at, reviewer_note
+        FROM marketing_approval_queue
+    """)
+    conn.execute("DROP TABLE marketing_approval_queue")
+    conn.execute("ALTER TABLE marketing_approval_queue_new RENAME TO marketing_approval_queue")
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -8020,6 +8077,7 @@ MIGRATIONS = {
     130: _migrate_v130_to_v131,
     131: _migrate_v131_to_v132,
     132: _migrate_v132_to_v133,
+    133: _migrate_v133_to_v134,
 }
 
 

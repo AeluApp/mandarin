@@ -1,4 +1,5 @@
 """Tests for Supabase MCP migration preparation module."""
+# phantom-schema-checked
 
 import json
 import unittest

@@ -299,6 +299,7 @@ class TestSandhiV2:
 
 # ── Coaching V2 ───────────────────────────────────────────────────
 
+@pytest.mark.tone_audio
 class TestCoachingV2:
     def test_coaching_with_diagnostics(self):
         from mandarin.tone_grading import generate_tone_coaching

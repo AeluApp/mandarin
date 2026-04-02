@@ -94,6 +94,13 @@ MAILING_ADDRESS = os.environ.get("MAILING_ADDRESS", "Aelu")
 NEWSLETTER_TO = os.environ.get("NEWSLETTER_TO", "")
 MARKETING_NOTIFY_EMAIL = os.environ.get("MARKETING_NOTIFY_EMAIL", "")
 
+# ── Notifications — Matrix / Beeper ───────────────────
+MATRIX_HOMESERVER   = os.environ.get("MATRIX_HOMESERVER", "")
+MATRIX_ACCESS_TOKEN = os.environ.get("MATRIX_ACCESS_TOKEN", "")
+MATRIX_USER_ID      = os.environ.get("MATRIX_USER_ID", "")
+# Optional: hardcode the notification room ID to skip DM-with-self lookup
+MATRIX_ROOM_ID      = os.environ.get("MATRIX_ROOM_ID", "")
+
 PLAUSIBLE_DOMAIN = os.environ.get("PLAUSIBLE_DOMAIN", "")  # e.g. "aeluapp.com"
 PLAUSIBLE_API_KEY = os.environ.get("PLAUSIBLE_API_KEY", "")
 
@@ -424,6 +431,16 @@ def _is_cloud_model(model_name: str) -> bool:
 
 IS_CLOUD_MODEL = _is_cloud_model(LITELLM_MODEL)
 MODEL_SIZE_B = _extract_model_size_b(LITELLM_MODEL)
+
+# LLM_ENABLED: true when an LLM is intentionally configured for this environment.
+# Defaults to true if a cloud API key is present; false for local dev without Ollama.
+# Set LLM_ENABLED=true in production env to ensure health checks fire correctly.
+LLM_ENABLED = (
+    bool(os.environ.get("LLM_ENABLED", ""))
+    or bool(ANTHROPIC_API_KEY)
+    or bool(OPENAI_API_KEY)
+    or IS_CLOUD_MODEL
+)
 
 
 def validate_production_config() -> dict[str, list[str]]:
