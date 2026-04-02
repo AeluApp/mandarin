@@ -1559,6 +1559,57 @@ def seed_grammar():
         console.print(f"  Linked {g_links} grammar→content, {s_links} skill→content.\n")
 
 
+@app.command(name="import-cedict")
+def import_cedict():
+    """Download CC-CEDICT and import into dictionary_entry + rag_knowledge_base.
+
+    Downloads the latest CC-CEDICT release directly from cc-cedict.org,
+    extracts it to a temp file, and runs import_cc_cedict(). Safe to re-run —
+    existing entries are skipped. Typical runtime: 2-3 minutes.
+    """
+    import gzip
+    import shutil
+    import tempfile
+    import urllib.request
+
+    CEDICT_URL = "https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz"
+
+    console.print()
+    console.print("  [bold]Importing CC-CEDICT…[/bold]")
+    console.print(f"  Downloading from {CEDICT_URL}")
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        gz_path = f"{tmpdir}/cedict.txt.gz"
+        txt_path = f"{tmpdir}/cedict.txt"
+
+        try:
+            urllib.request.urlretrieve(CEDICT_URL, gz_path)
+        except Exception as e:
+            console.print(f"  [red]Download failed: {e}[/red]")
+            raise SystemExit(1)
+
+        with gzip.open(gz_path, "rb") as f_in, open(txt_path, "wb") as f_out:
+            shutil.copyfileobj(f_in, f_out)
+
+        console.print("  Download complete. Importing…")
+
+        from .ai.rag_layer import import_cc_cedict
+        with db.connection() as conn:
+            result = import_cc_cedict(conn, txt_path)
+
+        if "error" in result:
+            console.print(f"  [red]Import error: {result['error']}[/red]")
+            raise SystemExit(1)
+
+        added = result.get("added", 0)
+        skipped = result.get("skipped", 0)
+        console.print(f"  Added {added:,} entries, skipped {skipped:,} already present.")
+
+    console.print()
+    console.print("  [dim]CC-CEDICT import complete.[/dim]")
+    console.print()
+
+
 @app.command()
 def settings(
     audio: str = typer.Option(None, help="Audio playback: on/off"),
