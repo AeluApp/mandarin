@@ -1601,9 +1601,9 @@ def import_cedict():
             console.print(f"  [red]Import error: {result['error']}[/red]")
             raise SystemExit(1)
 
-        added = result.get("added", 0)
+        imported = result.get("imported", 0)
         skipped = result.get("skipped", 0)
-        console.print(f"  Added {added:,} entries, skipped {skipped:,} already present.")
+        console.print(f"  Imported {imported:,} entries ({skipped:,} not in HSK vocab — skipped).")
 
     console.print()
     console.print("  [dim]CC-CEDICT import complete.[/dim]")
