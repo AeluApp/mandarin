@@ -545,6 +545,12 @@ def _classify_keywords(instruction: str, target_parameter: str = None,
             "flag", "interference", "retrain", "model version")):
         return "fix_config"
 
+    # Explicit human-routing language — never override with LLM
+    if any(phrase in instruction_lower for phrase in
+           ("decide manually", "human review", "requires human", "manual review",
+            "review and decide", "strategic decision", "human judgment")):
+        return "requires_human_final"
+
     return "requires_human"
 
 
@@ -682,6 +688,8 @@ def classify_prescription(instruction: str, target_parameter: str = None,
     """
     # Fast path: keyword matching
     result = _classify_keywords(instruction, target_parameter, confidence_label, instruction_source)
+    if result == "requires_human_final":
+        return "requires_human"
     if result != "requires_human":
         return result
 

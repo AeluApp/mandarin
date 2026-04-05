@@ -274,9 +274,10 @@ class TestGenerateHypotheses:
 
     @patch("mandarin.ai.experiment_ai.generate")
     @patch("mandarin.ai.experiment_ai.is_ollama_available", return_value=True)
-    def test_no_signals(self, mock_avail, mock_gen, exp_db):
+    @patch("mandarin.churn_detection.compute_churn_risk", return_value={"score": 0, "risk_level": "none", "signals": []})
+    def test_no_signals(self, mock_churn, mock_avail, mock_gen, exp_db):
         from mandarin.ai.experiment_ai import generate_hypotheses
-        # Empty DB — no sessions, no signals
+        # Empty DB — no sessions, no signals (churn patched to zero)
         result = generate_hypotheses(exp_db)
         assert result == []
         mock_gen.assert_not_called()

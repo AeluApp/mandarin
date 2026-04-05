@@ -474,7 +474,7 @@ def _classify_churn_type(signals: list, days_gap, freq_decline, dur_decline,
 # Public API for other modules (e.g., email trigger hooks)
 # ---------------------------------------------------------------------------
 
-def get_at_risk_users(db_path: str = None, min_risk: int = 60,
+def get_at_risk_users(db_path_or_conn=None, min_risk: int = 60,
                       user_id: int = 1) -> list[dict]:
     """Return a list of user risk profiles where score >= min_risk.
 
@@ -489,18 +489,26 @@ def get_at_risk_users(db_path: str = None, min_risk: int = 60,
         days_since_last_session: float or None
 
     Args:
-        db_path: Path to the SQLite database. Defaults to the standard location.
+        db_path_or_conn: Path string to SQLite database, or an existing
+            sqlite3.Connection. Defaults to the standard location.
         min_risk: Minimum risk score to include (default 60 = High + Critical).
         user_id: User ID to check.
 
     Returns:
         List of risk profile dicts.
     """
-    path = Path(db_path) if db_path else _DEFAULT_DB_PATH
-    if not path.exists():
-        return []
+    import sqlite3 as _sqlite3
 
-    conn = _get_connection(path)
+    if isinstance(db_path_or_conn, _sqlite3.Connection):
+        conn = db_path_or_conn
+        own_conn = False
+    else:
+        path = Path(db_path_or_conn) if db_path_or_conn else _DEFAULT_DB_PATH
+        if not path.exists():
+            return []
+        conn = _get_connection(path)
+        own_conn = True
+
     try:
         risk = compute_churn_risk(conn, user_id=user_id)
         if risk["score"] >= min_risk:
@@ -513,7 +521,8 @@ def get_at_risk_users(db_path: str = None, min_risk: int = 60,
             }]
         return []
     finally:
-        conn.close()
+        if own_conn:
+            conn.close()
 
 
 # ---------------------------------------------------------------------------

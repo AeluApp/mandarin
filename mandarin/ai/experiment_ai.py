@@ -213,7 +213,7 @@ def _gather_learner_signals(conn: sqlite3.Connection) -> dict:
     try:
         # Churn risk signals
         from ..churn_detection import get_at_risk_users
-        at_risk = get_at_risk_users(min_risk=40)
+        at_risk = get_at_risk_users(conn, min_risk=40)
         if at_risk:
             churn_types = {}
             for u in at_risk:
