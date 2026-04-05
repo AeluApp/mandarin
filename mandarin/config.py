@@ -289,7 +289,7 @@ MIN_NEW_ITEMS = 2               # Always allow at least this many new items
 CONFIDENCE_WINS_NEEDED = 2      # Correct answers needed before moving on
 SECONDS_PER_DRILL = 35          # Estimated time per drill item
 SECONDS_PER_CONVERSATION = 60  # Estimated time per dialogue scenario
-SESSION_PLAN_REDUCTION_FACTOR = 0.80  # Reduce planned items to 80% — improves completion ratio
+SESSION_PLAN_REDUCTION_FACTOR = 0.60  # Reduce planned items to 60% — matches observed completion rate
 
 # ── Session time cap (hyperfocus guard) ──
 
@@ -297,10 +297,10 @@ SESSION_TIME_CAP_SECONDS = 600  # 10 minutes; auto-finish after this
 
 # ── Adaptive session length ──
 
-ADAPTIVE_LENGTH_MIN_SESSIONS = 3      # Min recent sessions needed for adaptive adjustment
+ADAPTIVE_LENGTH_MIN_SESSIONS = 2      # Min recent sessions needed for adaptive adjustment
 ADAPTIVE_LENGTH_RECENT_SESSIONS = 5   # Number of recent sessions to analyze
-ADAPTIVE_LENGTH_LOW_COMPLETION = 0.8  # Avg completion below this → shrink session
-ADAPTIVE_LENGTH_SHRINK_FACTOR = 0.7   # Multiply base length by this when shrinking (was 0.8)
+ADAPTIVE_LENGTH_LOW_COMPLETION = 0.6  # Avg completion below this → shrink session
+ADAPTIVE_LENGTH_SHRINK_FACTOR = 0.6   # Multiply base length by this when shrinking
 ADAPTIVE_LENGTH_MIN_ITEMS = 4         # Floor for shrunken session length
 ADAPTIVE_LENGTH_HIGH_COMPLETION = 0.95  # Avg completion above this → grow session
 ADAPTIVE_LENGTH_HIGH_MIN_SESSIONS = 5   # Need this many sessions for growth
@@ -308,9 +308,9 @@ ADAPTIVE_LENGTH_GROW_FACTOR = 1.1     # Multiply base length by this when growin
 
 # ── Encounter → drill boost ──
 
-ENCOUNTER_BOOST_RATIO = 0.40          # Up to 40% of session for encounter items (was 25%)
-ENCOUNTER_PRIORITY_WINDOW_DAYS = 3    # Priority window: drill within 3 days of lookup
-ENCOUNTER_FULL_WINDOW_DAYS = 14       # Full eligibility window for encounter items
+ENCOUNTER_BOOST_RATIO = 0.40          # Up to 40% of session for encounter items
+ENCOUNTER_PRIORITY_WINDOW_DAYS = 7    # Priority window: drill within 7 days of lookup
+ENCOUNTER_FULL_WINDOW_DAYS = 30       # Full eligibility window for encounter items
 
 # ── Cross-modality boost ──
 

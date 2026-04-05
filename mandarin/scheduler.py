@@ -3445,6 +3445,11 @@ def plan_standard_session(conn: sqlite3.Connection, target_items: int | None = N
     if not is_long_gap:
         _plan_delayed_validations(conn, drills, seen_ids, user_id)
 
+    # Hard cap: trim to 120% of target to prevent injection bloat
+    cap = max(MIN_SESSION_ITEMS, int(params["target_items"] * 1.2))
+    if len(drills) > cap:
+        drills = drills[:cap]
+
     # First-session scaffolding: recognition drills first for brand-new users
     profile = db.get_profile(conn, user_id=user_id)
     if (profile.get("total_sessions") or 0) == 0:

@@ -220,6 +220,25 @@ def _process_vocab_encounter(conn, user_id, data):
     ).fetchone()
     content_item_id = row["id"] if row else None
 
+    # Auto-create content item for looked-up words not yet in catalog
+    if content_item_id is None:
+        try:
+            from ..dictionary import cedict_lookup
+            entries = cedict_lookup(conn, hanzi)
+            if entries:
+                pinyin = entries[0].get("pinyin", "")
+                english = entries[0].get("english", "")
+            else:
+                pinyin, english = "", ""
+            cur = conn.execute(
+                """INSERT INTO content_item (hanzi, pinyin, english, status, review_status)
+                   VALUES (?, ?, ?, 'drill_ready', 'approved')""",
+                (hanzi, pinyin, english),
+            )
+            content_item_id = cur.lastrowid
+        except Exception:
+            pass  # Fall back to NULL; non-critical
+
     conn.execute(
         """INSERT INTO vocab_encounter
            (content_item_id, hanzi, source_type, source_id, looked_up, user_id)
