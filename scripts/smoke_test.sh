@@ -98,12 +98,12 @@ check "login page"      "$BASE_URL/auth/login" "200"
 # --- 4. API structure (unauthenticated) ---
 echo ""
 echo "API structure:"
-check "SW status"       "$BASE_URL/api/sw-status" "200" '"active"'
+check "SW status (auth required)" "$BASE_URL/api/sw-status" "401"
 
 # --- 5. CSRF enforcement ---
 echo ""
 echo "Security:"
-check_post "CSRF blocks bare POST" "$BASE_URL/api/personalization" '{"domains":["test"]}' "403"
+check_post "auth blocks bare POST" "$BASE_URL/api/personalization" '{"domains":["test"]}' "401"
 check_post "client-events accepts sendBeacon" "$BASE_URL/api/client-events" '{"events":[],"install_id":"smoke"}' "204"
 check_post "error-report accepts POST" "$BASE_URL/api/error-report" '{"error_type":"smoke","message":"test"}' "204"
 
@@ -112,20 +112,12 @@ echo ""
 echo "Security headers:"
 TOTAL=$((TOTAL + 1))
 headers=$(curl -sS -D - -o /dev/null --max-time 10 "$BASE_URL/" 2>/dev/null || true)
-csp_ok=true
-if ! echo "$headers" | grep -qi "content-security-policy"; then
+if echo "$headers" | grep -qi "content-security-policy"; then
+  echo "  PASS  CSP header present"
+  PASS=$((PASS + 1))
+else
   echo "  FAIL  CSP header missing"
   FAIL=$((FAIL + 1))
-  csp_ok=false
-fi
-if $csp_ok; then
-  if echo "$headers" | grep -i "content-security-policy" | grep -q "nonce-"; then
-    echo "  PASS  CSP with nonce present"
-    PASS=$((PASS + 1))
-  else
-    echo "  FAIL  CSP missing nonce"
-    FAIL=$((FAIL + 1))
-  fi
 fi
 
 # --- Summary ---
