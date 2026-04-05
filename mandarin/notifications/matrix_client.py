@@ -91,6 +91,34 @@ def _find_existing_dm_room() -> str | None:
     return None
 
 
+def _find_dm_room_via_joined() -> str | None:
+    """Fallback: scan joined rooms for one named 'Aelu Notifications'."""
+    try:
+        resp = requests.get(
+            _api("/_matrix/client/v3/joined_rooms"),
+            headers=_headers(),
+            timeout=_HTTP_TIMEOUT,
+        )
+        if resp.status_code != 200:
+            return None
+        for rid in resp.json().get("joined_rooms", []):
+            try:
+                state_resp = requests.get(
+                    _api(f"/_matrix/client/v3/rooms/{requests.utils.quote(rid, safe='')}/state/m.room.name"),
+                    headers=_headers(),
+                    timeout=_HTTP_TIMEOUT,
+                )
+                if state_resp.status_code == 200:
+                    name = state_resp.json().get("name", "")
+                    if name == "Aelu Notifications":
+                        return rid
+            except requests.RequestException:
+                continue
+    except (requests.RequestException, ValueError) as exc:
+        logger.debug("Matrix: joined_rooms scan failed: %s", exc)
+    return None
+
+
 def _create_dm_room() -> str | None:
     """Create a new direct-message room with the configured Matrix user."""
     try:
@@ -109,6 +137,14 @@ def _create_dm_room() -> str | None:
             room_id = resp.json().get("room_id")
             logger.info("Matrix: created DM room %s with %s", room_id, MATRIX_USER_ID)
             return room_id
+        elif resp.status_code == 403 and "already in the room" in resp.text:
+            # Room exists but account_data lookup missed it — scan joined rooms.
+            logger.warning("Matrix: 403 on createRoom (already in room), scanning joined rooms")
+            room_id = _find_existing_dm_room() or _find_dm_room_via_joined()
+            if room_id:
+                logger.info("Matrix: recovered existing DM room %s", room_id)
+                return room_id
+            logger.error("Matrix: 403 but could not find existing DM room")
         else:
             logger.error(
                 "Matrix: createRoom failed %s: %s", resp.status_code, resp.text

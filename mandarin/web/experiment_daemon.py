@@ -256,7 +256,7 @@ def _daemon_tick(conn):
 
     # ── 4. Propose experiments from churn signals ──
     try:
-        at_risk = get_at_risk_users(conn, min_risk=50)
+        at_risk = get_at_risk_users(min_risk=50)
         churn_types = {}
         for user in at_risk:
             ct = user.get("churn_type", "unknown")
