@@ -41,15 +41,12 @@ def stop():
 
 def _seconds_until_next_run(target_hour: int = 3) -> int:
     """Seconds until the next occurrence of target_hour UTC."""
+    from datetime import timedelta
     now = datetime.now(UTC)
     target = now.replace(hour=target_hour, minute=0, second=0, microsecond=0)
     if now >= target:
-        target = target.replace(day=target.day + 1)
-    diff = (target - now).total_seconds()
-    # Handle month boundary by using timedelta
-    if diff <= 0:
-        diff = _DAILY_SECONDS
-    return int(diff)
+        target += timedelta(days=1)
+    return max(int((target - now).total_seconds()), 60)
 
 
 def _run_loop():
@@ -111,7 +108,15 @@ def _intelligence_tick(conn):
         except Exception:
             logger.exception("Failed to run monthly intelligence audit")
 
-    # 3. Log lifecycle event
+    # 3. Send daily intelligence digest email
+    try:
+        from ..email import send_daily_intelligence_digest
+        send_daily_intelligence_digest(conn)
+        actions.append("sent daily intelligence digest")
+    except Exception:
+        logger.exception("Failed to send daily intelligence digest")
+
+    # 4. Log lifecycle event
     try:
         from ..marketing_hooks import log_lifecycle_event
         log_lifecycle_event(

@@ -905,12 +905,7 @@ def _run_intelligence_loop():
             except Exception:
                 logger.debug("Intelligence loop: auto-executor failed", exc_info=True)
 
-            # 5. Send daily intelligence digest email
-            try:
-                from ..email import send_daily_intelligence_digest
-                send_daily_intelligence_digest(conn)
-            except Exception:
-                logger.warning("Intelligence loop: daily digest email failed", exc_info=True)
+            # 5. Daily digest moved to nightly_intelligence_scheduler (03:00 UTC)
 
     except Exception:
         logger.exception("Intelligence automation loop failed")
