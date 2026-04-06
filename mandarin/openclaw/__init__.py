@@ -37,39 +37,31 @@ _logger = logging.getLogger(__name__)
 def notify_owner(message: str) -> bool:
     """Send a proactive notification to the product owner via the best available channel.
 
-    Tries channels in priority order: Matrix/Beeper → iMessage → Telegram → Discord.
+    Tries channels in priority order: Email (Resend) → Matrix/Beeper → iMessage → Telegram.
     Returns True if any channel delivered successfully.
     """
-    # Try Matrix/Beeper first (delivers to iMessage via Beeper bridge)
+    # Try email first (most reliable — works from Fly.io, delivers to phone)
     try:
-        from ..notifications.matrix_client import send_notification, _is_configured
-        if _is_configured():
-            if send_notification(message):
+        from ..email import send_alert
+        from ..settings import ADMIN_EMAIL
+        if ADMIN_EMAIL:
+            if send_alert(ADMIN_EMAIL, "Aelu", message):
                 return True
     except (ImportError, Exception):
         pass
 
-    # Try iMessage directly (macOS only, zero deps)
+    # Also try Matrix/Beeper (delivers to Beeper app — best-effort alongside email)
+    try:
+        from ..notifications.matrix_client import send_notification, _is_configured
+        if _is_configured():
+            send_notification(message)
+    except (ImportError, Exception):
+        pass
+
+    # Also try iMessage directly (macOS only, zero deps — best-effort)
     try:
         from .imessage_bot import send_to_owner
-        if send_to_owner(message):
-            return True
-    except (ImportError, Exception):
-        pass
-
-    # Try Telegram
-    try:
-        from .telegram_bot import send_telegram_notification
-        if send_telegram_notification(message):
-            return True
-    except (ImportError, Exception):
-        pass
-
-    # Try Discord
-    try:
-        from .discord_bot import send_discord_notification
-        if send_discord_notification(message):
-            return True
+        send_to_owner(message)
     except (ImportError, Exception):
         pass
 
