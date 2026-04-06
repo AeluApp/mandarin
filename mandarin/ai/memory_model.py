@@ -477,25 +477,19 @@ Only report HIGH confidence pairs. Return JSON only:
 
 
 def _insert_interference_pairs(conn: sqlite3.Connection, pairs: list[dict]):
+    # Normalize pair order (smaller ID first) so UNIQUE constraint catches dupes.
+    # Use INSERT OR IGNORE to avoid per-row SELECT + lock contention.
     for p in pairs:
-        existing = conn.execute("""
-            SELECT 1 FROM interference_pairs
-            WHERE (item_id_a=? AND item_id_b=?)
-               OR (item_id_a=? AND item_id_b=?)
-        """, (p["item_id_a"], p["item_id_b"],
-              p["item_id_b"], p["item_id_a"])).fetchone()
-        if existing:
-            continue
+        a, b = p["item_id_a"], p["item_id_b"]
+        if a > b:
+            a, b = b, a
         conn.execute("""
-            INSERT INTO interference_pairs
+            INSERT OR IGNORE INTO interference_pairs
             (item_id_a, item_id_b, interference_type,
              interference_strength, detected_by)
             VALUES (?,?,?,?,?)
-        """, (
-            p["item_id_a"], p["item_id_b"],
-            p["interference_type"], p["interference_strength"],
-            p["detected_by"],
-        ))
+        """, (a, b, p["interference_type"], p["interference_strength"],
+              p["detected_by"]))
 
 
 # ─────────────────────────────────────────────
