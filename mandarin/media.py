@@ -302,8 +302,8 @@ def recommend_media(conn, hsk_max: int = 9, lens_weights: dict | None = None,
 
     scored = []
     for entry in catalog:
-        # Only show verified entries with real URLs
-        if not entry.get("verified") or not entry.get("url"):
+        # Show entries that have a URL or where_to_find instructions
+        if not entry.get("url") and not entry.get("where_to_find"):
             continue
 
         mid = entry["id"]
