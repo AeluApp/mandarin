@@ -29,6 +29,11 @@ _sync_token: str | None = None
 # Signal room cache
 _signal_room_id: str | None = None
 
+# Track event IDs of replies we sent, so we skip our own replies
+# but still process messages from the owner (same Matrix account).
+_sent_event_ids: set[str] = set()
+_MAX_SENT_TRACKING = 200
+
 _HTTP_TIMEOUT = 15
 
 
@@ -124,7 +129,7 @@ def _validate_signal_sender(sender_mxid: str) -> bool:
 
 
 def _send_reply(room_id: str, message: str) -> bool:
-    """Send a reply to the Signal room via Matrix."""
+    """Send a reply to the Signal room via Matrix. Tracks event ID to avoid re-processing."""
     txn = f"aelu_signal_{int(time.time())}_{uuid.uuid4().hex[:8]}"
     try:
         url = _api(
@@ -136,7 +141,16 @@ def _send_reply(room_id: str, message: str) -> bool:
             json={"msgtype": "m.text", "body": message},
             timeout=_HTTP_TIMEOUT,
         )
-        return resp.status_code in (200, 201)
+        if resp.status_code in (200, 201):
+            event_id = resp.json().get("event_id", "")
+            if event_id:
+                _sent_event_ids.add(event_id)
+                # Cap the set to prevent memory growth
+                if len(_sent_event_ids) > _MAX_SENT_TRACKING:
+                    # Remove oldest (arbitrary, but set is small)
+                    _sent_event_ids.pop()
+            return True
+        return False
     except requests.RequestException:
         return False
 
@@ -242,9 +256,11 @@ def poll_once() -> int:
         events = room_data.get("timeline", {}).get("events", [])
 
         for event in events:
+            event_id = event.get("event_id", "")
             sender = event.get("sender", "")
-            # Skip our own messages (sent by the bot itself)
-            if sender == MATRIX_USER_ID:
+
+            # Skip our own bot replies (tracked by event ID)
+            if event_id in _sent_event_ids:
                 continue
 
             content = event.get("content", {})

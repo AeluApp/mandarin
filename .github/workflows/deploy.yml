@@ -22,7 +22,7 @@ jobs:
 
       - name: Run full test suite (fail-fast on first error)
         run: >
-          pytest -x -v --tb=short -m "not slow"
+          pytest -x -v --tb=short -m "not slow" --timeout=300
         env:
           HYPOTHESIS_PROFILE: ci
 

@@ -7,8 +7,6 @@ through the OpenClaw intent pipeline, and replies via Matrix.
 import logging
 import threading
 
-from ..scheduler_lock import acquire_lock, release_lock
-
 logger = logging.getLogger(__name__)
 
 _POLL_INTERVAL = 10  # seconds
@@ -38,6 +36,7 @@ def _run_loop():
     """Poll for Signal messages every 10 seconds."""
     from ..openclaw.signal_bot import is_configured, poll_once
 
+    # Check config BEFORE delay — don't waste 30s in CI where creds aren't set
     if not is_configured():
         logger.info("Signal bot: not configured (missing MATRIX or SIGNAL credentials), not starting")
         return

@@ -54,6 +54,45 @@ def _run_loop():
     if _stop_event.wait(_INITIAL_DELAY):
         return
 
+    # Catch-up: if last digest was >24h ago, run immediately on startup
+    # (handles missed runs due to redeployments crossing the 03:00 window)
+    try:
+        catch_conn = db.get_connection()
+        last_event = catch_conn.execute("""
+            SELECT MAX(created_at) FROM openclaw_message_log
+            WHERE agent_type = 'nightly_intelligence'
+        """).fetchone()
+        last_ts = last_event[0] if last_event and last_event[0] else None
+        catch_conn.close()
+
+        should_catch_up = True
+        if last_ts:
+            from datetime import timedelta
+            last_dt = datetime.fromisoformat(last_ts).replace(tzinfo=UTC)
+            if (datetime.now(UTC) - last_dt).total_seconds() < _DAILY_SECONDS:
+                should_catch_up = False
+
+        if should_catch_up:
+            logger.info("Nightly intelligence: catch-up run (missed scheduled window)")
+            conn = db.get_connection()
+            try:
+                if acquire_lock(conn, "nightly_intelligence", ttl_seconds=3600):
+                    _intelligence_tick(conn)
+                    release_lock(conn, "nightly_intelligence")
+                    # Log so we don't catch up again
+                    conn.execute("""
+                        INSERT INTO openclaw_message_log
+                        (agent_type, direction, message_text, user_id)
+                        VALUES ('nightly_intelligence', 'outbound', 'catch-up digest sent', 1)
+                    """)
+                    conn.commit()
+            except Exception:
+                logger.exception("Nightly intelligence catch-up failed")
+            finally:
+                conn.close()
+    except Exception:
+        logger.debug("Nightly intelligence: catch-up check failed", exc_info=True)
+
     while not _stop_event.is_set():
         # Sleep until next 03:00 UTC
         wait_seconds = _seconds_until_next_run(target_hour=3)

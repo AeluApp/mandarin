@@ -159,8 +159,6 @@ def _discover_from_openrouter(seen_names: set) -> list[dict]:
             if not model_id:
                 continue
 
-            # Open-source only: check architecture/license fields
-            arch = m.get("architecture", {})
             # OpenRouter marks proprietary models; skip them
             pricing = m.get("pricing", {})
             # Skip if no pricing data (likely not available)
@@ -172,7 +170,6 @@ def _discover_from_openrouter(seen_names: set) -> list[dict]:
                 continue
 
             # Size filter
-            param_count = m.get("context_length", 0)  # OpenRouter doesn't always have param count
             size = _extract_model_size_b(model_id)
             if 0 < size < _MIN_MODEL_SIZE_B:
                 continue

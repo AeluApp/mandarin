@@ -1156,7 +1156,7 @@
         if (!match) return;
         var monthly = match[1];
         var annualMultiplied = (parseFloat(monthly) * 12).toFixed(0);
-        var annualPrice = Math.round(parseFloat(monthly) * 10); // ~10 months = annual discount
+        var annualPrice = Math.floor(parseFloat(monthly) * 10); // ~10 months = annual discount
         var annualPerMonth = (annualPrice / 12).toFixed(2);
         var savings = (annualMultiplied - annualPrice).toString();
         // Update visible monthly price
