@@ -37,13 +37,22 @@ _logger = logging.getLogger(__name__)
 def notify_owner(message: str) -> bool:
     """Send a proactive notification to the product owner via the best available channel.
 
-    Tries channels in priority order: iMessage (macOS-native) → Telegram → Discord.
+    Tries channels in priority order: Matrix/Beeper → iMessage → Telegram → Discord.
     Returns True if any channel delivered successfully.
     """
-    # Try iMessage first (macOS only, zero deps)
+    # Try Matrix/Beeper first (delivers to iMessage via Beeper bridge)
     try:
-        from .imessage_bot import send_imessage_notification
-        if send_imessage_notification(message):
+        from ..notifications.matrix_client import send_notification, _is_configured
+        if _is_configured():
+            if send_notification(message):
+                return True
+    except (ImportError, Exception):
+        pass
+
+    # Try iMessage directly (macOS only, zero deps)
+    try:
+        from .imessage_bot import send_to_owner
+        if send_to_owner(message):
             return True
     except (ImportError, Exception):
         pass

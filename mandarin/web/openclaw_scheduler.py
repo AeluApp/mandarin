@@ -141,7 +141,7 @@ def _check_study_reminder():
             f"{struggle_text} Ready?"
         )
 
-        # Log the reminder (actual delivery depends on configured transport)
+        # Log and deliver the reminder
         conn.execute("""
             INSERT INTO openclaw_message_log
             (agent_type, direction, message_text, user_id)
@@ -149,6 +149,11 @@ def _check_study_reminder():
         """, (message,))
         conn.commit()
         logger.info("Study reminder: %s", message)
+        try:
+            from ..openclaw import notify_owner
+            notify_owner(f"📖 {message}")
+        except Exception:
+            logger.debug("Study reminder: delivery failed", exc_info=True)
 
 
 def _check_review_queue():
@@ -185,6 +190,11 @@ def _check_review_queue():
         """, (message,))
         conn.commit()
         logger.info("Review queue alert: %s", message)
+        try:
+            from ..openclaw import notify_owner
+            notify_owner(message)
+        except Exception:
+            logger.debug("Review queue alert: delivery failed", exc_info=True)
 
 
 def _check_audit_briefing():
@@ -239,3 +249,8 @@ def _check_audit_briefing():
         """, (message,))
         conn.commit()
         logger.info("Audit briefing: %s", message)
+        try:
+            from ..openclaw import notify_owner
+            notify_owner(message)
+        except Exception:
+            logger.debug("Audit briefing: delivery failed", exc_info=True)

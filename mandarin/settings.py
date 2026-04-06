@@ -208,6 +208,11 @@ OPENCLAW_DISCORD_OWNER_ID = os.environ.get("OPENCLAW_DISCORD_OWNER_ID", "0")
 # iMessage (macOS only)
 OPENCLAW_IMESSAGE_OWNER_ID = os.environ.get("OPENCLAW_IMESSAGE_OWNER_ID", "")
 
+# Matrix / Beeper (iMessage bridge)
+MATRIX_HOMESERVER = os.environ.get("MATRIX_HOMESERVER", "")
+MATRIX_ACCESS_TOKEN = os.environ.get("MATRIX_ACCESS_TOKEN", "")
+MATRIX_USER_ID = os.environ.get("MATRIX_USER_ID", "")
+
 # ── Kanban / methodology ──────────────────────────────
 WIP_LIMIT_IN_PROGRESS = 5
 ESTIMATE_POINTS = {"S": 1, "M": 3, "L": 5, "XL": 8}
