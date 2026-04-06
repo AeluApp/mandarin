@@ -282,21 +282,21 @@ def discover_available_models(conn=None) -> list[dict]:
     models = []
     seen_names = set()
 
-    # 1. Seed models: providers with configured API keys
+    # 1. OpenRouter: meta-provider — discovers new providers and models autonomously.
+    #    First so it's the source of truth for what's available.
+    openrouter_models = _discover_from_openrouter(seen_names)
+    models.extend(openrouter_models)
+
+    # 2. Direct provider APIs: query each configured provider for their catalog
+    live_models = _discover_from_provider_apis(seen_names)
+    models.extend(live_models)
+
+    # 3. Seed list: known-good models as fallback if APIs are down
     for m in _CLOUD_OSS_MODELS:
         provider = m["provider"]
         if _provider_has_key(provider) and m["name"] not in seen_names:
             models.append({**m, "local": False})
             seen_names.add(m["name"])
-
-    # 2. OpenRouter: meta-provider that aggregates all open-source models.
-    #    This is how we discover new providers and models autonomously.
-    openrouter_models = _discover_from_openrouter(seen_names)
-    models.extend(openrouter_models)
-
-    # 3. Direct provider APIs: query each configured provider for their catalog
-    live_models = _discover_from_provider_apis(seen_names)
-    models.extend(live_models)
 
     # 4. LiteLLM model list (static, updates with pip upgrade)
     try:
@@ -315,7 +315,7 @@ def discover_available_models(conn=None) -> list[dict]:
     except Exception:
         pass
 
-    # 5. Local Ollama fallback
+    # 5. Local Ollama
     try:
         resp = httpx.get(f"{OLLAMA_URL}/api/tags", timeout=5.0)
         if resp.status_code == 200:
