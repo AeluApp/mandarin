@@ -13,6 +13,63 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 
+def dispatch_intent(intent_result, conn=None) -> str:
+    """Execute a classified intent and return the response text.
+
+    Shared by all bot transports (Telegram, Signal, etc.).
+    """
+    from . import llm_handler
+    from ..settings import BASE_URL
+
+    intent = intent_result.intent
+    args = intent_result.args
+
+    dispatch = {
+        "status": lambda: cmd_status(),
+        "review": lambda: cmd_review(),
+        "audit": lambda: cmd_audit(),
+        "briefing": lambda: cmd_briefing(focus=args.get("focus", "general")),
+        "errors": lambda: cmd_error_patterns(),
+        "approve": lambda: cmd_approve(item_id=args.get("item_id", 0)),
+        "reject": lambda: cmd_reject(
+            item_id=args.get("item_id", 0),
+            reason=args.get("reason", ""),
+        ),
+        "session": lambda: f"Ready to study? Open {BASE_URL} to start a session.",
+        "findings": lambda: cmd_findings(),
+        "approve_finding": lambda: cmd_approve_finding(
+            finding_number=int(args.get("number", 0)), notes=args.get("notes", ""),
+        ),
+        "dismiss_finding": lambda: cmd_dismiss_finding(
+            finding_number=int(args.get("number", 0)), notes=args.get("notes", ""),
+        ),
+        "modify_finding": lambda: cmd_modify_finding(
+            finding_number=int(args.get("number", 0)),
+            instruction=args.get("instruction", args.get("notes", "")),
+        ),
+        "help": lambda: (
+            "Commands: status, review, audit, briefing, errors, findings\n"
+            "Reply 'approve 1' or 'dismiss 1' after findings.\n"
+            "Or just type naturally."
+        ),
+    }
+
+    handler = dispatch.get(intent)
+    if handler:
+        try:
+            return handler()
+        except Exception as e:
+            logger.error("Command %s failed: %s", intent, e, exc_info=True)
+            return f"Error running {intent}: {str(e)[:100]}"
+
+    # Chat / unknown — generate conversational response
+    if intent_result.reply:
+        return intent_result.reply
+    return llm_handler.generate_chat_response(
+        intent_result.args.get("original_text", ""), conn=conn,
+    )
+
+
 def _get_conn():
     """Get a DB connection."""
     from .. import db

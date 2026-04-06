@@ -640,6 +640,7 @@ def create_app(testing=False):
             counter_metrics_scheduler,
             marketing_scheduler,
             nightly_intelligence_scheduler,
+            signal_scheduler,
         )
 
         _scheduler_modules = [
@@ -656,6 +657,7 @@ def create_app(testing=False):
             ("counter-metrics", counter_metrics_scheduler),
             ("marketing-scheduler", marketing_scheduler),
             ("nightly-intelligence", nightly_intelligence_scheduler),
+            ("signal-bot", signal_scheduler),
         ]
 
         for _name, _module in _scheduler_modules:

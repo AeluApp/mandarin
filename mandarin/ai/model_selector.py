@@ -38,6 +38,7 @@ _MIN_SAMPLES_FOR_ROUTING = 5
 _REBENCHMARK_DAYS = 7
 
 # Provider → API key env var mapping
+# New providers are auto-activated when their API key env var is set.
 _PROVIDER_KEY_MAP = {
     "groq": "GROQ_API_KEY",
     "together": "TOGETHER_API_KEY",
@@ -45,7 +46,27 @@ _PROVIDER_KEY_MAP = {
     "siliconflow": "SILICONFLOW_API_KEY",
     "deepseek": "DEEPSEEK_API_KEY",
     "mistral": "MISTRAL_API_KEY",
+    "cerebras": "CEREBRAS_API_KEY",
+    "sambanova": "SAMBANOVA_API_KEY",
+    "novita": "NOVITA_API_KEY",
+    "lepton": "LEPTON_API_KEY",
 }
+
+# Provider → (models_endpoint, LiteLLM prefix)
+_PROVIDER_API_ENDPOINTS = {
+    "together": ("https://api.together.xyz/v1/models", "together_ai"),
+    "groq": ("https://api.groq.com/openai/v1/models", "groq"),
+    "deepseek": ("https://api.deepseek.com/v1/models", "deepseek"),
+    "fireworks": ("https://api.fireworks.ai/inference/v1/models", "fireworks_ai"),
+    "mistral": ("https://api.mistral.ai/v1/models", "mistral"),
+    "cerebras": ("https://api.cerebras.ai/v1/models", "cerebras"),
+    "sambanova": ("https://api.sambanova.ai/v1/models", "sambanova"),
+    "novita": ("https://api.novita.ai/v3/openai/models", "novita"),
+    "lepton": ("https://api.lepton.ai/v1/models", "lepton"),
+}
+
+_MIN_MODEL_SIZE_B = 3.0  # Skip models below 3B params
+_CHAT_MODEL_KEYWORDS = {"chat", "instruct", "it", "turbo", "versatile", "latest"}
 
 def _provider_has_key(provider: str) -> bool:
     """Check if a cloud provider has an API key configured."""
@@ -88,24 +109,123 @@ _CLOUD_OSS_MODELS = [
 
 # ─── Discovery ──────────────────────────────────────────────────
 
+
+def _is_chat_model(model_id: str, model_data: dict = None) -> bool:
+    """Heuristic: is this model suitable for chat/instruction tasks?"""
+    model_lower = model_id.lower()
+    # Exclude known non-chat model types
+    if any(skip in model_lower for skip in (
+        "embed", "whisper", "tts", "vision-only", "rerank",
+        "guard", "safety", "clip", "vae", "encoder",
+    )):
+        return False
+    # Include if name has chat/instruct keywords or is a known architecture
+    if any(kw in model_lower for kw in _CHAT_MODEL_KEYWORDS):
+        return True
+    # Check model_data type field if available
+    if model_data:
+        mtype = str(model_data.get("type", "")).lower()
+        if mtype in ("chat", "language", "text-generation"):
+            return True
+    # Default: include if size is reasonable (let benchmarking filter poor performers)
+    return True
+
+
+def _discover_from_provider_apis(seen_names: set) -> list[dict]:
+    """Query each configured provider's /models endpoint for live catalog.
+
+    Discovers new models released since the seed list was last updated.
+    """
+    from .. import settings as _settings
+    discovered = []
+
+    for provider, (endpoint, litellm_prefix) in _PROVIDER_API_ENDPOINTS.items():
+        key_name = _PROVIDER_KEY_MAP.get(provider, "")
+        api_key = getattr(_settings, key_name, None) if key_name else None
+        if not api_key:
+            continue
+
+        try:
+            resp = httpx.get(
+                endpoint,
+                headers={"Authorization": f"Bearer {api_key}"},
+                timeout=10.0,
+            )
+            if resp.status_code != 200:
+                continue
+
+            data = resp.json()
+            # Most providers follow OpenAI format: {"data": [...]}
+            models_list = data.get("data", data.get("models", []))
+            if isinstance(data, list):
+                models_list = data
+
+            for m in models_list:
+                if isinstance(m, str):
+                    model_id = m
+                    model_data = {}
+                elif isinstance(m, dict):
+                    model_id = m.get("id", m.get("name", ""))
+                    model_data = m
+                else:
+                    continue
+
+                if not model_id:
+                    continue
+
+                # Format with LiteLLM prefix
+                full_name = f"{litellm_prefix}/{model_id}"
+                if full_name in seen_names:
+                    continue
+
+                # Filter: chat-capable and large enough
+                if not _is_chat_model(model_id, model_data):
+                    continue
+
+                size = _extract_model_size_b(model_id)
+                if size < _MIN_MODEL_SIZE_B and size > 0:
+                    continue
+
+                discovered.append({
+                    "name": full_name,
+                    "provider": provider,
+                    "size_b": size,
+                    "local": False,
+                })
+                seen_names.add(full_name)
+
+        except Exception:
+            logger.debug("Model discovery: %s API failed", provider, exc_info=True)
+
+    if discovered:
+        logger.info("Model discovery: %d new models from provider APIs: %s",
+                     len(discovered),
+                     ", ".join(m["name"] for m in discovered[:5]))
+
+    return discovered
+
+
 def discover_available_models(conn=None) -> list[dict]:
     """Discover models available across all configured providers.
 
-    Cloud-first: checks which provider API keys are configured and includes
-    their models. Also checks local Ollama as fallback. Runs daily via
-    the model selection scheduler.
+    Cloud-first: seed list → live provider APIs → LiteLLM → local Ollama.
+    Runs daily via the model selection scheduler.
     """
     models = []
     seen_names = set()
 
-    # 1. Cloud models: only include from providers that have API keys configured
+    # 1. Seed models: providers with configured API keys
     for m in _CLOUD_OSS_MODELS:
         provider = m["provider"]
         if _provider_has_key(provider) and m["name"] not in seen_names:
             models.append({**m, "local": False})
             seen_names.add(m["name"])
 
-    # 2. Try LiteLLM model list for dynamic discovery of new models
+    # 2. Live discovery: query each provider's /models API for new releases
+    live_models = _discover_from_provider_apis(seen_names)
+    models.extend(live_models)
+
+    # 3. LiteLLM model list (static, updates with pip upgrade)
     try:
         import litellm
         provider_models = getattr(litellm, "models", None)
@@ -122,7 +242,7 @@ def discover_available_models(conn=None) -> list[dict]:
     except Exception:
         pass
 
-    # 3. Local Ollama fallback — always check for availability
+    # 4. Local Ollama fallback
     try:
         resp = httpx.get(f"{OLLAMA_URL}/api/tags", timeout=5.0)
         if resp.status_code == 200:
@@ -141,8 +261,8 @@ def discover_available_models(conn=None) -> list[dict]:
 
     cloud_count = sum(1 for m in models if not m.get("local"))
     local_count = sum(1 for m in models if m.get("local"))
-    logger.info("Model discovery: found %d models (%d cloud, %d local)",
-                len(models), cloud_count, local_count)
+    logger.info("Model discovery: found %d models (%d cloud, %d local, %d from live APIs)",
+                len(models), cloud_count, local_count, len(live_models))
     if cloud_count == 0 and local_count == 0:
         logger.error("Model discovery: NO models available — check API keys and Ollama")
     elif cloud_count == 0:

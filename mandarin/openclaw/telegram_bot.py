@@ -391,7 +391,7 @@ def _execute_intent(intent_result: llm_handler.IntentResult, conn) -> str:
             reason=args.get("reason", ""),
         ),
         "session": lambda: (
-            f"Ready to study? Open the app or visit {__import__('mandarin.settings', fromlist=['BASE_URL']).BASE_URL} "
+            f"Ready to study? Open {__import__('mandarin.settings', fromlist=['BASE_URL']).BASE_URL} "
             "to start a session."
         ),
         "findings": lambda: commands.cmd_findings(),
@@ -420,7 +420,7 @@ def _execute_intent(intent_result: llm_handler.IntentResult, conn) -> str:
             logger.error("Command %s failed: %s", intent, e, exc_info=True)
             return f"Error running {intent}: {str(e)[:100]}"
 
-    # Chat / unknown — generate conversational response
+    # Chat / unknown
     if intent_result.reply:
         return intent_result.reply
     return llm_handler.generate_chat_response(
