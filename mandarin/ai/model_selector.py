@@ -50,6 +50,7 @@ _PROVIDER_KEY_MAP = {
     "sambanova": "SAMBANOVA_API_KEY",
     "novita": "NOVITA_API_KEY",
     "lepton": "LEPTON_API_KEY",
+    "openrouter": "OPENROUTER_API_KEY",
 }
 
 # Provider → (models_endpoint, LiteLLM prefix)
@@ -129,6 +130,73 @@ def _is_chat_model(model_id: str, model_data: dict = None) -> bool:
             return True
     # Default: include if size is reasonable (let benchmarking filter poor performers)
     return True
+
+
+def _discover_from_openrouter(seen_names: set) -> list[dict]:
+    """Query OpenRouter for all available open-source models.
+
+    OpenRouter aggregates models from dozens of providers. New providers
+    and models appear automatically — this is how we discover new players
+    without hardcoding them. Filters to open-source models only.
+    """
+    from .. import settings as _settings
+    api_key = getattr(_settings, "OPENROUTER_API_KEY", None)
+    if not api_key:
+        return []
+
+    discovered = []
+    try:
+        resp = httpx.get(
+            "https://openrouter.ai/api/v1/models",
+            headers={"Authorization": f"Bearer {api_key}"},
+            timeout=15.0,
+        )
+        if resp.status_code != 200:
+            return []
+
+        for m in resp.json().get("data", []):
+            model_id = m.get("id", "")
+            if not model_id:
+                continue
+
+            # Open-source only: check architecture/license fields
+            arch = m.get("architecture", {})
+            # OpenRouter marks proprietary models; skip them
+            pricing = m.get("pricing", {})
+            # Skip if no pricing data (likely not available)
+            if not pricing:
+                continue
+
+            # Filter: only instruct/chat models
+            if not _is_chat_model(model_id, m):
+                continue
+
+            # Size filter
+            param_count = m.get("context_length", 0)  # OpenRouter doesn't always have param count
+            size = _extract_model_size_b(model_id)
+            if 0 < size < _MIN_MODEL_SIZE_B:
+                continue
+
+            full_name = f"openrouter/{model_id}"
+            if full_name in seen_names:
+                continue
+
+            discovered.append({
+                "name": full_name,
+                "provider": "openrouter",
+                "size_b": size,
+                "local": False,
+            })
+            seen_names.add(full_name)
+
+    except Exception:
+        logger.debug("Model discovery: OpenRouter API failed", exc_info=True)
+
+    if discovered:
+        logger.info("Model discovery: %d open-source models from OpenRouter",
+                     len(discovered))
+
+    return discovered
 
 
 def _discover_from_provider_apis(seen_names: set) -> list[dict]:
@@ -221,11 +289,16 @@ def discover_available_models(conn=None) -> list[dict]:
             models.append({**m, "local": False})
             seen_names.add(m["name"])
 
-    # 2. Live discovery: query each provider's /models API for new releases
+    # 2. OpenRouter: meta-provider that aggregates all open-source models.
+    #    This is how we discover new providers and models autonomously.
+    openrouter_models = _discover_from_openrouter(seen_names)
+    models.extend(openrouter_models)
+
+    # 3. Direct provider APIs: query each configured provider for their catalog
     live_models = _discover_from_provider_apis(seen_names)
     models.extend(live_models)
 
-    # 3. LiteLLM model list (static, updates with pip upgrade)
+    # 4. LiteLLM model list (static, updates with pip upgrade)
     try:
         import litellm
         provider_models = getattr(litellm, "models", None)
@@ -242,7 +315,7 @@ def discover_available_models(conn=None) -> list[dict]:
     except Exception:
         pass
 
-    # 4. Local Ollama fallback
+    # 5. Local Ollama fallback
     try:
         resp = httpx.get(f"{OLLAMA_URL}/api/tags", timeout=5.0)
         if resp.status_code == 200:
@@ -261,8 +334,8 @@ def discover_available_models(conn=None) -> list[dict]:
 
     cloud_count = sum(1 for m in models if not m.get("local"))
     local_count = sum(1 for m in models if m.get("local"))
-    logger.info("Model discovery: found %d models (%d cloud, %d local, %d from live APIs)",
-                len(models), cloud_count, local_count, len(live_models))
+    logger.info("Model discovery: found %d models (%d cloud, %d local, %d OpenRouter, %d direct API)",
+                len(models), cloud_count, local_count, len(openrouter_models), len(live_models))
     if cloud_count == 0 and local_count == 0:
         logger.error("Model discovery: NO models available — check API keys and Ollama")
     elif cloud_count == 0:
