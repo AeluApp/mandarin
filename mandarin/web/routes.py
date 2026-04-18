@@ -211,27 +211,41 @@ def register_routes(app):
 
     @app.route("/api/health/ready")
     def api_health_ready():
-        """Readiness probe — DB writable, schema current."""
+        """Readiness probe — DB readable, schema current.
+
+        Uses a disposable connection with a short busy_timeout so the probe
+        returns quickly (200 or 503) instead of hanging for 15 s when the WAL
+        is being checkpointed or background writers hold locks.
+        """
         import time as _time
         t0 = _time.monotonic()
+        conn = None
         try:
-            with db.connection() as conn:
-                conn.execute("SELECT 1")
-                from ..db.core import _get_schema_version, SCHEMA_VERSION
-                schema_version = _get_schema_version(conn)
-                if schema_version < SCHEMA_VERSION:
-                    elapsed_ms = round((_time.monotonic() - t0) * 1000, 1)
-                    return jsonify({
-                        "status": "not_ready",
-                        "reason": f"schema migration pending: v{schema_version} → v{SCHEMA_VERSION}",
-                        "latency_ms": elapsed_ms,
-                    }), 503
-                elapsed_ms = round((_time.monotonic() - t0) * 1000, 1)
-                return jsonify({"status": "ok", "latency_ms": elapsed_ms})
+            conn = db.get_connection()
+            # Override to a 2-second timeout: fail fast and honest rather than
+            # hanging through the full 15 s default.
+            conn.execute("PRAGMA busy_timeout=2000")
+            conn.execute("SELECT 1")
+            from ..db.core import _get_schema_version, SCHEMA_VERSION
+            schema_version = _get_schema_version(conn)
+            elapsed_ms = round((_time.monotonic() - t0) * 1000, 1)
+            if schema_version < SCHEMA_VERSION:
+                return jsonify({
+                    "status": "not_ready",
+                    "reason": f"schema migration pending: v{schema_version} → v{SCHEMA_VERSION}",
+                    "latency_ms": elapsed_ms,
+                }), 503
+            return jsonify({"status": "ok", "latency_ms": elapsed_ms})
         except (sqlite3.Error, OSError) as e:
             elapsed_ms = round((_time.monotonic() - t0) * 1000, 1)
             logger.error("readiness check failed: %s", e)
             return jsonify({"status": "not_ready", "reason": _sanitize_error(e), "latency_ms": elapsed_ms}), 503
+        finally:
+            if conn:
+                try:
+                    conn.close()
+                except Exception:
+                    pass
 
     @app.route("/api/health")
     def api_health():
