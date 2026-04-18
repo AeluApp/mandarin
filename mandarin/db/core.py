@@ -135,7 +135,7 @@ def get_pool_stats() -> dict:
     }
 
 
-SCHEMA_VERSION = 133  # Increment when adding migrations
+SCHEMA_VERSION = 134  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -7886,6 +7886,40 @@ def _migrate_v132_to_v133(conn):
     conn.commit()
 
 
+def _migrate_v133_to_v134(conn: sqlite3.Connection) -> None:
+    """v133->v134: Fix NULL NOT-NULL lens columns from ALTER TABLE ADD COLUMN migrations.
+
+    SQLite 3.37+ integrity_check flags NOT NULL violations in physical storage for
+    columns added via ALTER TABLE ADD COLUMN on existing rows. The bootstrap learner
+    profile row may have NULL stored for these lens columns even though the schema
+    records a DEFAULT. This migration back-fills them to their intended defaults.
+    """
+    cols = _col_set(conn, "learner_profile")
+    lens_defaults = {
+        "lens_quiet_observation": 0.7,
+        "lens_institutions": 0.7,
+        "lens_urban_texture": 0.7,
+        "lens_humane_mystery": 0.7,
+        "lens_identity": 0.7,
+        "lens_comedy": 0.7,
+        "lens_food": 0.5,
+        "lens_travel": 0.5,
+        "lens_explainers": 0.5,
+        "lens_wit": 0.7,
+        "lens_ensemble_comedy": 0.7,
+        "lens_sharp_observation": 0.7,
+        "lens_satire": 0.7,
+        "lens_moral_texture": 0.7,
+    }
+    for col, default in lens_defaults.items():
+        if col in cols:
+            conn.execute(
+                f"UPDATE learner_profile SET {col} = ? WHERE {col} IS NULL",
+                (default,),
+            )
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -8020,6 +8054,7 @@ MIGRATIONS = {
     130: _migrate_v130_to_v131,
     131: _migrate_v131_to_v132,
     132: _migrate_v132_to_v133,
+    133: _migrate_v133_to_v134,
 }
 
 

@@ -90,7 +90,6 @@ _CLOUD_OSS_MODELS = [
     # Together AI — widest model selection
     {"name": "together_ai/meta-llama/Llama-3.3-70B-Instruct-Turbo", "provider": "together", "size_b": 70.0},
     {"name": "together_ai/meta-llama/Llama-3.1-8B-Instruct-Turbo", "provider": "together", "size_b": 8.0},
-    {"name": "together_ai/mistralai/Mixtral-8x7B-Instruct-v0.1", "provider": "together", "size_b": 47.0},
     {"name": "together_ai/Qwen/Qwen2.5-72B-Instruct", "provider": "together", "size_b": 72.0},
     {"name": "together_ai/Qwen/Qwen2.5-7B-Instruct", "provider": "together", "size_b": 7.0},
     {"name": "together_ai/deepseek-ai/DeepSeek-V3", "provider": "together", "size_b": 671.0},
