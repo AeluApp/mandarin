@@ -77,15 +77,25 @@ def _run_loop():
             conn = db.get_connection()
             try:
                 if acquire_lock(conn, "nightly_intelligence", ttl_seconds=3600):
-                    _intelligence_tick(conn)
-                    release_lock(conn, "nightly_intelligence")
-                    # Log so we don't catch up again
-                    conn.execute("""
-                        INSERT INTO openclaw_message_log
-                        (agent_type, direction, message_text, user_id)
-                        VALUES ('nightly_intelligence', 'outbound', 'catch-up digest sent', 1)
-                    """)
-                    conn.commit()
+                    try:
+                        _intelligence_tick(conn)
+                    except Exception:
+                        logger.exception("Nightly intelligence catch-up tick failed")
+                    finally:
+                        release_lock(conn, "nightly_intelligence")
+                        # Always log the attempt so restarts don't re-trigger catch-up
+                        try:
+                            conn.execute("""
+                                INSERT INTO openclaw_message_log
+                                (agent_type, direction, message_text, user_id)
+                                VALUES ('nightly_intelligence', 'outbound',
+                                        'catch-up digest attempted', 1)
+                            """)
+                            conn.commit()
+                        except Exception:
+                            logger.debug(
+                                "Could not log catch-up attempt", exc_info=True
+                            )
             except Exception:
                 logger.exception("Nightly intelligence catch-up failed")
             finally:

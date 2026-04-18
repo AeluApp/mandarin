@@ -1218,7 +1218,13 @@ CREATE TABLE IF NOT EXISTS lti_user_mapping (
 -- ────────────────────────────────
 INSERT OR IGNORE INTO user (id, email, password_hash, display_name, subscription_tier, is_active)
     VALUES (1, 'local@localhost', 'bootstrap_no_login', 'Local', 'free', 0);
-INSERT OR IGNORE INTO learner_profile (id, user_id) VALUES (1, 1);
+INSERT OR IGNORE INTO learner_profile (
+    id, user_id,
+    lens_quiet_observation, lens_institutions, lens_urban_texture,
+    lens_humane_mystery, lens_identity, lens_comedy, lens_food,
+    lens_travel, lens_explainers, lens_wit, lens_ensemble_comedy,
+    lens_sharp_observation, lens_satire, lens_moral_texture
+) VALUES (1, 1, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.5, 0.5, 0.5, 0.7, 0.7, 0.7, 0.7, 0.7);
 
 -- ────────────────────────────────
 -- QUALITY INFRASTRUCTURE (V42+)

@@ -43,7 +43,7 @@ jobs:
 
           if [ -n "$OPEN" ]; then
             echo "Incident issue #$OPEN already open — skipping"
-            gh issue comment "$OPEN" --body "Health check still failing at $(date -u +%H:%M). live=${{ steps.health.outputs.live }} ready=${{ steps.health.outputs.ready }}"
+            gh issue comment "$OPEN" --body "Health check still failing at $(date -u +%H:%M). live=${{ steps.health.outputs.live }} ready=${{ steps.health.outputs.ready }}" || true
           else
             gh issue create \
               --title "App is down (health check failed)" \
@@ -58,5 +58,7 @@ jobs:
           Fly.io should auto-restart the machine. If this keeps happening, there may be a code bug causing crashes — check Sentry for errors.
 
           This issue was created automatically by the health monitor." \
-              --label "incident"
+              --label "incident" || true
           fi
+          # Always fail the job when app is down — this is how GitHub sends the alert email
+          exit 1

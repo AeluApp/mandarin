@@ -13,11 +13,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Initialize test database
-        run: python -c "from mandarin.db import core; core.init_db()"
+        run: |
+          rm -f data/mandarin.db data/mandarin.db-shm data/mandarin.db-wal
+          python -c "from mandarin.db import core; core.ensure_db()"
         env:
-          DATABASE_PATH: data/mandarin.db
+          DATA_DIR: data
       - name: Run DR test
         run: bash scripts/dr_test.sh
