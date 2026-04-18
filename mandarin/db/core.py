@@ -7911,10 +7911,16 @@ def _migrate_v133_to_v134(conn: sqlite3.Connection) -> None:
         "lens_satire": 0.7,
         "lens_moral_texture": 0.7,
     }
+    # Use unconditional COALESCE rather than WHERE col IS NULL.
+    # Columns added via ALTER TABLE ADD COLUMN have no physical storage for
+    # existing rows; SQLite returns the DEFAULT for reads, so "IS NULL" never
+    # matches them — but PRAGMA integrity_check still flags the absent bytes as
+    # a NOT NULL violation.  COALESCE forces a physical write while preserving
+    # any real user-set values.
     for col, default in lens_defaults.items():
         if col in cols:
             conn.execute(
-                f"UPDATE learner_profile SET {col} = ? WHERE {col} IS NULL",
+                f"UPDATE learner_profile SET {col} = COALESCE({col}, ?)",
                 (default,),
             )
     conn.commit()

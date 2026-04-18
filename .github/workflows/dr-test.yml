@@ -17,7 +17,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Initialize test database
-        run: python -c "from mandarin.db import core; core.ensure_db()"
+        run: |
+          rm -f data/mandarin.db data/mandarin.db-shm data/mandarin.db-wal
+          python -c "from mandarin.db import core; core.ensure_db()"
         env:
           DATA_DIR: data
       - name: Run DR test

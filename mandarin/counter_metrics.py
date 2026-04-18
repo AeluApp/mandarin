@@ -1946,3 +1946,12 @@ def get_snapshot_history(conn: sqlite3.Connection,
     """, (user_id, limit)).fetchall()
 
     return [dict(r) for r in rows]
+
+
+def measure_delayed_recall(conn: sqlite3.Connection, user_id: int = 1) -> int:
+    """Identify and record delayed-recall measurements for 24h+ samples.
+
+    Placeholder: no dedicated delayed-recall sample queue exists yet.
+    Returns 0 until the sampling infrastructure is built out.
+    """
+    return 0
