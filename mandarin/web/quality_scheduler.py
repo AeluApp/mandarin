@@ -222,7 +222,7 @@ def _collect_metrics():
 
         # Capability metrics
         try:
-            cap_metrics = capability.calculate(conn)
+            cap_metrics = capability.get_capability_summary(conn)
             for metric_name, metric_value in cap_metrics.items():
                 conn.execute(
                     "INSERT INTO quality_metric (metric_type, value) VALUES (?, ?)",
@@ -233,7 +233,7 @@ def _collect_metrics():
 
         # Retention metrics
         try:
-            ret_metrics = retention.calculate(conn)
+            ret_metrics = retention.get_retention_summary(conn)
             for metric_name, metric_value in ret_metrics.items():
                 conn.execute(
                     "INSERT INTO quality_metric (metric_type, value) VALUES (?, ?)",

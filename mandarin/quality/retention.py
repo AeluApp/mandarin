@@ -696,6 +696,31 @@ def fit_weibull(conn, churn_days: int = _CHURN_THRESHOLD_DAYS) -> dict:
     }
 
 
+def get_retention_summary(conn) -> dict[str, float]:
+    """Return flat dict of key scalar retention metrics for quality tracking."""
+    result: dict[str, float] = {}
+    try:
+        km = kaplan_meier(conn, days=90)
+        survival = km.get("survival_probabilities", [])
+        time_pts = km.get("time_points", [])
+        for target_day in (1, 7, 30):
+            rate = None
+            for t, s in zip(time_pts, survival):
+                if t >= target_day:
+                    rate = s
+                    break
+            if rate is None and survival:
+                rate = survival[-1]
+            if rate is not None:
+                result[f"d{target_day}_survival"] = rate
+        median = km.get("median_survival")
+        if median is not None:
+            result["median_survival_days"] = float(median)
+    except Exception:
+        pass
+    return result
+
+
 def _norm_sf(z: float) -> float:
     """Standard normal survival function."""
     if z < -8:

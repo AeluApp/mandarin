@@ -129,8 +129,9 @@ def _intelligence_tick(conn):
 
     # 1. Measure delayed recall for 24h+ samples
     try:
-        from ..counter_metrics import measure_delayed_recall
-        measured = measure_delayed_recall(conn)
+        from ..counter_metrics import delayed_recall_accuracy
+        result = delayed_recall_accuracy(conn)
+        measured = result.get("sample_size", 0)
         if measured > 0:
             actions.append(f"measured {measured} delayed recall samples")
             logger.info("Measured %d delayed recall samples", measured)
