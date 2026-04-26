@@ -10,8 +10,8 @@ if [ -n "$LITESTREAM_S3_BUCKET" ]; then
 
     echo "Starting gunicorn under Litestream replication..."
     exec litestream replicate -config /etc/litestream.yml -exec \
-        "gunicorn mandarin.web.wsgi:app --bind 0.0.0.0:8080 --preload --worker-class gevent --workers 2 --worker-connections 100 --timeout 120 --max-requests 1000 --max-requests-jitter 50"
+        "gunicorn mandarin.web.wsgi:app --bind 0.0.0.0:8080 --preload --worker-class gevent --workers 1 --worker-connections 100 --timeout 120 --max-requests 1000 --max-requests-jitter 50"
 else
     echo "Starting gunicorn (no replication)..."
-    exec gunicorn mandarin.web.wsgi:app --bind 0.0.0.0:8080 --preload --worker-class gevent --workers 2 --worker-connections 100 --timeout 120 --max-requests 1000 --max-requests-jitter 50
+    exec gunicorn mandarin.web.wsgi:app --bind 0.0.0.0:8080 --preload --worker-class gevent --workers 1 --worker-connections 100 --timeout 120 --max-requests 1000 --max-requests-jitter 50
 fi
