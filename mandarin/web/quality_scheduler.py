@@ -223,11 +223,15 @@ def _collect_metrics():
         # Capability metrics
         try:
             cap_metrics = capability.get_capability_summary(conn)
-            for metric_name, metric_value in cap_metrics.items():
-                conn.execute(
-                    "INSERT INTO quality_metric (metric_type, value) VALUES (?, ?)",
-                    (f"capability_{metric_name}", metric_value),
-                )
+            for group_name, group_data in cap_metrics.items():
+                if not isinstance(group_data, dict):
+                    continue
+                for sub_key, sub_val in group_data.items():
+                    if isinstance(sub_val, (int, float)):
+                        conn.execute(
+                            "INSERT INTO quality_metric (metric_type, value) VALUES (?, ?)",
+                            (f"capability_{group_name}_{sub_key}", sub_val),
+                        )
         except Exception:
             logger.exception("Quality metrics: capability calculation failed")
 
