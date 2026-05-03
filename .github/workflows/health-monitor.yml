@@ -16,6 +16,8 @@ jobs:
       actions: write
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Check production health
         id: health
         run: |

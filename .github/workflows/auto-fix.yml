@@ -44,4 +44,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
           WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
-        run: python scripts/auto_fix_ci.py
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "ANTHROPIC_API_KEY secret not set — skipping auto-fix agent"
+            echo "Set it via: gh secret set ANTHROPIC_API_KEY --repo AeluApp/mandarin"
+            exit 0
+          fi
+          python scripts/auto_fix_ci.py
