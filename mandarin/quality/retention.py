@@ -705,7 +705,7 @@ def get_retention_summary(conn) -> dict[str, float]:
         time_pts = km.get("time_points", [])
         for target_day in (1, 7, 30):
             rate = None
-            for t, s in zip(time_pts, survival):
+            for t, s in zip(time_pts, survival, strict=False):
                 if t >= target_day:
                     rate = s
                     break
