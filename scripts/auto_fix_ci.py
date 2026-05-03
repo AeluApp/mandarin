@@ -2,11 +2,11 @@
 """Autonomous CI fix agent — diagnoses failures and creates fix PRs.
 
 Called by the auto-fix GitHub Actions workflow when CI fails on main.
-Uses the Anthropic API with tool use to read failure logs, analyze
+Uses LiteLLM + Together.ai with tool use to read failure logs, analyze
 the codebase, generate fixes, and create a pull request.
 
 Requires:
-    ANTHROPIC_API_KEY — set as a GitHub secret
+    TOGETHER_API_KEY — set as a GitHub secret
     GITHUB_TOKEN — provided by GitHub Actions
     WORKFLOW_RUN_ID — the failing workflow run ID
 
@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import json
 import os
-import re
 import subprocess
 import sys
 import textwrap
@@ -37,7 +36,6 @@ def run(cmd: str, check: bool = True) -> str:
 
 def get_failure_logs(run_id: str) -> str:
     """Extract failure logs from a GitHub Actions workflow run."""
-    # Get failed jobs
     jobs_json = run(f"gh run view {run_id} --json jobs")
     jobs = json.loads(jobs_json).get("jobs", [])
 
@@ -45,12 +43,10 @@ def get_failure_logs(run_id: str) -> str:
     if not failed_jobs:
         return "No failed jobs found."
 
-    # Get the failed log output
     logs = run(f"gh run view {run_id} --log-failed", check=False)
     if not logs:
         logs = "Could not retrieve failure logs."
 
-    # Summarize which jobs failed and their step names
     summary_parts = []
     for job in failed_jobs:
         name = job.get("name", "unknown")
@@ -63,7 +59,6 @@ def get_failure_logs(run_id: str) -> str:
 
     summary = "\n".join(summary_parts)
 
-    # Truncate logs to avoid token limits (keep last 3000 chars per job)
     if len(logs) > 12000:
         logs = "...(truncated)...\n" + logs[-12000:]
 
@@ -98,21 +93,14 @@ def search_code(pattern: str, path: str = ".") -> str:
     return result or "No matches found."
 
 
-def call_claude(system_prompt: str, user_message: str) -> dict:
-    """Call Claude API and return the response with tool use support."""
-    try:
-        import anthropic
-    except ImportError:
-        subprocess.run([sys.executable, "-m", "pip", "install", "anthropic"], check=True)
-        import anthropic
-
-    client = anthropic.Anthropic()
-
-    tools = [
-        {
+# Tool definitions in OpenAI/LiteLLM format
+TOOLS = [
+    {
+        "type": "function",
+        "function": {
             "name": "read_file",
             "description": "Read a file from the repository",
-            "input_schema": {
+            "parameters": {
                 "type": "object",
                 "properties": {
                     "path": {"type": "string", "description": "File path relative to repo root"}
@@ -120,10 +108,13 @@ def call_claude(system_prompt: str, user_message: str) -> dict:
                 "required": ["path"],
             },
         },
-        {
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "write_file",
             "description": "Write content to a file in the repository",
-            "input_schema": {
+            "parameters": {
                 "type": "object",
                 "properties": {
                     "path": {"type": "string", "description": "File path relative to repo root"},
@@ -132,10 +123,13 @@ def call_claude(system_prompt: str, user_message: str) -> dict:
                 "required": ["path", "content"],
             },
         },
-        {
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "list_files",
             "description": "List files matching a glob pattern",
-            "input_schema": {
+            "parameters": {
                 "type": "object",
                 "properties": {
                     "pattern": {"type": "string", "description": "Glob pattern (e.g., 'tests/test_*.py')"}
@@ -143,10 +137,13 @@ def call_claude(system_prompt: str, user_message: str) -> dict:
                 "required": ["pattern"],
             },
         },
-        {
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "search_code",
             "description": "Search for a regex pattern in Python files",
-            "input_schema": {
+            "parameters": {
                 "type": "object",
                 "properties": {
                     "pattern": {"type": "string", "description": "Search pattern"},
@@ -155,10 +152,13 @@ def call_claude(system_prompt: str, user_message: str) -> dict:
                 "required": ["pattern"],
             },
         },
-        {
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "run_command",
             "description": "Run a shell command (read-only: lint, test, grep, etc.)",
-            "input_schema": {
+            "parameters": {
                 "type": "object",
                 "properties": {
                     "command": {"type": "string", "description": "Shell command to run"}
@@ -166,67 +166,92 @@ def call_claude(system_prompt: str, user_message: str) -> dict:
                 "required": ["command"],
             },
         },
-    ]
+    },
+]
 
-    messages = [{"role": "user", "content": user_message}]
+
+def _dispatch_tool(name: str, inp: dict) -> tuple[str, str | None]:
+    """Execute a tool call. Returns (result, modified_file_or_None)."""
+    if name == "read_file":
+        return read_file(inp["path"]), None
+    elif name == "write_file":
+        return write_file(inp["path"], inp["content"]), inp["path"]
+    elif name == "list_files":
+        return list_files(inp["pattern"]), None
+    elif name == "search_code":
+        return search_code(inp["pattern"], inp.get("path", ".")), None
+    elif name == "run_command":
+        cmd = inp["command"]
+        if any(danger in cmd for danger in ["rm -rf", "git push", "git reset", "DROP TABLE"]):
+            return "BLOCKED: destructive command not allowed", None
+        return run(cmd, check=False), None
+    else:
+        return f"Unknown tool: {name}", None
+
+
+def call_llm(system_prompt: str, user_message: str) -> dict:
+    """Call LLM via LiteLLM and return the response with tool use support."""
+    try:
+        import litellm
+    except ImportError:
+        subprocess.run([sys.executable, "-m", "pip", "install", "litellm"], check=True)
+        import litellm
+
+    model = os.environ.get("LITELLM_MODEL", "together_ai/deepseek-ai/DeepSeek-V3.1")
+
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_message},
+    ]
     files_modified = []
 
-    # Agentic loop — let Claude use tools until it's done
-    for _turn in range(20):  # max 20 tool-use turns
-        response = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=8192,
-            system=system_prompt,
-            tools=tools,
+    for _turn in range(20):
+        response = litellm.completion(
+            model=model,
             messages=messages,
+            tools=TOOLS,
+            tool_choice="auto",
+            max_tokens=8192,
+            temperature=0.2,
         )
 
-        # Collect text and tool use blocks
-        text_parts = []
-        tool_uses = []
-        for block in response.content:
-            if block.type == "text":
-                text_parts.append(block.text)
-            elif block.type == "tool_use":
-                tool_uses.append(block)
+        msg = response.choices[0].message
+        tool_calls = getattr(msg, "tool_calls", None) or []
 
-        if not tool_uses:
-            # No more tool calls — Claude is done
-            return {"text": "\n".join(text_parts), "files_modified": files_modified}
+        if not tool_calls:
+            return {"text": msg.content or "", "files_modified": files_modified}
 
-        # Process tool calls
-        tool_results = []
-        for tool_use in tool_uses:
-            name = tool_use.name
-            inp = tool_use.input
+        # Append assistant message with tool calls
+        messages.append({
+            "role": "assistant",
+            "content": msg.content,
+            "tool_calls": [
+                {
+                    "id": tc.id,
+                    "type": "function",
+                    "function": {"name": tc.function.name, "arguments": tc.function.arguments},
+                }
+                for tc in tool_calls
+            ],
+        })
 
-            if name == "read_file":
-                result = read_file(inp["path"])
-            elif name == "write_file":
-                result = write_file(inp["path"], inp["content"])
-                files_modified.append(inp["path"])
-            elif name == "list_files":
-                result = list_files(inp["pattern"])
-            elif name == "search_code":
-                result = search_code(inp["pattern"], inp.get("path", "."))
-            elif name == "run_command":
-                cmd = inp["command"]
-                # Safety: block destructive commands
-                if any(danger in cmd for danger in ["rm -rf", "git push", "git reset", "DROP TABLE"]):
-                    result = "BLOCKED: destructive command not allowed"
-                else:
-                    result = run(cmd, check=False)
-            else:
-                result = f"Unknown tool: {name}"
+        # Execute tool calls and append results
+        for tc in tool_calls:
+            name = tc.function.name
+            try:
+                inp = json.loads(tc.function.arguments)
+            except json.JSONDecodeError:
+                inp = {}
 
-            tool_results.append({
-                "type": "tool_result",
-                "tool_use_id": tool_use.id,
-                "content": result[:8000],  # truncate large outputs
+            result, modified_file = _dispatch_tool(name, inp)
+            if modified_file:
+                files_modified.append(modified_file)
+
+            messages.append({
+                "role": "tool",
+                "tool_call_id": tc.id,
+                "content": result[:8000],
             })
-
-        messages.append({"role": "assistant", "content": response.content})
-        messages.append({"role": "user", "content": tool_results})
 
     return {"text": "Agent reached max turns", "files_modified": files_modified}
 
@@ -243,17 +268,13 @@ def create_fix_pr(files_modified: list[str], diagnosis: str, run_id: str) -> str
     for f in files_modified:
         run(f"git add {f}")
 
-    # Commit
     commit_msg = f"Auto-fix CI failure from run {run_id}"
     run(f'git commit -m "{commit_msg}"')
     run(f"git push -u origin {branch}")
 
-    # Create PR with plain-English explanation
     repo = os.environ.get('GITHUB_REPOSITORY', 'AeluApp/mandarin')
     n_files = len(files_modified)
     file_list = ", ".join(files_modified)
-
-    # Truncate diagnosis for PR body
     short_diagnosis = diagnosis[:2000]
 
     pr_body = textwrap.dedent(f"""\
@@ -282,13 +303,11 @@ def create_fix_pr(files_modified: list[str], diagnosis: str, run_id: str) -> str
     🤖 *Created automatically by the CI Auto-Fix Agent*
     """)
 
-    # Write body to temp file to avoid shell escaping issues
     body_file = Path("/tmp/pr_body.md")
     body_file.write_text(pr_body)
 
     pr_url = run(f'gh pr create --title "Auto-fix: CI failure from run {run_id}" --body-file /tmp/pr_body.md')
 
-    # Enable auto-merge so it merges itself when checks pass
     if pr_url:
         run("gh pr merge --auto --squash", check=False)
 
@@ -301,17 +320,17 @@ def main():
         print("ERROR: WORKFLOW_RUN_ID not set", file=sys.stderr)
         return 1
 
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        print("ERROR: ANTHROPIC_API_KEY not set", file=sys.stderr)
-        return 1
+    api_key = os.environ.get("TOGETHER_API_KEY")
+    if not api_key:
+        print("TOGETHER_API_KEY secret not set — skipping auto-fix agent")
+        print("Set it via: gh secret set TOGETHER_API_KEY --repo AeluApp/mandarin")
+        return 0
 
     print(f"Diagnosing CI failure for run {run_id}...")
 
-    # Step 1: Get failure logs
     failure_logs = get_failure_logs(run_id)
     print(f"Extracted {len(failure_logs)} chars of failure logs")
 
-    # Step 2: Call Claude to diagnose and fix
     system_prompt = textwrap.dedent("""\
     You are an autonomous CI fix agent for the Aelu project (a Mandarin learning platform).
 
@@ -343,14 +362,14 @@ Start by reading the relevant files mentioned in the error, then make the fix.
 """
 
     try:
-        result = call_claude(system_prompt, user_message)
+        result = call_llm(system_prompt, user_message)
     except Exception as e:
         err = str(e)
-        if "credit balance" in err or "rate_limit" in err.lower() or "insufficient_quota" in err.lower():
-            print(f"Skipping auto-fix: API billing issue — {err[:200]}")
-            print("Add credits at https://console.anthropic.com/settings/billing")
-            return 0  # Don't fail CI for billing issues
+        if any(kw in err.lower() for kw in ["credit", "rate_limit", "quota", "billing", "payment"]):
+            print(f"Skipping auto-fix: API issue — {err[:200]}")
+            return 0
         raise
+
     diagnosis = result["text"]
     files_modified = result["files_modified"]
 
@@ -360,7 +379,6 @@ Start by reading the relevant files mentioned in the error, then make the fix.
     print(f"\nFiles modified: {files_modified}")
     print(f"{'='*60}")
 
-    # Step 3: Create PR if files were modified
     if files_modified:
         pr_url = create_fix_pr(files_modified, diagnosis, run_id)
         if pr_url:
@@ -368,7 +386,6 @@ Start by reading the relevant files mentioned in the error, then make the fix.
         return 0
     else:
         print("\nNo automated fix possible. Creating issue instead.")
-        # Create a GitHub issue with the diagnosis
         issue_title = f"CI failure needs manual fix (run {run_id})"
         issue_body = f"## CI Failure Diagnosis\n\n{diagnosis[:3000]}\n\n**Run:** https://github.com/{os.environ.get('GITHUB_REPOSITORY', 'AeluApp/mandarin')}/actions/runs/{run_id}"
         body_file = Path("/tmp/issue_body.md")

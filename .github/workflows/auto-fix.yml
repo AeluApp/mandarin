@@ -31,7 +31,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install anthropic
+        run: pip install litellm
 
       - name: Configure git for PR creation
         run: |
@@ -40,14 +40,8 @@ jobs:
 
       - name: Run auto-fix agent
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
           WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
-        run: |
-          if [ -z "$ANTHROPIC_API_KEY" ]; then
-            echo "ANTHROPIC_API_KEY secret not set — skipping auto-fix agent"
-            echo "Set it via: gh secret set ANTHROPIC_API_KEY --repo AeluApp/mandarin"
-            exit 0
-          fi
-          python scripts/auto_fix_ci.py
+        run: python scripts/auto_fix_ci.py
