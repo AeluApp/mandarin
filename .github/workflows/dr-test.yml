@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Initialize test database
-        run: python -c "from mandarin.db import core; core.init_db()"
+        run: python -c "from mandarin.db import core; conn = core.init_db(); core._migrate(conn)"
         env:
           DATABASE_PATH: data/mandarin.db
       - name: Run DR test

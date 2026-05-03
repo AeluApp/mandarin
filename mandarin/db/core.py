@@ -135,7 +135,7 @@ def get_pool_stats() -> dict:
     }
 
 
-SCHEMA_VERSION = 133  # Increment when adding migrations
+SCHEMA_VERSION = 134  # Increment when adding migrations
 
 
 def _get_schema_version(conn: sqlite3.Connection) -> int:
@@ -7886,6 +7886,29 @@ def _migrate_v132_to_v133(conn):
     conn.commit()
 
 
+def _migrate_v133_to_v134(conn: sqlite3.Connection) -> None:
+    """v133->v134: Backfill NULL lens_* columns in learner_profile.
+
+    ALTER TABLE ADD COLUMN stores defaults lazily in SQLite; SQLite 3.45+
+    PRAGMA integrity_check flags those physical NULLs as NOT NULL violations.
+    This migration physically writes the default (0.7) for any row that has
+    a NULL in one of the personality lens columns added in v37→v38.
+    """
+    logger.info("Migration v133→v134: backfill NULL lens_* columns in learner_profile")
+    lens_cols = (
+        "lens_wit",
+        "lens_ensemble_comedy",
+        "lens_sharp_observation",
+        "lens_satire",
+        "lens_moral_texture",
+    )
+    cols = _col_set(conn, "learner_profile")
+    for col in lens_cols:
+        if col in cols:
+            conn.execute(f"UPDATE learner_profile SET {col} = 0.7 WHERE {col} IS NULL")
+    conn.commit()
+
+
 MIGRATIONS = {
     0: _migrate_v0_to_v1,
     1: _migrate_v1_to_v2,
@@ -8020,6 +8043,7 @@ MIGRATIONS = {
     130: _migrate_v130_to_v131,
     131: _migrate_v131_to_v132,
     132: _migrate_v132_to_v133,
+    133: _migrate_v133_to_v134,
 }
 
 
