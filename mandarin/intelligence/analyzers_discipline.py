@@ -438,11 +438,14 @@ def _analyze_copywriting(conn) -> list[dict]:
 
     # --- Placeholder/TODO text ---
     placeholder_pattern = re.compile(
-        r"\b(lorem|ipsum|todo|placeholder|tbd|fixme|xxx)\b", re.IGNORECASE
+        r"\b(lorem|ipsum|todo|tbd|fixme|xxx)\b", re.IGNORECASE
     )
     placeholder_hits = {}
     for name, content in templates.items():
-        matches = placeholder_pattern.findall(content)
+        # Strip HTML tag attributes before scanning so that attribute names
+        # like placeholder="..." and value="TODO" are not flagged as content.
+        stripped = re.sub(r'<[^>]+>', '', content)
+        matches = placeholder_pattern.findall(stripped)
         if matches:
             placeholder_hits[name] = matches
 
