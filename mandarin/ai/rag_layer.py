@@ -242,7 +242,7 @@ def retrieve_context_for_generation(
                 model = _get_multilingual_model()
                 # Build a query from the missing hanzi
                 query_text = " ".join(missing)
-                query_emb = model.encode([query_text], show_progress_bar=False)[0].tolist()
+                query_emb = next(model.embed([query_text])).tolist()
                 vector_results = table.search(query_emb).limit(3).to_pandas()
 
                 found_ids = {item["hanzi"] for item in found}

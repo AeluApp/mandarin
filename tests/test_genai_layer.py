@@ -271,12 +271,11 @@ class TestEmbeddingLayer(unittest.TestCase):
         _seed_items(conn, count=3)
         mock_model = MagicMock()
         embeddings = np.random.rand(3, 768).astype(np.float32)
-        mock_model.embed.return_value = embeddings
+        # embed() is called as an iterator; use side_effect for fresh iter each call
+        mock_model.embed.side_effect = lambda texts: iter(embeddings[:len(texts)])
         with patch("mandarin.ai.genai_layer._get_multilingual_model", return_value=mock_model), \
              patch("mandarin.ai.genai_layer._get_lance_db", return_value=None):
             compute_item_embeddings(conn, content_item_ids=[1, 2, 3])
-            # For query, return single embedding
-            mock_model.embed.return_value = embeddings[:1]
             results = find_similar_items(conn, "字1")
         self.assertGreater(len(results), 0)
         self.assertIn("similarity", results[0])

@@ -81,8 +81,7 @@ def build_faiss_index(
         return {"status": "error", "reason": "no texts to index"}
 
     # Encode
-    embeddings = model.encode(texts, show_progress_bar=False, batch_size=64)
-    embeddings = np.array(embeddings, dtype=np.float32)
+    embeddings = np.array(list(model.embed(texts)), dtype=np.float32)
     dimension = embeddings.shape[1]
 
     # Normalize for cosine similarity
@@ -234,8 +233,7 @@ def _faiss_retrieve(
         return []
 
     # Encode query
-    query_vec = model.encode([query], show_progress_bar=False)
-    query_vec = np.array(query_vec, dtype=np.float32)
+    query_vec = np.array(list(model.embed([query])), dtype=np.float32)
     faiss.normalize_L2(query_vec)
 
     # Search
@@ -303,12 +301,12 @@ def evaluate_retrieval(
     # Relevance: embedding similarity between query and retrieved docs
     model = _get_multilingual_model()
     if model and retrieved_docs:
-        query_emb = model.encode([query], show_progress_bar=False)
+        query_emb = np.array(list(model.embed([query])))
         doc_texts = [
             f"{d.get('hanzi', '')} {d.get('english', '')} {d.get('pinyin', '')}"
             for d in retrieved_docs
         ]
-        doc_embs = model.encode(doc_texts, show_progress_bar=False)
+        doc_embs = np.array(list(model.embed(doc_texts)))
 
         if _HAS_NUMPY:
             q = np.array(query_emb)
