@@ -642,7 +642,7 @@ def _evaluate_channel_strategy(conn) -> None:
             f"Current channels and performance:\n{channel_summary}\n\n"
             f"Engagement metrics:\n{metrics_summary}\n\n"
             f"Currently active: Twitter, Reddit, Newsletter, TikTok, Xiaohongshu (manual)\n"
-            f"Pricing: $14.99/month, free tier for HSK 1-2\n"
+            f"Pricing: $14.99/month, free tier (HSK 1 reading/media, HSK 1-2 listening)\n"
             f"Target audience: Self-study adults (25-45) learning Mandarin\n\n"
             f"Evaluate:\n"
             f"1. Are we on the right platforms? What should we add/drop?\n"
