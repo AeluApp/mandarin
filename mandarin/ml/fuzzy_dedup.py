@@ -27,10 +27,10 @@ def _get_model():
         with _model_lock:
             if _model is None:
                 try:
-                    from sentence_transformers import SentenceTransformer
-                    _model = SentenceTransformer('all-MiniLM-L6-v2')
+                    from fastembed import TextEmbedding
+                    _model = TextEmbedding('sentence-transformers/all-MiniLM-L6-v2')
                 except ImportError:
-                    logger.warning("sentence-transformers not installed; fuzzy dedup unavailable")
+                    logger.warning("fastembed not installed; fuzzy dedup unavailable")
                     return None
                 except Exception as e:
                     logger.warning("Failed to load sentence transformer: %s", e)
@@ -49,7 +49,7 @@ def compute_similarity(text_a: str, text_b: str) -> float:
     if model is None:
         return 0.0
 
-    embeddings = model.encode([text_a, text_b], convert_to_numpy=True)
+    embeddings = np.array(list(model.embed([text_a, text_b])))
     norm_a = np.linalg.norm(embeddings[0])
     norm_b = np.linalg.norm(embeddings[1])
     if norm_a == 0 or norm_b == 0:
@@ -88,7 +88,7 @@ def find_semantic_duplicate(
     # Batch encode all titles at once
     existing_titles = [r['title'] for r in existing]
     all_texts = [title] + existing_titles
-    embeddings = model.encode(all_texts, convert_to_numpy=True, show_progress_bar=False)
+    embeddings = np.array(list(model.embed(all_texts)))
 
     new_emb = embeddings[0]
     new_norm = np.linalg.norm(new_emb)
@@ -148,7 +148,7 @@ def find_content_duplicate(
     candidate_texts = [f"{c['hanzi']} {c['english']}" for c in candidates]
 
     all_texts = [new_text] + candidate_texts
-    embeddings = model.encode(all_texts, convert_to_numpy=True, show_progress_bar=False)
+    embeddings = np.array(list(model.embed(all_texts)))
 
     new_emb = embeddings[0]
     new_norm = np.linalg.norm(new_emb)
@@ -184,7 +184,7 @@ def cache_embedding(conn: sqlite3.Connection, finding_id: int, title: str) -> No
     if model is None:
         return
     try:
-        embedding = model.encode([title], convert_to_numpy=True)[0]
+        embedding = next(model.embed([title]))
         embedding_bytes = embedding.tobytes()
         conn.execute("""
             INSERT OR REPLACE INTO pi_finding_embeddings
@@ -220,7 +220,7 @@ def calibrate_similarity_threshold(conn: sqlite3.Connection) -> dict:
             continue
 
         titles = [f['title'] for f in dim_findings]
-        embeddings = model.encode(titles, convert_to_numpy=True, show_progress_bar=False)
+        embeddings = np.array(list(model.embed(titles)))
 
         for i in range(len(dim_findings)):
             for j in range(i + 1, len(dim_findings)):

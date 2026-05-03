@@ -705,13 +705,13 @@ def detect_prompt_regressions(conn) -> list[dict]:
 # Module 5: Local Embedding Layer
 # ═══════════════════════════════════════════════════════════════════════════════
 
-_EMBEDDING_MODEL_NAME = "paraphrase-multilingual-mpnet-base-v2"
+_EMBEDDING_MODEL_NAME = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
 _embedding_model = None
 _embedding_lock = None
 
 
 def _get_multilingual_model():
-    """Thread-safe singleton for multilingual embedding model.
+    """Thread-safe singleton for multilingual embedding model (ONNX via fastembed).
 
     Separate from fuzzy_dedup.py's all-MiniLM-L6-v2.
     """
@@ -722,8 +722,8 @@ def _get_multilingual_model():
     if _embedding_model is None:
         with _embedding_lock:
             if _embedding_model is None:
-                from sentence_transformers import SentenceTransformer
-                _embedding_model = SentenceTransformer(_EMBEDDING_MODEL_NAME)
+                from fastembed import TextEmbedding
+                _embedding_model = TextEmbedding(_EMBEDDING_MODEL_NAME)
     return _embedding_model
 
 
@@ -734,7 +734,7 @@ def compute_item_embeddings(conn, content_item_ids: list[int] | None = None,
         import numpy as np
         model = _get_multilingual_model()
     except ImportError:
-        return {"status": "skipped", "reason": "sentence-transformers not installed"}
+        return {"status": "skipped", "reason": "fastembed not installed"}
 
     # --- Determine which items need embeddings ---
     # Try LanceDB first to check what's already embedded
@@ -800,7 +800,7 @@ def compute_item_embeddings(conn, content_item_ids: list[int] | None = None,
         return {"status": "complete", "computed": 0}
 
     texts = [f"{r['hanzi']} {r['pinyin']} {r['english']}" for r in rows]
-    embeddings = model.encode(texts, show_progress_bar=False)
+    embeddings = np.array(list(model.embed(texts)))
 
     # --- Write to LanceDB (primary) ---
     if lance_db is not None:
@@ -854,7 +854,7 @@ def find_similar_items(conn, query_hanzi: str, top_k: int = 5) -> list[dict]:
     except ImportError:
         return []
 
-    query_emb = model.encode([query_hanzi], show_progress_bar=False)[0]
+    query_emb = next(model.embed([query_hanzi]))
 
     # --- Try LanceDB (primary) ---
     lance_db = _get_lance_db()
