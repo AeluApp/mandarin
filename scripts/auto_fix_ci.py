@@ -342,7 +342,15 @@ Here are the CI failure details. Diagnose the root cause and fix it.
 Start by reading the relevant files mentioned in the error, then make the fix.
 """
 
-    result = call_claude(system_prompt, user_message)
+    try:
+        result = call_claude(system_prompt, user_message)
+    except Exception as e:
+        err = str(e)
+        if "credit balance" in err or "rate_limit" in err.lower() or "insufficient_quota" in err.lower():
+            print(f"Skipping auto-fix: API billing issue — {err[:200]}")
+            print("Add credits at https://console.anthropic.com/settings/billing")
+            return 0  # Don't fail CI for billing issues
+        raise
     diagnosis = result["text"]
     files_modified = result["files_modified"]
 
